@@ -1,48 +1,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ddd"
+    android:background="#DAD2D2"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tax Me"
+        android:fontFamily="@font/alegreya"
         android:gravity="center"
-
-        android:textSize="16sp"
-        android:padding="10dp"/>
-
+        android:padding="10dp"
+        android:text="Welcome to TaxMe"
+        android:textColor="#050505"
+        android:textSize="24sp" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/ET_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
-
+            android:textColorLink="@color/design_default_color_primary_dark" />
 
     </android.support.design.widget.TextInputLayout>
 
-
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/ET_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
@@ -51,33 +46,43 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="#DD030303" />
 
-
-    </LinearLayout>
-
+    </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/sign_up_button"
+        android:id="@+id/Btn_Login"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@color/colorPrimary"
+        android:text="Login"
+        android:textColor="#050505" />
+
+    <!-- Link to Login Screen -->
+
+    <Button
+        android:id="@+id/Btn_SignUp"
         style="?android:textAppearanceSmall"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="Sign Up"
-        android:textColor="#ddd"
+        android:textColor="#050505"
         android:textStyle="bold" />
 
+    <!-- Link to Forget Password -->
 
-    <!-- Link to Login Screen -->
-
-
-    <Button
-        android:id="@+id/sign_in_button"
-        android:layout_width="160dp"
+    <TextView
+        android:id="@+id/forget_password_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="@color/colorPrimary"
-        android:text="Sign In"
-        android:textColor="#ddd" />
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Forget Password"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
 </LinearLayout>

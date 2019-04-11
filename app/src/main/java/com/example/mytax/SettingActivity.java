@@ -11,7 +11,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
 
     Button btnSignOut;
     FirebaseAuth auth;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_setting);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -35,18 +35,21 @@ public class MainActivity extends AppCompatActivity {
         btnSignOut = (Button) findViewById(R.id.sign_out_button);
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 auth.signOut();
-                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user == null) {
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            finish();
-                        }
-                    }
-                };
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                finish();
+//                FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+//                    @Override
+//                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                        FirebaseUser user = firebaseAuth.getCurrentUser();
+//                        if (user == null) {
+//                            startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+//                            finish();
+//                        }
+//                    }
+//                };
             }
         });
 
@@ -72,10 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override    protected void onResume() {
         if (auth.getCurrentUser() == null) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(SettingActivity.this, LoginActivity.class));
             finish();
         }
         super.onResume();
     }
 }
-  
