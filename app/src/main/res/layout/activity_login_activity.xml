@@ -18,7 +18,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Email"
@@ -34,7 +35,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Password"
@@ -55,7 +57,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="@color/colorPrimary"
+        android:background="#4635DB"
         android:text="Login"
         android:textColor="#050505" />
 
@@ -67,7 +69,7 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
+        android:background="#4635DB"
         android:text="Sign Up"
         android:textColor="#050505"
         android:textStyle="bold" />
@@ -83,6 +85,6 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Forget Password"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#000"
         android:textStyle="bold" />
 </LinearLayout>

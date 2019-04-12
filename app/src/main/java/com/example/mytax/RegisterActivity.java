@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(RegisterActivity.this, SettingActivity.class));
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             finish();
         }
 
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     Toast.LENGTH_LONG).show();
                                             Log.v("error", task.getResult().toString());
                                         } else {
-                                            Intent intent = new Intent(RegisterActivity.this, SettingActivity.class);
+                                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
