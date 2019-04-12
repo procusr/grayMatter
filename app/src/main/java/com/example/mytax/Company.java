@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.mytax;
 
 public class Company {
     private String companyName ;
