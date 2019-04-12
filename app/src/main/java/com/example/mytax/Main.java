@@ -33,7 +33,7 @@ public class Main extends AppCompatActivity {
         mActualTax = findViewById(R.id.TV_Salary_afterTax);
         mSalary = findViewById(R.id.TV_tax);
         mSave = findViewById(R.id.B_Save_db);
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("company");
+        //mDatabase= FirebaseDatabase.getInstance().getReference().child("company");
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1
                 , getResources().getStringArray(R.array.Communes));
