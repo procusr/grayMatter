@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "882094614549",
+    "firebase_url": "https://taxme-45045.firebaseio.com",
+    "project_id": "taxme-45045",
+    "storage_bucket": "taxme-45045.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882094614549:android:6336afc6b9e47aab",
+        "android_client_info": {
+          "package_name": "com.example.mytax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882094614549-3l0dl0eqk1ck7dhs7lnce6dp8kka7sna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA-vQICkhxh2ApnLhyRqO_e4US1si4zCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882094614549-3l0dl0eqk1ck7dhs7lnce6dp8kka7sna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
