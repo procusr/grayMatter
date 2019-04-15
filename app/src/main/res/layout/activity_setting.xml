@@ -39,16 +39,6 @@
 
 
     <Button
-        android:id="@+id/delete_user_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="#4635DB"
-        android:text="Delete User"
-        android:textColor="#000" />
-
-
-    <Button
         android:id="@+id/sign_out_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

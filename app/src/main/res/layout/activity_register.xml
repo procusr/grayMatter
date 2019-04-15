@@ -73,10 +73,8 @@
         android:textColor="#000"
          />
 
-
-    <!-- Link to Login Screen -->
-
-
+<!--
+    &lt;!&ndash; Link to Login Screen &ndash;&gt;
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="160dp"
@@ -84,5 +82,5 @@
         android:layout_marginTop="16dp"
         android:background="#4635DB"
         android:text="Sign In"
-        android:textColor="#000" />
+        android:textColor="#000" />-->
 </LinearLayout>

@@ -6,23 +6,105 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    #We should merge this button with the slide icon "setting"
+
+    <ImageButton
         android:id="@+id/Btn_Setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginLeft="151dp"
-        android:layout_marginTop="195dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginRight="172dp"
-        android:layout_marginBottom="488dp"
-        android:text="Setting"
-        android:textColor="#000"
-        android:onClick="df"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="setting"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#4635DB"/>
+        app:srcCompat="@drawable/ic_settings_applications_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="pop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_info_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="140dp"
+            android:gravity="center"
+            >
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background=""
+                app:srcCompat="@drawable/house"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="40dp"
+                />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scrollbarSize="100dp"
+                android:background=""
+                app:srcCompat="@drawable/car75m"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp" />
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="40dp"
+            android:gravity="center"
+            >
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background=""
+                app:srcCompat="@drawable/percentage"
+                tools:layout_editor_absoluteX="78dp"
+                tools:layout_editor_absoluteY="320dp" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background=""
+                app:srcCompat="@drawable/summary"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
 
 </android.support.constraint.ConstraintLayout>

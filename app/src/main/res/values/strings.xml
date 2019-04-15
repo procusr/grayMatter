@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Tax Me</string>
     <string name="button">Button</string>
+    <string name="pop_window">Pop window</string>
+    <string name="todo">TODO</string>
+
 
 </resources>

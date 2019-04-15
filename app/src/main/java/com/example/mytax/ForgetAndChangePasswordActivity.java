@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,14 @@ public class ForgetAndChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_and_change_password);
 
+        //this code to view the activity in a new window
+                DisplayMetrics dm = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width = dm.widthPixels;
+                int height = dm.heightPixels;
+                getWindow().setLayout((int)(width*.8),(int)(height*.6));
+        //=================
+
         PD = new ProgressDialog(this);
         PD.setMessage("Loading...");
         PD.setCancelable(true);
@@ -52,13 +61,10 @@ public class ForgetAndChangePasswordActivity extends AppCompatActivity {
             txtMode.setText("Change Password");
             edtMode.setHint("Enter New Password");
             labelMode.setHint("Enter New Password");
-        } else if (mode == 2) {
+        } else  {
             txtMode.setText("Change Email");
             edtMode.setHint("Enter New Email");
             labelMode.setHint("Enter New Email");
-        } else {
-            txtMode.setText("Delete User");
-            edtMode.setVisibility(View.GONE);
         }
 
         submit.setOnClickListener(new View.OnClickListener() {
