@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,4 +8,72 @@
     tools:context=".House"
     tools:showIn="@layout/activity_house">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="122dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/linearLayout2">
+
+
+  2
+
+    <EditText
+        android:id="@+id/bought"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:hint="Buying price"
+        android:gravity="center"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/sold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Selling price"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/broker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Broker cost"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/listing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Listing cost"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/profit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Profit after selling"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/Btn_Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="test"
+        android:text="TBD" />
+</LinearLayout>
+
+</RelativeLayout>

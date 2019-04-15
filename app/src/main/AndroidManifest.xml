@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity"/>
+        <activity
+            android:name=".House"
+            android:label="@string/title_activity_house"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".ForgetAndChangePasswordActivity" />
         <activity android:name=".RegisterActivity" />
