@@ -2,23 +2,21 @@ package com.example.mytax;
 
 public class Company {
     private String companyName ;
-    private int expectedTax;
+    private String expectedTax;
+    private String actualTax;
+    private String salary;
 
-    public Company(String companyName, int expectedTax, int actualTax, int difference) {
+    public Company(String companyName, String salary, String expectedTax,String actualTax) {
         this.companyName = companyName;
+        this.salary = expectedTax;
         this.expectedTax = expectedTax;
-        this.actualTax = actualTax;
-        this.difference = difference;
+        this.actualTax =actualTax ;
     }
 
     public Company(){
     }
 
-    public Company(String companyName, int expectedTax, int actualTax) {
-        this.companyName = companyName;
-        this.expectedTax = expectedTax;
-        this.actualTax = actualTax;
-    }
+
 
     public String getCompanyName() {
         return companyName;
@@ -28,31 +26,30 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public int getExpectedTax() {
+    public String getExpectedTax() {
         return expectedTax;
     }
 
-    public void setExpectedTax(int expectedTax) {
+    public void setExpectedTax(String expectedTax) {
         this.expectedTax = expectedTax;
     }
 
-    public int getActualTax() {
+    public String getActualTax() {
         return actualTax;
     }
 
-    public void setActualTax(int actualTax) {
+    public void setActualTax(String actualTax) {
         this.actualTax = actualTax;
     }
 
-    public int getDifference() {
-        return difference;
+    public String getSalary() {
+        return salary;
     }
 
-    public void setDifference(int difference) {
-        this.difference = difference;
+    public void setSalary(String salary) {
+        this.salary= salary;
     }
 
-    private int actualTax;
-    private int difference;
+
 
 }
