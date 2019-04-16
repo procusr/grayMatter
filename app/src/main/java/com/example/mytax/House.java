@@ -1,6 +1,4 @@
 package com.example.mytax;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class House extends AppCompatActivity {
@@ -24,9 +23,9 @@ public class House extends AppCompatActivity {
     EditText sellPrice;
     EditText brokerPrice;
     EditText listPrice;
-    EditText profitValue;
+    TextView profitValue;
 
-    Button tbdButton;
+       Button tbdButton;
 
 
     @Override
@@ -34,33 +33,33 @@ public class House extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
-        buyPrice = (EditText) findViewById(R.id.bought);
-        sellPrice = (EditText) findViewById(R.id.sold);
-        brokerPrice = (EditText) findViewById(R.id.broker);
-        listPrice  =  (EditText) findViewById(R.id.listing);
-        profitValue = (EditText) findViewById(R.id.profit);
+        buyPrice =  findViewById(R.id.bought);
+        sellPrice =  findViewById(R.id.sold);
+        brokerPrice =  findViewById(R.id.broker);
+        profitValue =  findViewById(R.id.profit);
+        listPrice = findViewById(R.id.listing);
 
-        tbdButton = (Button) findViewById(R.id.Btn_Submit);
+
+        tbdButton = findViewById(R.id.Btn_Calculate);
+
         tbdButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                buy = Integer.valueOf(buyPrice.getText().toString());
-                sell = Integer.valueOf(sellPrice.getText().toString());
-                broker = Integer.valueOf(brokerPrice.getText().toString());
-                list = Integer.valueOf(listPrice.getText().toString());
-                profit = Integer.valueOf(profitValue.getText().toString());
+                buy = Integer.parseInt(buyPrice.getText().toString());
+                sell = Integer.parseInt(sellPrice.getText().toString());
+                broker = Integer.parseInt(brokerPrice.getText().toString());
+                list = Integer.parseInt(listPrice.getText().toString());
 
-                //showToast(String.valueOf(buy));
-                //showToast(String.valueOf(sell));
-                //showToast(String.valueOf(broker));
-                //showToast(String.valueOf(list));
-                showToast(String.valueOf(profit));
+                profit = (sell - (buy + broker + list));
+
+                profitValue.setText(String.valueOf(profit));
+
+                showToast(String.valueOf("Profit to declare \n" + profit));
 
             }
         });
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,10 +76,10 @@ public class House extends AppCompatActivity {
         });
 
     }
+
     private void showToast(String text)
     {
         Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
     }
-
-
 }
+

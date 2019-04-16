@@ -2,78 +2,170 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".House"
     tools:showIn="@layout/activity_house">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="122dp"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/linearLayout2">
+  <LinearLayout
+      android:id="@+id/linearLayout2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_marginTop="122dp"
+      android:orientation="vertical">
+    2
 
-
-  2
-
-    <EditText
-        android:id="@+id/bought"
+    <TextView
+        android:id="@+id/boughtText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="15dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="Buying price"
-        android:gravity="center"
-        android:inputType="number" />
-    <EditText
-        android:id="@+id/sold"
+        android:inputType="number"
+        android:paddingBottom="15dp" />
+
+    <TextView
+        android:id="@+id/soldText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="15dp"
+        android:ems="10"
+        android:gravity="center"
         android:hint="Selling price"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number" />
-    <EditText
-        android:id="@+id/broker"
+        android:inputType="number"
+        android:paddingBottom="15dp" />
+
+    <TextView
+        android:id="@+id/brokerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="15dp"
+        android:ems="10"
+        android:gravity="center"
         android:hint="Broker cost"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="number" />
-    <EditText
-        android:id="@+id/listing"
+        android:inputType="number"
+        android:paddingBottom="15dp" />
+
+    <TextView
+        android:id="@+id/listingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="15dp"
+        android:ems="10"
+        android:gravity="center"
         android:hint="Listing cost"
-        android:ems="10"
-        android:gravity="center"
+        android:layout_marginBottom="25dp"
         android:inputType="number" />
 
-    <EditText
-        android:id="@+id/profit"
+    <TextView
+        android:id="@+id/profitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="10"
         android:gravity="center"
+        android:layout_marginTop="3dp"
         android:hint="Profit after selling"
-        android:inputType="number" />
+        android:inputType="number"
+        android:paddingBottom="15dp" />
 
-    <Button
-        android:id="@+id/Btn_Submit"
+
+  </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="test"
-        android:text="TBD" />
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+        2
+
+        <EditText
+            android:id="@+id/bought"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Buying price"
+            android:inputType="number"
+            android:paddingBottom="15dp" />
+
+        <EditText
+            android:id="@+id/sold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Selling price"
+            android:inputType="number"
+            android:paddingBottom="15dp" />
+
+        <EditText
+            android:id="@+id/broker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Broker cost"
+            android:inputType="number"
+            android:paddingBottom="15dp" />
+
+        <EditText
+            android:id="@+id/listing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:layout_marginBottom="25dp"
+            android:gravity="center"
+            android:hint="Listing cost"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/profit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:hint="Profit after selling"
+            android:inputType="number"
+            android:paddingBottom="15dp"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="450dp">
+
+        <Button
+            android:id="@+id/Btn_Calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|clip_vertical"
+            android:gravity="center|center_horizontal"
+            android:text="TBD" />
+
+    </LinearLayout>
+
+
+
 
 </RelativeLayout>
