@@ -3,12 +3,12 @@ package com.example.mytax;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class car extends AppCompatActivity {
+public class Summary extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car);
+        setContentView(R.layout.activity_summary);
     }
 }

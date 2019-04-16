@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:onClick="Btn_car"
+                android:onClick="car"
                 app:srcCompat="@drawable/car"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="40dp" />

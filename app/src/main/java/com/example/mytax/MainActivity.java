@@ -26,22 +26,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void Btn_car(View view) { Intent intent = new Intent(MainActivity.this, car.class);
+    public void car(View view) {
+        Intent intent = new Intent(MainActivity.this, Car.class);
     startActivity(intent);}
 
-    public void house(View view) {Intent intent =new Intent(MainActivity.this, house.class);
+    public void house(View view) {
+        Intent intent =new Intent(MainActivity.this, House.class);
         startActivity(intent);}
 
-    public void summary(View view) {Intent intent = new Intent(MainActivity.this, summary.class);
+    public void summary(View view) {
+        Intent intent = new Intent(MainActivity.this, Summary.class);
         startActivity(intent);}
 
-    public void percentage(View view) {Intent intent = new Intent(MainActivity.this, percentage.class);
+    public void percentage(View view) {
+        Intent intent = new Intent(MainActivity.this, Percentage.class);
         startActivity(intent);}
 
-    public void salary(View view) {Intent intent = new Intent(MainActivity.this, Salary.class);
+    public void salary(View view) {
+        Intent intent = new Intent(MainActivity.this, Salary.class);
         startActivity(intent);}
 
-    public void plus(View view) {Intent intent = new Intent(MainActivity.this, plus.class);
+    public void plus(View view) {
+        Intent intent = new Intent(MainActivity.this, Plus.class);
         startActivity(intent);}
 
 

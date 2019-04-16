@@ -3,7 +3,7 @@ package com.example.mytax;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class plus extends AppCompatActivity {
+public class Plus extends AppCompatActivity {
 
 
     @Override
