@@ -12,7 +12,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"/>
-
+        <activity android:name=".car"/>
+        <activity android:name=".summary"/>
+        <activity android:name=".plus"/>
+        <activity android:name=".house"/>
+        <activity android:name=".percentage"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
