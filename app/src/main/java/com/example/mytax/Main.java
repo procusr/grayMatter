@@ -7,13 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -99,6 +97,11 @@ public class Main extends AppCompatActivity {
                 expectedTax=mExpectedTax.getText().toString().trim();
                 actualTax=mActualTax.getText().toString().trim();
 
+                if(companyName.trim().isEmpty()||actualTax.trim().isEmpty()||expectedTax.trim().isEmpty()||salary.trim().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Company company = new Company(companyName, salary, expectedTax, actualTax);
                 mDatabase.child(company.getCompanyName()).setValue(company);
 
@@ -144,22 +147,11 @@ public class Main extends AppCompatActivity {
             String mExpectedTax = expectedTax.getText().toString().trim();
             String mActualTax = actualTax.getText().toString().trim();
 
-            if (TextUtils.isEmpty(mCompanyName)) {
-                companyName.setError(REQUIRED);
+            if(mCompanyName.trim().isEmpty()||mActualTax.trim().isEmpty()||mExpectedTax.trim().isEmpty()||mSalary.trim().isEmpty()){
+                Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (TextUtils.isEmpty(mSalary)) {
-                salary.setError(REQUIRED);
-                return;
-            }
-            if (TextUtils.isEmpty(mExpectedTax)) {
-                expectedTax.setError(REQUIRED);
-                return;
-            }
-            if (TextUtils.isEmpty(mActualTax)) {
-                actualTax.setError(REQUIRED);
-                return;
-            }
+
 
             Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax);
             mDatabase.child(company.getCompanyName()).setValue(company);
@@ -216,7 +208,10 @@ public class Main extends AppCompatActivity {
                     }
                 });
             }
+
+
         };
+
         recyclerView.setAdapter(adapter);
     }
 
