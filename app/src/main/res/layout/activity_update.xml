@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
@@ -16,6 +17,7 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/white"
         />
+        /TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -165,30 +167,28 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content">
+
             <Button
+                android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/btnDelete"
-                android:textColor="@android:color/black"
                 android:background="@color/colorPrimary"
                 android:text="Delete"
-                />
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content">
+
             <Button
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/btnUpdate"
-                android:textColor="@android:color/black"
                 android:background="@color/colorPrimary"
                 android:text="Update"
-                />
+                android:textColor="@android:color/black" />
         </RelativeLayout>
 
 

@@ -6,20 +6,22 @@ public class Company {
     private String actualTax;
     private String salary;
 
-    public Company(String companyName, String salary, String expectedTax,String actualTax) {
+
+    public Company(String companyName, String salary, String expectedTax, String actualTax) {
         this.companyName = companyName;
-        this.salary = expectedTax;
         this.expectedTax = expectedTax;
-        this.actualTax =actualTax ;
+        this.actualTax = actualTax;
+        this.salary = salary;
     }
 
-    public Company(){
-    }
+
+
+
 
 
 
     public String getCompanyName() {
-        return companyName;
+        return this.companyName;
     }
 
     public void setCompanyName(String companyName) {
@@ -27,7 +29,7 @@ public class Company {
     }
 
     public String getExpectedTax() {
-        return expectedTax;
+        return this.expectedTax;
     }
 
     public void setExpectedTax(String expectedTax) {
@@ -35,7 +37,7 @@ public class Company {
     }
 
     public String getActualTax() {
-        return actualTax;
+        return this.actualTax;
     }
 
     public void setActualTax(String actualTax) {
@@ -43,7 +45,7 @@ public class Company {
     }
 
     public String getSalary() {
-        return salary;
+        return this.salary;
     }
 
     public void setSalary(String salary) {

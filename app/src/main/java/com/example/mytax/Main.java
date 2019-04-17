@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class Main extends AppCompatActivity {
      private String salary;
      private String expectedTax;
      private String actualTax;
-     private static final String REQUIRED= "Required input";
      private DatabaseReference mDatabase;
 
 
@@ -39,7 +39,7 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rec_list);
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("salary");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Monthly_Income");
         mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -72,16 +72,16 @@ public class Main extends AppCompatActivity {
         final EditText mActualTax = myView.findViewById(R.id.actual_tax);
 
         mCompanyName.setText(companyName);
-        //mCompanyName.setSelection(companyName.length());
+        mCompanyName.setSelection(companyName.length());
 
         mSalary.setText(salary);
-        //mSalary.setSelection(salary.length());
+        mSalary.setSelection(salary.length());
 
         mExpectedTax.setText(expectedTax);
-        //mExpectedTax.setSelection(expectedTax.length());
+        mExpectedTax.setSelection(expectedTax.length());
 
         mActualTax.setText(actualTax);
-        //mActualTax.setSelection(actualTax.length());
+        mActualTax.setSelection(actualTax.length());
 
 
 
@@ -169,7 +169,7 @@ public class Main extends AppCompatActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("salary");
+        Query query = FirebaseDatabase.getInstance().getReference().child("Monthly_Income");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
@@ -185,6 +185,27 @@ public class Main extends AppCompatActivity {
                         })
                         .build();
 
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
+                Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
+                final int position = viewHolder.getAdapterPosition();
+                adapter.getRef(position).removeValue();
+            }
+        };
+
+        ItemTouchHelper it = new ItemTouchHelper(simpleItemTouchCallback);
+        it.attachToRecyclerView(recyclerView);
+
+
+
         adapter = new FirebaseRecyclerAdapter<Company, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -194,24 +215,24 @@ public class Main extends AppCompatActivity {
                 return new ViewHolder(view);
             }
             @Override
-            protected void onBindViewHolder(ViewHolder viewHolder, final int position, Company model) {
+            protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
                 viewHolder.setCompanyName("Company: "+model.getCompanyName());
                 viewHolder.setSalary("Salary: "+ model.getSalary());
                 viewHolder.setActualTax("Actual Tax: " + model.getActualTax());
                 viewHolder.setExpectedTax("Expected Tax: " + model.getExpectedTax());
 
-                viewHolder.companyName.setOnClickListener(new View.OnClickListener() {
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        companyName=model.getCompanyName();
+                        salary=model.getSalary();
+                        expectedTax=model.getExpectedTax();
+                        actualTax=model.getActualTax();
                        updateData();
                     }
                 });
             }
-
-
         };
-
         recyclerView.setAdapter(adapter);
     }
 
@@ -226,6 +247,7 @@ public class Main extends AppCompatActivity {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        View mView;
         public TextView companyName;
         public TextView salary;
         public TextView expectedTax;
@@ -233,27 +255,26 @@ public class Main extends AppCompatActivity {
 
         public ViewHolder(View itemView) {
             super(itemView);
-             companyName= itemView.findViewById(R.id.company_name);
-             salary= itemView.findViewById(R.id.salary);
-             expectedTax = itemView.findViewById(R.id.expected_tax);
-             actualTax = itemView.findViewById(R.id.actual_tax);
-
+            mView=itemView;
         }
 
         public void setSalary(String string) {
+            salary= mView.findViewById(R.id.salary);
             salary.setText(string);
         }
         public void setExpectedTax(String string) {
-           expectedTax.setText(string);
+            expectedTax = mView.findViewById(R.id.expected_tax);
+            expectedTax.setText(string);
         }
         public void setActualTax(String string) {
+            actualTax = mView.findViewById(R.id.actual_tax);
             actualTax.setText(string);
         }
         public void setCompanyName(String string){
+            companyName= mView.findViewById(R.id.company_name);
             companyName.setText(string);
         }
     }
-
 
 }
 
