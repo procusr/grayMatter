@@ -11,9 +11,11 @@
 /build
 /captures
 .externalNativeBuild
-app/build.gradle
-app/src/androidTest/java/com/example/mytax/ExampleInstrumentedTest.java
-app/src/main/AndroidManifest.xml
-app/src/test/java/com/example/mytax/ExampleUnitTest.java
-app/google-services.json
-app/src/main/AndroidManifest.xml
+/app/build.gradle
+/app/src/androidTest/java/com/example/mytax/ExampleInstrumentedTest.java
+/app/src/main/AndroidManifest.xml
+/app/src/test/java/com/example/mytax/ExampleUnitTest.java
+/app/google-services.json
+/app/src/main/AndroidManifest.xml
+/app/src/main/res/layout/activity_main.xml
+/app/src/main/res/values/strings.xml
