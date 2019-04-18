@@ -25,7 +25,7 @@ public class House extends AppCompatActivity {
     EditText listPrice;
     TextView profitValue;
 
-       Button tbdButton;
+    Button tbdButton;
 
 
     @Override
@@ -69,7 +69,7 @@ public class House extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
             }
@@ -82,4 +82,3 @@ public class House extends AppCompatActivity {
         Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
     }
 }
-
