@@ -19,9 +19,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class Main extends AppCompatActivity {
      private RecyclerView recyclerView;
@@ -47,6 +49,19 @@ public class Main extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
+       mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    Toast.makeText(getApplicationContext(),"No data Exists",Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +116,6 @@ public class Main extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 Company company = new Company(companyName, salary, expectedTax, actualTax);
                 mDatabase.child(company.getCompanyName()).setValue(company);
 
@@ -228,7 +242,7 @@ public class Main extends AppCompatActivity {
                         salary=model.getSalary();
                         expectedTax=model.getExpectedTax();
                         actualTax=model.getActualTax();
-                       updateData();
+                        updateData();
                     }
                 });
             }

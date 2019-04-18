@@ -29,7 +29,21 @@
             app:backgroundTint="@color/colorPrimary"
             android:src="@android:drawable/ic_input_add"
             />
-
+        <TextView
+            android:id="@+id/empty_db"
+            android:layout_width="216dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.289" />
 
     </android.support.design.widget.CoordinatorLayout>
 
