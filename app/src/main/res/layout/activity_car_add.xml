@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation = "vertical"
+    android:padding = "16dp"
+    tools:context="CarAdd">
+
+
+  '
+
+  <TextView
+      android:id="@+id/textView4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Enter your Kilometer" />
+
+  <EditText
+      android:id="@+id/text_input_distance"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="numberDecimal"/>
+
+  <TextView
+      android:layout_width="134dp"
+      android:layout_height="30dp"
+      android:id="@+id/tvDate"
+      android:hint="Start Date" />
+
+
+
+  <TextView
+      android:layout_width="134dp"
+      android:layout_height="30dp"
+      android:id="@+id/endDate"
+      android:hint="end Date" />
+
+
+  <EditText
+      android:id="@+id/text_input_origin"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="textPersonName"
+      android:text="Origin" />
+
+
+
+  <EditText
+      android:id="@+id/text_input_Destination"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="textPersonName"
+      android:text="Destination" />
+
+
+  <EditText
+      android:id="@+id/text_input_purpose"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:inputType="textPersonName"
+      android:text="Purpose" />
+
+  <TextView
+      android:id="@+id/textView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Distance" />
+
+  <TextView
+      android:id="@+id/Amount"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Amount" />
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="gpsInput"
+      android:text="GPSTracker" />
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="saveInput"
+      android:text="Save" />
+
+
+</LinearLayout>

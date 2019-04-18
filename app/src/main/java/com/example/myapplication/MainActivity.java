@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,52 +29,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        if(savedInstanceState == null) {
+       /* if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new SalaryFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_salary);
-        }
+        }*/
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
+            /*case R.id.nav_salary:
 
-            case R.id.nav_salary:
+                Intent intent = new Intent(this, Salary.class);
+                startActivity(intent);
+                finish();
+
               getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                       new SalaryFragment()).commit();
               break;
-
+*/
             case R.id.nav_car:
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CarFragment()).commit();
-            break;
+                Intent intent = new Intent(this, CarAdd.class);
+                startActivity(intent);
+                finish();
+                break;
 
-            case R.id.nav_house:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HouseFragment()).commit();
+          /*  case R.id.nav_house:
+                Intent intent = new Intent(this, House.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.nav_percentage_calculator:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PercentageCalculatorFragment()).commit();
+                gIntent intent = new Intent(this, PrecentageCalculator.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.nav_setting:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingFragment()).commit();
+                Intent intent = new Intent(this, Setting.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.nav_summary:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SummaryFragment()).commit();
+                Intent intent = new Intent(this, Summary.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.nav_share:
-                Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Share.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.nav_send:
-                Toast.makeText(this, "send", Toast.LENGTH_SHORT).show();
-                break;
+                Intent intent = new Intent(this Send.class);
+                startActivity(intent);
+                finish();*/
 
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -91,3 +104,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 }
+
