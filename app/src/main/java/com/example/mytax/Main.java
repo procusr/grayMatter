@@ -1,5 +1,6 @@
 package com.example.mytax;
 
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -11,13 +12,18 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +40,7 @@ public class Main extends AppCompatActivity {
      private String expectedTax;
      private String actualTax;
      private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -48,9 +55,9 @@ public class Main extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
-       mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser mUser=mAuth.getCurrentUser();
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
@@ -59,7 +66,6 @@ public class Main extends AppCompatActivity {
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -144,29 +150,58 @@ public class Main extends AppCompatActivity {
 
         dialog.setCancelable(false);
 
+       final  TextView result = (TextView) myView.findViewById(R.id.result);
+       final TextView list = (TextView) myView.findViewById(R.id.kommune_percent);
+       final Spinner spinner =(Spinner) myView.findViewById(R.id.spinner);
+
+
+
         final EditText companyName = myView.findViewById(R.id.company_name);
         final EditText salary = myView.findViewById(R.id.salary);
-        final EditText expectedTax =myView.findViewById(R.id.expected_tax);
+       // final TextView expectedTax =myView.findViewById(R.id.result);
         final EditText actualTax = myView.findViewById(R.id.actual_tax);
 
         Button btnCancel=myView.findViewById(R.id.btnCancel);
         Button btnAdd=myView.findViewById(R.id.btnSave);
 
+        final TypedArray percent=getResources().obtainTypedArray(R.array.percentage);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Main.this, R.array.commune,
+                android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                list.setText(percent.getString(position));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                return;
+            }
+
+        });
+
 
     btnAdd.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            double num1 = Double.parseDouble(list.getText().toString());
+            double num2 = Double.parseDouble(salary.getText().toString());
+            double num3;
+            num3 = num1*num2/100;
+            result.setText(""+num3);
+
             String mCompanyName = companyName.getText().toString().trim();
             String mSalary = salary.getText().toString().trim();
-            String mExpectedTax = expectedTax.getText().toString().trim();
+            String mExpectedTax = String.format("%.2f", num3);
             String mActualTax = actualTax.getText().toString().trim();
 
             if(mCompanyName.trim().isEmpty()||mActualTax.trim().isEmpty()||mExpectedTax.trim().isEmpty()||mSalary.trim().isEmpty()){
                 Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
                 return;
             }
-
-
             Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax);
             mDatabase.child(company.getCompanyName()).setValue(company);
             Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
@@ -206,7 +241,6 @@ public class Main extends AppCompatActivity {
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
-
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
                 Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
@@ -249,7 +283,6 @@ public class Main extends AppCompatActivity {
         };
         recyclerView.setAdapter(adapter);
     }
-
 
 
     @Override

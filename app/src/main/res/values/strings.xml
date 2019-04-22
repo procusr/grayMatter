@@ -1,11 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Main</string>
-
-    <string-array name="Communes">
-        <item>Please Select a Commune</item>
-        <item>Stockholm</item>
-        <item>Nacka</item>
-        <item>Hanigne</item>
-        <item>Sodertalje</item>
-    </string-array>
 </resources>
