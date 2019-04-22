@@ -5,7 +5,16 @@ public class Company {
     private String expectedTax;
     private String actualTax;
     private String salary;
+    private String date;
 
+
+    public Company(String companyName, String salary, String expectedTax, String actualTax,String date) {
+        this.date=date;
+        this.companyName = companyName;
+        this.expectedTax = expectedTax;
+        this.actualTax = actualTax;
+        this.salary = salary;
+    }
 
     public Company(String companyName, String salary, String expectedTax, String actualTax) {
         this.companyName = companyName;
@@ -16,9 +25,13 @@ public class Company {
 
 
 
+    public String getDate() {
+        return date;
+    }
 
-
-
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getCompanyName() {
         return this.companyName;

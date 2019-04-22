@@ -38,16 +38,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 public class Main extends AppCompatActivity {
-     private RecyclerView recyclerView;
-     private LinearLayoutManager linearLayoutManager;
-     private FirebaseRecyclerAdapter adapter;
-     private String companyName;
-     private String salary;
-     private String expectedTax;
-     private String actualTax;
-     private DatabaseReference mDatabase;
-     private FirebaseAuth mAuth;
-     public  DatePickerDialog.OnDateSetListener mDateSetListener;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private FirebaseRecyclerAdapter adapter;
+    private String companyName;
+    private String salary;
+    private String expectedTax;
+    private String actualTax;
+    private String date;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    public DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
     @Override
@@ -62,15 +63,16 @@ public class Main extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mAuth= FirebaseAuth.getInstance();
-        FirebaseUser mUser=mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    Toast.makeText(getApplicationContext(),"No data Exists",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "No data Exists", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -85,19 +87,20 @@ public class Main extends AppCompatActivity {
         });
     }
 
-    public void updateData(){
+    public void updateData() {
 
-        AlertDialog.Builder myDialog=new AlertDialog.Builder(this);
-        LayoutInflater inflater= LayoutInflater.from(getApplicationContext());
-        View myView=inflater.inflate(R.layout.activity_update,null);
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View myView = inflater.inflate(R.layout.activity_update, null);
         myDialog.setView(myView);
 
-        final AlertDialog dialog=myDialog.create();
+        final AlertDialog dialog = myDialog.create();
 
-        final EditText mCompanyName=myView.findViewById(R.id.company_name);
-        final EditText mSalary=myView.findViewById(R.id.salary);
-        final EditText mExpectedTax=myView.findViewById(R.id.expected_tax);
+        final EditText mCompanyName = myView.findViewById(R.id.company_name);
+        final EditText mSalary = myView.findViewById(R.id.salary);
+        final EditText mExpectedTax = myView.findViewById(R.id.expected_tax);
         final EditText mActualTax = myView.findViewById(R.id.actual_tax);
+        final EditText mDate = myView.findViewById(R.id.date);
 
         mCompanyName.setText(companyName);
         mCompanyName.setSelection(companyName.length());
@@ -111,26 +114,31 @@ public class Main extends AppCompatActivity {
         mActualTax.setText(actualTax);
         mActualTax.setSelection(actualTax.length());
 
+        mDate.setText(date);
+        mDate.setSelection(date.length());
 
 
-        Button btnDelete=myView.findViewById(R.id.btnDelete);
-        Button btnUpdate=myView.findViewById(R.id.btnUpdate);
+
+        Button btnDelete = myView.findViewById(R.id.btnDelete);
+        Button btnUpdate = myView.findViewById(R.id.btnUpdate);
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                companyName=mCompanyName.getText().toString().trim();
-                salary=mSalary.getText().toString().trim();
-                expectedTax=mExpectedTax.getText().toString().trim();
-                actualTax=mActualTax.getText().toString().trim();
+                companyName = mCompanyName.getText().toString().trim();
+                salary = mSalary.getText().toString().trim();
+                expectedTax = mExpectedTax.getText().toString().trim();
+                actualTax = mActualTax.getText().toString().trim();
+                date = mDate.getText().toString().trim();
 
-                if(companyName.trim().isEmpty()||actualTax.trim().isEmpty()||expectedTax.trim().isEmpty()||salary.trim().isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
+
+                if (companyName.trim().isEmpty() || actualTax.trim().isEmpty() || expectedTax.trim().isEmpty() || salary.trim().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Company company = new Company(companyName, salary, expectedTax, actualTax);
-                mDatabase.child(company.getCompanyName()).setValue(company);
+                Company company = new Company(companyName, salary, expectedTax, actualTax,date);
+                mDatabase.child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -139,39 +147,36 @@ public class Main extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child(companyName).removeValue();
+                mDatabase.child(date).removeValue();
                 dialog.dismiss();
             }
         });
 
-          dialog.show();
+        dialog.show();
     }
 
     private void submitRecord() {
 
-        AlertDialog.Builder myDialog=new AlertDialog.Builder(this);
-        LayoutInflater inflater= LayoutInflater.from(getApplicationContext());
-        View myView=inflater.inflate(R.layout.activity_add,null);
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View myView = inflater.inflate(R.layout.activity_add, null);
         myDialog.setView(myView);
-        final AlertDialog dialog=myDialog.create();
+        final AlertDialog dialog = myDialog.create();
 
         dialog.setCancelable(false);
 
-        final TextView list =  myView.findViewById(R.id.kommune_percent);
+        final TextView list = myView.findViewById(R.id.kommune_percent);
         final Spinner spinner = myView.findViewById(R.id.spinner);
-
-
 
         final EditText companyName = myView.findViewById(R.id.company_name);
         final EditText salary = myView.findViewById(R.id.salary);
         final EditText actualTax = myView.findViewById(R.id.actual_tax);
 
-        Button btnCancel=myView.findViewById(R.id.btnCancel);
-        Button btnAdd=myView.findViewById(R.id.btnSave);
+        Button btnCancel = myView.findViewById(R.id.btnCancel);
+        Button btnAdd = myView.findViewById(R.id.btnSave);
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
-
-        final TypedArray percent=getResources().obtainTypedArray(R.array.percentage);
+        final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Main.this, R.array.commune,
                 android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
@@ -193,14 +198,14 @@ public class Main extends AppCompatActivity {
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar=Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         Main.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener, year,month,day);
+                        mDateSetListener, year, month, day);
 
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -211,35 +216,36 @@ public class Main extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month =month+1;
-                String date = month +"/"+ day + "/" + year;
+                month = month + 1;
+                String date = month + " " + day + " " + year;
                 mDisplayDate.setText(date);
             }
         };
 
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            double num1 = Double.parseDouble(list.getText().toString());
-            double num2 = Double.parseDouble(salary.getText().toString());
-            double num3 = num1*num2/100;
+            @Override
+            public void onClick(View v) {
+                double num1 = Double.parseDouble(list.getText().toString());
+                double num2 = Double.parseDouble(salary.getText().toString());
+                double num3 = num1 * num2 / 100;
 
-            String mCompanyName = companyName.getText().toString().trim();
-            String mSalary = salary.getText().toString().trim();
-            String mExpectedTax = String.format("%.2f", num3);
-            String mActualTax = actualTax.getText().toString().trim();
+                String mDate = mDisplayDate.getText().toString().trim();
+                String mCompanyName = companyName.getText().toString().trim();
+                String mSalary = salary.getText().toString().trim();
+                String mExpectedTax = String.format("%.2f", num3);
+                String mActualTax = actualTax.getText().toString().trim();
 
-            if(mCompanyName.trim().isEmpty()||mActualTax.trim().isEmpty()||mExpectedTax.trim().isEmpty()||mSalary.trim().isEmpty()){
-                Toast.makeText(getApplicationContext(),"Please provide all the inputs",Toast.LENGTH_SHORT).show();
-                return;
+                if (mCompanyName.trim().isEmpty() || mActualTax.trim().isEmpty() || mExpectedTax.trim().isEmpty() || mSalary.trim().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, mDate);
+                mDatabase.child(company.getDate()).setValue(company);
+                Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
-            Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax);
-            mDatabase.child(company.getCompanyName()).setValue(company);
-            Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        }
-     });
+        });
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -261,7 +267,8 @@ public class Main extends AppCompatActivity {
                                 return new Company(snapshot.child("companyName").getValue().toString(),
                                         snapshot.child("salary").getValue().toString(),
                                         snapshot.child("expectedTax").getValue().toString(),
-                                        snapshot.child("actualTax").getValue().toString());
+                                        snapshot.child("actualTax").getValue().toString(),
+                                        snapshot.child("date").getValue().toString());
                             }
                         })
                         .build();
@@ -273,6 +280,7 @@ public class Main extends AppCompatActivity {
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
+
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
                 Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
@@ -285,7 +293,6 @@ public class Main extends AppCompatActivity {
         it.attachToRecyclerView(recyclerView);
 
 
-
         adapter = new FirebaseRecyclerAdapter<Company, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -294,20 +301,22 @@ public class Main extends AppCompatActivity {
 
                 return new ViewHolder(view);
             }
+
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
-                viewHolder.setCompanyName("Company: "+model.getCompanyName());
-                viewHolder.setSalary("Salary: "+ model.getSalary());
+                viewHolder.setCompanyName("Company: " + model.getCompanyName());
+                viewHolder.setSalary("Salary: " + model.getSalary());
                 viewHolder.setActualTax("Actual Tax: " + model.getActualTax());
                 viewHolder.setExpectedTax("Expected Tax: " + model.getExpectedTax());
-
+                viewHolder.setDate("Date: " + model.getDate());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        companyName=model.getCompanyName();
-                        salary=model.getSalary();
-                        expectedTax=model.getExpectedTax();
-                        actualTax=model.getActualTax();
+                        companyName = model.getCompanyName();
+                        salary = model.getSalary();
+                        expectedTax = model.getExpectedTax();
+                        actualTax = model.getActualTax();
+                        date=model.getDate();
                         updateData();
                     }
                 });
@@ -331,32 +340,40 @@ public class Main extends AppCompatActivity {
         public TextView salary;
         public TextView expectedTax;
         public TextView actualTax;
+        public TextView date;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
         }
 
         public void setSalary(String string) {
-            salary= mView.findViewById(R.id.salary);
+            salary = mView.findViewById(R.id.salary);
             salary.setText(string);
         }
+
         public void setExpectedTax(String string) {
             expectedTax = mView.findViewById(R.id.expected_tax);
             expectedTax.setText(string);
         }
+
         public void setActualTax(String string) {
             actualTax = mView.findViewById(R.id.actual_tax);
             actualTax.setText(string);
         }
-        public void setCompanyName(String string){
-            companyName= mView.findViewById(R.id.company_name);
+
+        public void setCompanyName(String string) {
+            companyName = mView.findViewById(R.id.company_name);
             companyName.setText(string);
         }
+
+        public void setDate(String string) {
+            date = mView.findViewById(R.id.date);
+            date.setText(string);
+        }
+
     }
 
 }
-
-
 
 
