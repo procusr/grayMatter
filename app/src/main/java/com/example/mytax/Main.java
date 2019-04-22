@@ -1,6 +1,9 @@
 package com.example.mytax;
 
+import android.app.DatePickerDialog;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +35,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 public class Main extends AppCompatActivity {
      private RecyclerView recyclerView;
      private LinearLayoutManager linearLayoutManager;
@@ -40,7 +46,8 @@ public class Main extends AppCompatActivity {
      private String expectedTax;
      private String actualTax;
      private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
+     private FirebaseAuth mAuth;
+     public  DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
     @Override
@@ -150,19 +157,19 @@ public class Main extends AppCompatActivity {
 
         dialog.setCancelable(false);
 
-       final  TextView result = (TextView) myView.findViewById(R.id.result);
-       final TextView list = (TextView) myView.findViewById(R.id.kommune_percent);
-       final Spinner spinner =(Spinner) myView.findViewById(R.id.spinner);
+        final TextView list =  myView.findViewById(R.id.kommune_percent);
+        final Spinner spinner = myView.findViewById(R.id.spinner);
 
 
 
         final EditText companyName = myView.findViewById(R.id.company_name);
         final EditText salary = myView.findViewById(R.id.salary);
-       // final TextView expectedTax =myView.findViewById(R.id.result);
         final EditText actualTax = myView.findViewById(R.id.actual_tax);
 
         Button btnCancel=myView.findViewById(R.id.btnCancel);
         Button btnAdd=myView.findViewById(R.id.btnSave);
+        final TextView mDisplayDate = myView.findViewById(R.id.date);
+
 
         final TypedArray percent=getResources().obtainTypedArray(R.array.percentage);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Main.this, R.array.commune,
@@ -183,15 +190,40 @@ public class Main extends AppCompatActivity {
 
         });
 
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar=Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-    btnAdd.setOnClickListener(new View.OnClickListener() {
+                DatePickerDialog dialog = new DatePickerDialog(
+                        Main.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener, year,month,day);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month =month+1;
+                String date = month +"/"+ day + "/" + year;
+                mDisplayDate.setText(date);
+            }
+        };
+
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             double num1 = Double.parseDouble(list.getText().toString());
             double num2 = Double.parseDouble(salary.getText().toString());
-            double num3;
-            num3 = num1*num2/100;
-            result.setText(""+num3);
+            double num3 = num1*num2/100;
 
             String mCompanyName = companyName.getText().toString().trim();
             String mSalary = salary.getText().toString().trim();
