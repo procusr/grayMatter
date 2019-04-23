@@ -37,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class Main extends AppCompatActivity {
+public class Salary extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
@@ -177,7 +177,7 @@ public class Main extends AppCompatActivity {
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
         final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Main.this, R.array.commune,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Salary.this, R.array.commune,
                 android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
 
@@ -204,7 +204,7 @@ public class Main extends AppCompatActivity {
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        Main.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        Salary.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
 
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -296,7 +296,7 @@ public class Main extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Company, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(Main.this)
+                View view = LayoutInflater.from(Salary.this)
                         .inflate(R.layout.to_be_inflated, parent, false);
 
                 return new ViewHolder(view);
