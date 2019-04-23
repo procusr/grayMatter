@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,6 @@ public class House extends AppCompatActivity {
         brokerPrice =  findViewById(R.id.broker);
         profitValue =  findViewById(R.id.profit);
         listPrice = findViewById(R.id.listing);
-
 
         tbdButton = findViewById(R.id.Btn_Calculate);
 

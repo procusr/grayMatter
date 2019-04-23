@@ -1,95 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".House"
     tools:showIn="@layout/activity_house"
-    >
+    android:background="#F4F6F8">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginRight="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
         <EditText
             android:id="@+id/bought"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
-
-            android:hint="Buying price"
-            android:inputType="number"
-            android:paddingBottom="15dp" />
-
-        <EditText
-            android:id="@+id/sold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Selling price"
-            android:inputType="number"
-            android:paddingBottom="15dp" />
-
-        <EditText
-            android:id="@+id/broker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Broker cost"
-            android:inputType="number"
-            android:paddingBottom="15dp" />
-
-        <EditText
-            android:id="@+id/listing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:layout_marginBottom="25dp"
-            android:gravity="center"
-            android:hint="Listing cost"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/profit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:hint="Profit after selling"
-            android:inputType="number"
-            android:paddingBottom="15dp"
-            />
-        <Button
-            android:id="@+id/btn_plant_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="320dp"
+            android:layout_height="52dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_marginRight="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/edit_text_bck"
             android:drawablePadding="20dp"
-            android:text="test"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="#050505"
             android:typeface="sans"
             android:gravity="left|center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:drawableLeft="@drawable/ic_bought"
+            android:maxLines="1"
+            android:hint="Buying price" />
+
+        <EditText
+            android:id="@+id/sold"
+            android:layout_width="320dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:drawablePadding="20dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:typeface="sans"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+
+            android:textColorHint="@drawable/text_hint_selector"
+            android:hint="Selling price"
+            android:drawableLeft="@drawable/ic_sell"
+            android:maxLines="1"
             />
 
-    <Button
-        android:id="@+id/Btn_Calculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|clip_vertical"
-        android:gravity="center|center_horizontal"
-        android:text="TBD" />
+        <EditText
+            android:id="@+id/broker"
+            android:layout_width="320dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:drawablePadding="20dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:typeface="sans"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+
+            android:textColorHint="@drawable/text_hint_selector"
+            android:hint="Broker price"
+            android:maxLines="1"
+            android:drawableLeft="@drawable/ic_broker"/>
+
+        <EditText
+            android:id="@+id/listing"
+            android:layout_width="320dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:drawablePadding="20dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:typeface="sans"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:hint="Listing price"
+            android:maxLines="1"
+            android:drawableLeft="@drawable/ic_listing" />
+
+        <TextView
+            android:id="@+id/profit"
+            android:layout_width="350dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edit_text_bck"
+            android:drawablePadding="20dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:typeface="sans"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:hint="Profit"
+            android:drawableLeft="@drawable/profit" />
+
+        <Button
+            android:id="@+id/Btn_Calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|clip_vertical"
+            android:layout_marginTop="25dp"
+            android:gravity="center|center_horizontal"
+            android:text="calculate" />
     </LinearLayout>
 
+
+
+
+</RelativeLayout>
