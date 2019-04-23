@@ -38,14 +38,14 @@ public class House extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
-        RelativeLayout constraintLayout = findViewById(R.id.content_house);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2000);
-        animationDrawable.setExitFadeDuration(4000);
-        animationDrawable.start();
+       // RelativeLayout constraintLayout = findViewById(R.id.content_house);
+       // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+       // animationDrawable.setEnterFadeDuration(2000);
+       // animationDrawable.setExitFadeDuration(4000);
+       // animationDrawable.start();
 
-        Toolbar toolbar = findViewById(R.id.toolbar_house);
-        setSupportActionBar(toolbar);
+       // Toolbar toolbar = findViewById(R.id.;
+       // setSupportActionBar(toolbar);
 
 
 
@@ -71,25 +71,25 @@ public class House extends AppCompatActivity {
 
                 profitValue.setText(String.valueOf(profit));
 
-                showToast(String.valueOf("Profit to declare \n" + profit));
+              // showToast(String.valueOf("Profit to declare \n" + profit));
             }
         });
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        });
-    }
-
-    private void showToast(String text)
-    {
-        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
-    }
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//
+//            }
+//        });
+//    }
+//
+//    private void showToast(String text)
+//    {
+//        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
+   }
 }
