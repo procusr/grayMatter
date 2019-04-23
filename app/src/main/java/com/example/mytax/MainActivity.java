@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void car(View view) {
-        Intent intent = new Intent(MainActivity.this, AutoCarActivity.class);
+        Intent intent = new Intent(MainActivity.this, DrawerBarActivity.class);
     startActivity(intent);}
 
     public void house(View view) {

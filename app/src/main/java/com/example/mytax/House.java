@@ -1,6 +1,7 @@
 package com.example.mytax;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -14,4 +15,5 @@ public class House extends AppCompatActivity {
 
 
     }
+
 }

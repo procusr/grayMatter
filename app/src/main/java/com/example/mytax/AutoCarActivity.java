@@ -45,7 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class AutoCarActivity extends AppCompatActivity {
+public class AutoCarActivity extends DrawerBarActivity {
 
     // For location services
     private static final String TAG = AutoCarActivity.class.getSimpleName();

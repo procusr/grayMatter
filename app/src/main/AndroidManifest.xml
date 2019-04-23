@@ -21,7 +21,9 @@
         <activity android:name=".Percentage"/>
         <activity android:name=".Salary"/>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".DrawerBarActivity" />
         <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
