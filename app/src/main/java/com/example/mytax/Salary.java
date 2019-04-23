@@ -304,11 +304,11 @@ public class Salary extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
-                viewHolder.setCompanyName("Company: " + model.getCompanyName());
-                viewHolder.setSalary("Salary: " + model.getSalary());
-                viewHolder.setActualTax("Actual Tax: " + model.getActualTax());
-                viewHolder.setExpectedTax("Expected Tax: " + model.getExpectedTax());
-                viewHolder.setDate("Date: " + model.getDate());
+                viewHolder.setCompanyName("Company :    " + model.getCompanyName());
+                viewHolder.setSalary("Salary :  " + model.getSalary());
+                viewHolder.setActualTax("Actual tax :   " + model.getActualTax());
+                viewHolder.setExpectedTax("Expected tax :   " +model.getExpectedTax());
+                viewHolder.setDate( model.getDate());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -325,13 +325,14 @@ public class Salary extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    
+
 
     @Override
     protected void onStart() {
         super.onStart();
         fetch();
         adapter.startListening();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
