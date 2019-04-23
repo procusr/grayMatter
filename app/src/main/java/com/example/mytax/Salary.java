@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +15,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -36,6 +36,9 @@ public class Salary extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         result = (TextView)findViewById(R.id.result);
         salary = (EditText)findViewById(R.id.salary);
+
+        //allocate the input only integer
+        salary.setInputType(InputType.TYPE_CLASS_NUMBER);
         final TypedArray procent=getResources().obtainTypedArray(R.array.percentage);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.commune,
                 android.R.layout.simple_spinner_item);
