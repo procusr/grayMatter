@@ -38,14 +38,16 @@ public class House extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_house);
-        setSupportActionBar(toolbar);
-
-        RelativeLayout relativeLayout = findViewById(R.id.content_house);
-        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        RelativeLayout constraintLayout = findViewById(R.id.content_house);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
+
+        Toolbar toolbar = findViewById(R.id.toolbar_house);
+        setSupportActionBar(toolbar);
+
+
 
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
