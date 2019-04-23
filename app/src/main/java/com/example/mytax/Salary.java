@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +38,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Salary extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -223,6 +231,7 @@ public class Salary extends AppCompatActivity {
         };
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 double num1 = Double.parseDouble(list.getText().toString());
@@ -235,11 +244,15 @@ public class Salary extends AppCompatActivity {
                 String mExpectedTax = String.format("%.2f", num3);
                 String mActualTax = actualTax.getText().toString().trim();
 
-                if (mCompanyName.trim().isEmpty() || mActualTax.trim().isEmpty() || mExpectedTax.trim().isEmpty() || mSalary.trim().isEmpty()) {
+                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                String Date = s.format(FOMATTER);
+
+                if (mCompanyName.trim().isEmpty() || mActualTax.trim().isEmpty() || mExpectedTax.trim().isEmpty() || mSalary.trim().isEmpty()||mDate.trim().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, mDate);
+                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
                 mDatabase.child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
