@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -46,10 +45,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class Car extends AppCompatActivity {
+public class AutoCarActivity extends AppCompatActivity {
 
     // For location services
-    private static final String TAG = Car.class.getSimpleName();
+    private static final String TAG = AutoCarActivity.class.getSimpleName();
     TextView textView;
     Button btnStartUpdates;
     Button btnStopUpdates;
@@ -307,7 +306,7 @@ public class Car extends AppCompatActivity {
                                     // Show the dialog by calling startResolutionForResult(), and check the
                                     // result in onActivityResult().
                                     ResolvableApiException rae = (ResolvableApiException) e;
-                                    rae.startResolutionForResult(Car.this, REQUEST_CHECK_SETTINGS);
+                                    rae.startResolutionForResult(AutoCarActivity.this, REQUEST_CHECK_SETTINGS);
                                 } catch (IntentSender.SendIntentException sie) {
                                     Log.i(TAG, "PendingIntent unable to execute request.");
                                 }
@@ -316,7 +315,7 @@ public class Car extends AppCompatActivity {
                                 String errorMessage = "Location settings are inadequate, and cannot be " +
                                         "fixed here. Fix in Settings.";
                                 Log.e(TAG, errorMessage);
-                                Toast.makeText(Car.this, errorMessage, Toast.LENGTH_LONG).show();
+                                Toast.makeText(AutoCarActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                                 mRequestingLocationUpdates = false;
                         }
 
@@ -427,7 +426,7 @@ public class Car extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             // Request permission
-                            ActivityCompat.requestPermissions(Car.this,
+                            ActivityCompat.requestPermissions(AutoCarActivity.this,
                                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                     REQUEST_PERMISSIONS_REQUEST_CODE);
                         }
@@ -437,7 +436,7 @@ public class Car extends AppCompatActivity {
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the user denied the permission
             // previously and checked "Never ask again".
-            ActivityCompat.requestPermissions(Car.this,
+            ActivityCompat.requestPermissions(AutoCarActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
         }

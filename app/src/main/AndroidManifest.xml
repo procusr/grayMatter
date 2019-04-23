@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"/>
-        <activity android:name=".Car"/>
+        <activity android:name=".AutoCarActivity"/>
         <activity android:name=".Summary"/>
         <activity android:name=".Plus"/>
         <activity android:name=".House"/>
