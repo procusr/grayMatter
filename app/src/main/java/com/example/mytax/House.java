@@ -1,5 +1,8 @@
 package com.example.mytax;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,15 @@ public class House extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house);
 
+        Toolbar toolbar = findViewById(R.id.toolbar_house);
+        setSupportActionBar(toolbar);
+
+        RelativeLayout relativeLayout = findViewById(R.id.content_house);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
+
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
         brokerPrice =  findViewById(R.id.broker);
@@ -57,12 +70,9 @@ public class House extends AppCompatActivity {
                 profitValue.setText(String.valueOf(profit));
 
                 showToast(String.valueOf("Profit to declare \n" + profit));
-
             }
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +84,6 @@ public class House extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void showToast(String text)

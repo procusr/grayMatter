@@ -6,19 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".House"
     tools:showIn="@layout/activity_house"
-    android:background="#F4F6F8">
+    android:background="@drawable/gradient_list"
+    android:id="@+id/content_house"
+    >
+
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="0dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -31,17 +34,17 @@
             android:layout_marginTop="25dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/edit_text_bck"
+            android:drawableLeft="@drawable/ic_bought"
             android:drawablePadding="20dp"
-            android:textAllCaps="false"
-            android:textColor="#050505"
-            android:typeface="sans"
             android:gravity="left|center_vertical"
+            android:hint="Buying price"
+            android:maxLines="1"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
             android:textColorHint="@drawable/text_hint_selector"
-            android:drawableLeft="@drawable/ic_bought"
-            android:maxLines="1"
-            android:hint="Buying price" />
+            android:typeface="sans" />
 
         <EditText
             android:id="@+id/sold"
@@ -51,19 +54,18 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:background="#FFFFFF"
+            android:drawableLeft="@drawable/ic_sell"
             android:drawablePadding="20dp"
-            android:textAllCaps="false"
-            android:textColor="#050505"
-            android:typeface="sans"
             android:gravity="left|center_vertical"
+            android:hint="Selling price"
+            android:maxLines="1"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
 
+            android:textAllCaps="false"
+            android:textColor="#050505"
             android:textColorHint="@drawable/text_hint_selector"
-            android:hint="Selling price"
-            android:drawableLeft="@drawable/ic_sell"
-            android:maxLines="1"
-            />
+            android:typeface="sans" />
 
         <EditText
             android:id="@+id/broker"
@@ -73,18 +75,18 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:background="#FFFFFF"
+            android:drawableLeft="@drawable/ic_broker"
             android:drawablePadding="20dp"
-            android:textAllCaps="false"
-            android:textColor="#050505"
-            android:typeface="sans"
             android:gravity="left|center_vertical"
+            android:hint="Broker price"
+            android:maxLines="1"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
 
+            android:textAllCaps="false"
+            android:textColor="#050505"
             android:textColorHint="@drawable/text_hint_selector"
-            android:hint="Broker price"
-            android:maxLines="1"
-            android:drawableLeft="@drawable/ic_broker"/>
+            android:typeface="sans" />
 
         <EditText
             android:id="@+id/listing"
@@ -93,19 +95,19 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:background="#FFFFFF"
-            android:drawablePadding="20dp"
-            android:textAllCaps="false"
-            android:textColor="#050505"
-            android:typeface="sans"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_marginBottom="20dp"
-            android:textColorHint="@drawable/text_hint_selector"
+            android:background="#FFFFFF"
+            android:drawableLeft="@drawable/ic_listing"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
             android:hint="Listing price"
             android:maxLines="1"
-            android:drawableLeft="@drawable/ic_listing" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
 
         <TextView
             android:id="@+id/profit"
@@ -114,18 +116,18 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/edit_text_bck"
+            android:drawableLeft="@drawable/profit"
             android:drawablePadding="20dp"
-            android:textAllCaps="false"
-            android:textColor="#050505"
-            android:typeface="sans"
             android:gravity="left|center_vertical"
+            android:hint="Profit"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginBottom="20dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
             android:textColorHint="@drawable/text_hint_selector"
-            android:hint="Profit"
-            android:drawableLeft="@drawable/profit" />
+            android:typeface="sans" />
 
         <Button
             android:id="@+id/Btn_Calculate"
