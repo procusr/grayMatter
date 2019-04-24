@@ -1,106 +1,120 @@
 package com.example.mytax;
 
+
+
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class DrawerBarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
+
+public class DrawerBarActivity extends AppCompatActivity {
+
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    //Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_bar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-       /* if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new SalaryFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_salary);
-        }*/
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                final String appPackageName = getPackageName();
+
+                switch (item.getItemId()) {
+
+                    case R.id.nav_car:
+                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
+                        startActivity(carOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
+
+                    case R.id.nav_House:
+                        Intent houseOption = new Intent(getApplicationContext(), House.class);
+                        startActivity(houseOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.nav_salary:
+                        Intent salaryOption = new Intent(getApplicationContext(), Salary.class);
+                        startActivity(salaryOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.nav_summary:
+                        Intent summaryOption = new Intent(getApplicationContext(), Summary.class);
+                        startActivity(summaryOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.nav_percentage:
+                        Intent percentageOption = new Intent(getApplicationContext(), Percentage.class);
+                        startActivity(percentageOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.nav_setting:
+                        Intent settingOption = new Intent(getApplicationContext(), SettingActivity.class);
+                        startActivity(settingOption);
+//                        finish();
+                        drawerLayout.closeDrawers();
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            /*case R.id.nav_salary:
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
-                Intent intent = new Intent(this, Salary.class);
-                startActivity(intent);
-                finish();
-
-              getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                      new SalaryFragment()).commit();
-              break;
-*/
-            case R.id.nav_car:
-                Intent intent = new Intent(this, AutoCarActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-
-          /*  case R.id.nav_house:
-                Intent intent = new Intent(this, House.class);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.nav_percentage_calculator:
-                gIntent intent = new Intent(this, PrecentageCalculator.class);
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.nav_setting:
-                Intent intent = new Intent(this, Setting.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.nav_summary:
-                Intent intent = new Intent(this, Summary.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.nav_share:
-                Intent intent = new Intent(this, Share.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.nav_send:
-                Intent intent = new Intent(this Send.class);
-                startActivity(intent);
-                finish();*/
-
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        actionBarDrawerToggle.syncState();
     }
 
     @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+    public void finish() {
+        super.finish();
+        overridePendingTransitionExit();
+    }
 
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        overridePendingTransitionEnter();
+    }
 
-            super.onBackPressed();
-        }
+    /**
+     * Overrides the pending Activity transition by performing the "Enter" animation.
+     */
+    protected void overridePendingTransitionEnter() {
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    /**
+     * Overrides the pending Activity transition by performing the "Exit" animation.
+     */
+    protected void overridePendingTransitionExit() {
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
-
