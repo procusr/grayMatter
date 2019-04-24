@@ -36,17 +36,16 @@ public class DrawerBarActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
 
-                    case R.id.nav_car:
-                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
-                        startActivity(carOption);
+                    case R.id.nav_House:
+                        Intent houseOption = new Intent(getApplicationContext(), House.class);
+                        startActivity(houseOption);
 //                        finish();
                         drawerLayout.closeDrawers();
                         break;
 
-
-                    case R.id.nav_House:
-                        Intent houseOption = new Intent(getApplicationContext(), House.class);
-                        startActivity(houseOption);
+                    case R.id.nav_car:
+                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
+                        startActivity(carOption);
 //                        finish();
                         drawerLayout.closeDrawers();
                         break;
@@ -85,12 +84,6 @@ public class DrawerBarActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//
-//        actionBarDrawerToggle.syncState();
-//    }
 
     @Override
     public void finish() {
