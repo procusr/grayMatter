@@ -11,13 +11,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Car"/>
-        <activity android:name=".Summary"/>
-        <activity android:name=".Plus"/>
-        <activity android:name=".House"/>
-        <activity android:name=".Percentage"/>
-        <activity android:name=".Salary"/>
+        <activity android:name=".AppIntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Car" />
+        <activity android:name=".Summary" />
+        <activity android:name=".Plus" />
+        <activity android:name=".House" />
+        <activity android:name=".Percentage" />
+        <activity android:name=".Salary" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -26,15 +41,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PopMain"
-            android:theme="@style/AppTheme.Custom">
-        </activity>
-        <activity android:name=".SettingActivity"
-            android:theme="@style/AppTheme.Custom">
-        </activity>
-        <activity android:name=".ForgetAndChangePasswordActivity"
-            android:theme="@style/AppTheme.Custom">
-        </activity>
+        <activity
+            android:name=".PopMain"
+            android:theme="@style/AppTheme.Custom" />
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppTheme.Custom" />
+        <activity
+            android:name=".ForgetAndChangePasswordActivity"
+            android:theme="@style/AppTheme.Custom" />
 
         <meta-data
             android:name="preloaded_fonts"

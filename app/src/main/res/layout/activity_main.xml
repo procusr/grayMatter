@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/main_activity">
 
     #We should merge this button with the slide icon "setting"
 
@@ -63,7 +64,7 @@
                 android:layout_marginRight="40dp"
                 android:background="@android:color/transparent"
                 android:onClick="house"
-                app:srcCompat="@drawable/house" />
+                app:srcCompat="@drawable/house"/>
 
             <ImageButton
                 android:id="@+id/Btn_car"

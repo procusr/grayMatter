@@ -3,6 +3,7 @@
     <string name="button">Button</string>
     <string name="pop_window">Pop window</string>
     <string name="todo">TODO</string>
+    <string name="title_activity_welcome">welcomeActivity</string>
 
 
 </resources>
