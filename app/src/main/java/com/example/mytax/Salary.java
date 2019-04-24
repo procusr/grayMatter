@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,7 @@ public class Salary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rec_list);
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Monthly_Income");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
         mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -180,6 +181,7 @@ public class Salary extends AppCompatActivity {
         final EditText salary = myView.findViewById(R.id.salary);
         final EditText actualTax = myView.findViewById(R.id.actual_tax);
 
+
         Button btnCancel = myView.findViewById(R.id.btnCancel);
         Button btnAdd = myView.findViewById(R.id.btnSave);
         final TextView mDisplayDate = myView.findViewById(R.id.date);
@@ -234,24 +236,28 @@ public class Salary extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                double num1 = Double.parseDouble(list.getText().toString());
-                double num2 = Double.parseDouble(salary.getText().toString());
-                double num3 = num1 * num2 / 100;
 
                 String mDate = mDisplayDate.getText().toString().trim();
                 String mCompanyName = companyName.getText().toString().trim();
                 String mSalary = salary.getText().toString().trim();
-                String mExpectedTax = String.format("%.2f", num3);
                 String mActualTax = actualTax.getText().toString().trim();
+
+                if (mCompanyName.trim().isEmpty() || mActualTax.trim().isEmpty() || mSalary.trim().isEmpty()||mDate.trim().isEmpty()||list.getText().toString().equals("0.0")) {
+                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M dd yyyy"));
                 DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String Date = s.format(FOMATTER);
 
-                if (mCompanyName.trim().isEmpty() || mActualTax.trim().isEmpty() || mExpectedTax.trim().isEmpty() || mSalary.trim().isEmpty()||mDate.trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
+                double num1 = Double.parseDouble(list.getText().toString());
+                double num2 = Double.parseDouble(salary.getText().toString());
+                double num3 = num1 * num2 / 100;
+                String mExpectedTax = String.format("%.2f", num3);
+
+
                 Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
                 mDatabase.child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
@@ -269,7 +275,7 @@ public class Salary extends AppCompatActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("Monthly_Income");
+        Query query = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
@@ -317,10 +323,10 @@ public class Salary extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
-                viewHolder.setCompanyName("Company :    " + model.getCompanyName());
-                viewHolder.setSalary("Salary :  " + model.getSalary());
-                viewHolder.setActualTax("Actual tax :   " + model.getActualTax());
-                viewHolder.setExpectedTax("Expected tax :   " +model.getExpectedTax());
+                viewHolder.setCompanyName("Company        :   " + model.getCompanyName());
+                viewHolder.setSalary     ("Salary              :   " + model.getSalary());
+                viewHolder.setActualTax  ("Actual tax     :   " + model.getActualTax());
+                viewHolder.setExpectedTax("Expected tax   :   " +model.getExpectedTax());
                 viewHolder.setDate( model.getDate());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override

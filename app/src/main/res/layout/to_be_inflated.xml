@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="Company"
                 android:hint="Company"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"

@@ -297,7 +297,7 @@
     </array>
 
     <array name="percentage">
-        <item></item>
+        <item>0.0</item>
         <item>	33.35	</item>
         <item>	32.84	</item>
         <item>	33.42	</item>
