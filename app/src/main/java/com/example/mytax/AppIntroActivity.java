@@ -19,8 +19,8 @@ public class AppIntroActivity extends AppIntro {
                 R.drawable.one, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
         addSlide(AppIntroFragment.newInstance("Second App Into", "Second App Intro Details",
                 R.drawable.one, ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
-        addSlide(AppIntroFragment.newInstance("Third App Into", "Third App Intro Details",
-                R.drawable.one, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark)));
+//        addSlide(AppIntroFragment.newInstance("Third App Into", "Third App Intro Details",
+//                R.drawable.one, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark)));
     }
 
     @Override
