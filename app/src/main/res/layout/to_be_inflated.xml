@@ -26,9 +26,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:backgroundTint="@color/colorPrimary"
-                android:gravity="left"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="Date: "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:textStyle="bold" />
@@ -46,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="Company"
+                android:hint="Company"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:visibility="visible" />
