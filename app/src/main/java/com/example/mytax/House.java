@@ -20,7 +20,7 @@ import android.support.design.widget.NavigationView;
 import android.widget.FrameLayout;
 
 
-public class House extends AppCompatActivity {
+public class House extends DrawerBarActivity {
 
 
     int buy;
