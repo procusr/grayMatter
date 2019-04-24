@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.widget.FrameLayout;
 
 
 public class House extends AppCompatActivity {
@@ -36,9 +39,14 @@ public class House extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_house, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(1).setChecked(true);
+
+
 
        // RelativeLayout constraintLayout = findViewById(R.id.content_house);
        // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
@@ -76,6 +84,7 @@ public class House extends AppCompatActivity {
               // showToast(String.valueOf("Profit to declare \n" + profit));
             }
         });
+
 
 
 //        FloatingActionButton fab = findViewById(R.id.fab);

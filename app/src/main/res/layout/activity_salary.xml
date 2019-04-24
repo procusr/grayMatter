@@ -100,5 +100,5 @@
             android:onClick="count"/>
 
     </LinearLayout>
-    <include layout="@layout/activity_drawer_bar" />
+
 </android.support.constraint.ConstraintLayout>
