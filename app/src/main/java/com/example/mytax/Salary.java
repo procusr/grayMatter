@@ -10,13 +10,11 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +39,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class Salary extends DrawerBarActivity {
     private RecyclerView recyclerView;
@@ -54,6 +50,7 @@ public class Salary extends DrawerBarActivity {
     private FirebaseRecyclerAdapter adapter;
     private String companyName;
     private String salary;
+    private Toolbar toolbar;
     private String expectedTax;
     private String actualTax;
     private String date;
@@ -69,9 +66,11 @@ public class Salary extends DrawerBarActivity {
         getLayoutInflater().inflate(R.layout.rec_list, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(2).setChecked(true);
-       // setContentView(R.layout.rec_list);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Salary details");
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -153,7 +152,7 @@ public class Salary extends DrawerBarActivity {
                     return;
                 }
                 Company company = new Company(companyName, salary, expectedTax, actualTax,date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -162,7 +161,7 @@ public class Salary extends DrawerBarActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child(date).removeValue();
+                mDatabase.child("salary").child(date).removeValue();
                 dialog.dismiss();
             }
         });
@@ -171,7 +170,6 @@ public class Salary extends DrawerBarActivity {
     }
 
     private void submitRecord() {
-
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_add, null);
@@ -265,7 +263,7 @@ public class Salary extends DrawerBarActivity {
 
 
                 Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -281,7 +279,7 @@ public class Salary extends DrawerBarActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
