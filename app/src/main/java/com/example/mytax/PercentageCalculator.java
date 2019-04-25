@@ -1,20 +1,49 @@
 package com.example.mytax;
 
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.mytax.kommun_JSON.JSONDownloader;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class PercentageCalculator extends AppCompatActivity {
 
     EditText gross, net;
 
-    Button btn_calc;
+    Button btn_calc, btn_kommunList;
     double taxAmount;
     double percentage;
+
+    Spinner spinner;
+
+    TextView textViewPercent;
+
+    String jsonURL ="https://api.myjson.com/bins/u3gdk";
+
+
+
 
 
     public EditText getGross() {
@@ -67,11 +96,29 @@ public class PercentageCalculator extends AppCompatActivity {
         gross = (EditText)findViewById(R.id.et_grossSal);
         net = (EditText)findViewById(R.id.et_netSal);
 
+        textViewPercent =(TextView) findViewById(R.id.textView_percent);
+
+        spinner = (Spinner)findViewById(R.id.spinner);
+
+        btn_kommunList = (Button)findViewById(R.id.btn_kommunSpinner);
+
+        btn_kommunList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new JSONDownloader(PercentageCalculator.this,jsonURL,spinner).execute();
+            }
+        });
+
+
+
+
+
         btn_calc = (Button)findViewById(R.id.btn_percentage);
 
         btn_calc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 calculatePercentage();
             }
         });
@@ -88,6 +135,9 @@ public class PercentageCalculator extends AppCompatActivity {
         taxAmount = grossSal-netSal;
 
         percentage = (taxAmount/grossSal)*100;
+        //go to json
+
+
         openDialog();
     }
 
@@ -107,4 +157,10 @@ public class PercentageCalculator extends AppCompatActivity {
 
 
     }
+
+
 }
+
+
+
+

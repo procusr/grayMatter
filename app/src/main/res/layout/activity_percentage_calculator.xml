@@ -8,6 +8,14 @@
     android:gravity="center"
     android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Calculate your Tax Percentage"
+            android:textStyle="bold|italic" />
+
         <EditText
             android:id="@+id/et_grossSal"
             android:layout_width="wrap_content"
@@ -29,6 +37,32 @@
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="244dp" />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_kommunSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Select Municipality"
+            android:textSize="8sp"
+            />
+
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Percentage" />
+
         <Button
             android:id="@+id/btn_percentage"
             android:layout_width="wrap_content"
@@ -40,5 +74,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.499"
             />
+
 
 </LinearLayout>
