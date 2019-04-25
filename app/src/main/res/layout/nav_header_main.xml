@@ -21,11 +21,12 @@
         app:civ_border_color="#FFFFFFFF"
         app:civ_border_width="2dp" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="12dp"
         android:text="Tax ME"
         android:textColor="#DD070707"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -38,5 +39,8 @@
         android:layout_height="wrap_content"
         android:text="android.studio@android.com"
         android:visibility="gone" />
+
+
+
 
 </LinearLayout>

@@ -21,11 +21,12 @@ public class DrawerBarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_bar);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,  R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -34,17 +35,16 @@ public class DrawerBarActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
 
-                    case R.id.nav_car:
-                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
-                        startActivity(carOption);
+                    case R.id.nav_House:
+                        Intent houseOption = new Intent(getApplicationContext(), House.class);
+                        startActivity(houseOption);
 //                        finish();
                         drawerLayout.closeDrawers();
                         break;
 
-
-                    case R.id.nav_House:
-                        Intent houseOption = new Intent(getApplicationContext(), House.class);
-                        startActivity(houseOption);
+                    case R.id.nav_car:
+                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
+                        startActivity(carOption);
 //                        finish();
                         drawerLayout.closeDrawers();
                         break;
@@ -81,14 +81,9 @@ public class DrawerBarActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        actionBarDrawerToggle.syncState();
-    }
 
     @Override
     public void finish() {
