@@ -162,7 +162,7 @@ public class Salary extends DrawerBarActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child(date).removeValue();
+                mDatabase.child("salary").child(date).removeValue();
                 dialog.dismiss();
             }
         });
