@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:onClick="main"
+    android:id="@+id/myLayout">
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -36,16 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="135dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="mai"
-            android:text="Welcome" />
-    </LinearLayout>
+        android:orientation="vertical"/>
 
 
 </LinearLayout>
