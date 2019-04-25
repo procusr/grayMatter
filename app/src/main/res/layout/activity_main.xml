@@ -36,6 +36,9 @@
         app:srcCompat="@drawable/ic_info_black_24dp"
         tools:ignore="VectorDrawableCompat" />
 
+
+
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
