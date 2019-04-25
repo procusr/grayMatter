@@ -68,7 +68,7 @@ public class Salary extends DrawerBarActivity {
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.rec_list, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(1).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
        // setContentView(R.layout.rec_list);
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
