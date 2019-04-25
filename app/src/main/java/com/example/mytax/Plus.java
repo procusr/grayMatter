@@ -11,9 +11,6 @@ public class Plus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plus);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> b0334f726e05b77c884a3f5cc535a767914f16ec
     }
 }
