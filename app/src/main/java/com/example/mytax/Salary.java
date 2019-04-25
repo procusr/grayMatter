@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.LoginFilter;
 import android.util.Log;
@@ -54,6 +55,7 @@ public class Salary extends DrawerBarActivity {
     private FirebaseRecyclerAdapter adapter;
     private String companyName;
     private String salary;
+    private Toolbar toolbar;
     private String expectedTax;
     private String actualTax;
     private String date;
@@ -69,7 +71,9 @@ public class Salary extends DrawerBarActivity {
         getLayoutInflater().inflate(R.layout.rec_list, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(2).setChecked(true);
-       // setContentView(R.layout.rec_list);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Salary details");
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -171,7 +175,6 @@ public class Salary extends DrawerBarActivity {
     }
 
     private void submitRecord() {
-
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_add, null);
