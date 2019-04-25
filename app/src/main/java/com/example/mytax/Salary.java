@@ -65,7 +65,7 @@ public class Salary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rec_list);
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -147,7 +147,7 @@ public class Salary extends AppCompatActivity {
                     return;
                 }
                 Company company = new Company(companyName, salary, expectedTax, actualTax,date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -259,7 +259,7 @@ public class Salary extends AppCompatActivity {
 
 
                 Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -275,7 +275,7 @@ public class Salary extends AppCompatActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
