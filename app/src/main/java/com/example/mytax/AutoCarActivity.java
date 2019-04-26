@@ -101,14 +101,13 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(1).setChecked(true);
-        //setContentView(R.layout.activity_maps);
+//        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+//        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.getMenu().getItem(1).setChecked(true);
+        setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
         textView = (TextView) findViewById(R.id.distance);
 //        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
 //        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
@@ -136,16 +135,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
 
     }
-        /*btnStartUpdates.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-               checkPermissions();
-
-            }
-        });*/
 
 
     private void updateValuesFromBundle(Bundle savedInstanceState) {

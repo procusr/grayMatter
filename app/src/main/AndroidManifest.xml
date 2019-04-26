@@ -20,10 +20,12 @@
         <activity android:name=".House"/>
         <activity android:name=".Percentage"/>
         <activity android:name=".Salary"/>
+        <activity android:name=".CarMain"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".DrawerBarActivity" />
         <activity android:name=".ManualCarActivity"/>
         <activity android:name=".LoginActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
