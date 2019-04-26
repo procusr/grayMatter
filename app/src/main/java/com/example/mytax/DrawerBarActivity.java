@@ -43,7 +43,7 @@ public class DrawerBarActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_car:
-                        Intent carOption = new Intent(getApplicationContext(), ManualCarActivity.class);
+                        Intent carOption = new Intent(getApplicationContext(), CarMain.class);
                         startActivity(carOption);
 //                        finish();
                         drawerLayout.closeDrawers();
