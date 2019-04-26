@@ -1,8 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/pic_6"
+    android:background="#DAD2D2"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
@@ -13,24 +12,14 @@
         android:fontFamily="@font/alegreya"
         android:gravity="center"
         android:padding="10dp"
-        android:text="TaxMe"
-        android:textColor="#55789B"
-        android:textSize="48sp"
-        android:shadowColor="@color/colorAccent"
-        android:shadowRadius="100"
-
-        app:fontFamily="@font/akronim"
-
-       />
+        android:text="Welcome to TaxMe"
+        android:textColor="#050505"
+        android:textSize="24sp" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#55789B"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp">
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Email"
@@ -47,11 +36,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#55789B"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp">
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Password"
@@ -72,9 +57,9 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="@drawable/btn_shape"
+        android:background="#4635DB"
         android:text="Login"
-        android:textColor="#55789B" />
+        android:textColor="#050505" />
 
     <!-- Link to Login Screen -->
 
@@ -84,11 +69,12 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/btn_shape"
+        android:background="#4635DB"
         android:text="Sign Up"
-        android:textColor="#55789B"
+        android:textColor="#050505"
         android:textStyle="bold" />
 
+    <!-- Link to Forget Password -->
 
     <TextView
         android:id="@+id/forget_password_button"
@@ -99,8 +85,6 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Forget Password"
-        android:textColor="#6D6D6F"
+        android:textColor="#000"
         android:textStyle="bold" />
-
-
 </LinearLayout>

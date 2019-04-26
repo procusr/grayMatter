@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Salary"
-    android:background="@drawable/pic_9">
+    tools:context=".Salary">
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>

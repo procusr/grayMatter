@@ -19,9 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.api.ApiException;
@@ -49,7 +47,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class AutoCarActivity extends DrawerBarActivity implements CompoundButton.OnCheckedChangeListener {
+public class AutoCarActivity extends DrawerBarActivity {
 
     // For location services
     private static final String TAG = AutoCarActivity.class.getSimpleName();
@@ -63,8 +61,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     private LocationSettingsRequest mLocationSettingsRequest;
     private Location mCurrentLocation;
     Context context;
-    private Switch switch1;
-    private TextView traker;
     final int REQUEST_CHECK_SETTINGS = 1;
     final int REQUEST_LOCATION = 2;
     public Boolean locUpdates;
@@ -110,13 +106,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         textView = (TextView) findViewById(R.id.distance);
-//        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
-//        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
-
-        switch1=findViewById(R.id.switch1);
-        switch1.setOnCheckedChangeListener(this);
-
-        traker=findViewById(R.id.TV_traker);
+        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
+        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
 
 
         // start location services, including permissions checks, etc.
@@ -581,17 +572,5 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     }
 
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (switch1.isChecked()){
-            mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
-            startLocationUpdates();
-            traker.setText("Stop");
-        }else{
-            stopLocationUpdates();
-            traker.setText("Start");
 
-        }
-    }
 }
