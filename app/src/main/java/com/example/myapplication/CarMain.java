@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.app.DatePickerDialog;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -16,18 +15,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
-import android.text.LoginFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +37,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 //import static com.example.myapplication.R.id.date;
 import static com.example.myapplication.R.id.switch_gpsDistance;
@@ -75,7 +66,7 @@ public class CarMain extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rec_list);
+        setContentView(R.layout.car_rec_list);
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -116,7 +107,7 @@ public class CarMain extends AppCompatActivity {
 
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-        View myView = inflater.inflate(R.layout.activity_update, null);
+        View myView = inflater.inflate(R.layout.activity_car_update, null);
         myDialog.setView(myView);
 
         final AlertDialog dialog = myDialog.create();
@@ -209,7 +200,7 @@ public class CarMain extends AppCompatActivity {
 
 
 
-                CarInfo car = new CarInfo(distance, startDate, endDate,gpsDistance, origin,destination, purpose, amount);
+                Car car = new Car(distance, startDate, endDate,gpsDistance, origin,destination, purpose, amount);
                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
 
                 dialog.dismiss();
@@ -290,7 +281,6 @@ public class CarMain extends AppCompatActivity {
 
 
         });
-
 
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -378,7 +368,7 @@ public class CarMain extends AppCompatActivity {
                  LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
                  String eDate = e.format(formatter);
 
-                 CarInfo car = new CarInfo(mDistance, sDate, eDate, mGpsdistance, mOrgin, mDestination, mPurpose, mAmount);
+                 Car car = new Car(mDistance, sDate, eDate, mGpsdistance, mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
@@ -397,13 +387,13 @@ public class CarMain extends AppCompatActivity {
     private void fetch() {
         Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("cardb");
 
-        FirebaseRecyclerOptions<CarInfo> options =
-                new FirebaseRecyclerOptions.Builder<CarInfo>()
-                        .setQuery(query, new SnapshotParser<CarInfo>() {
+        FirebaseRecyclerOptions<Car> options =
+                new FirebaseRecyclerOptions.Builder<Car>()
+                        .setQuery(query, new SnapshotParser<Car>() {
                             @NonNull
                             @Override
-                            public CarInfo parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                return new CarInfo(snapshot.child("distance").getValue().toString(),
+                            public Car parseSnapshot(@NonNull DataSnapshot snapshot) {
+                                return new Car(snapshot.child("distance").getValue().toString(),
                                         snapshot.child("startDate").getValue().toString(),
                                         snapshot.child("endDate").getValue().toString(),
                                         snapshot.child("gpsDistance").getValue().toString(),
@@ -434,7 +424,7 @@ public class CarMain extends AppCompatActivity {
         it.attachToRecyclerView(recyclerView);
 
 
-        adapter = new FirebaseRecyclerAdapter<CarInfo, ViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Car, ViewHolder>(options) {
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(getApplicationContext())
@@ -444,7 +434,7 @@ public class CarMain extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(ViewHolder viewHolder, final int position, final CarInfo model) {
+            protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Car model) {
                 viewHolder.setDistance("Distance       :" + model.getDistance());
                 viewHolder.setStartDate("Start Date    :" + model.getStartDate());
                 viewHolder.setEndDate ("End Date         :   " + model.getEndDate());

@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 import java.util.Date;
 
-public class CarInfo {
+public class Car {
 
     private String distance;
     private String startDate;
@@ -14,14 +14,14 @@ public class CarInfo {
     private String amount;
 
 
-    public CarInfo(){
+    public Car(){
 //empty constructor needed
 
     }
 
 
-    public CarInfo(String mDistance, String mStartDate, String mEndDate, String mGpsdistance, String mOrigin,
-                   String mDestination, String mPurpose, String mAmount){
+    public Car(String mDistance, String mStartDate, String mEndDate, String mGpsdistance, String mOrigin,
+               String mDestination, String mPurpose, String mAmount){
 
 
         this.distance = mDistance;
