@@ -1,5 +1,8 @@
 package com.example.mytax;
+import android.app.slice.Slice;
+import android.app.slice.SliceItem;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,18 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Utils;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,63 +35,17 @@ public class AppIntroActivity extends AppCompatActivity {
 
     //Graphs
 
-//    float yValues[] = {3500, 3800, 4500, 4100, 4250};
-//    float taxTBP[] = {4000, 3900, 4400, 5000, 4250};
-    float salary[] = {20000, 21000, 19000, 18000, 19500};
-    String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
-    private BarChart barChart;
+
+    float salary[] = {6500, 4500, 5200, 5100, 4800};
+    String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-        //Bar chart setup
-//        barChart = findViewById(R.id.barchart);
-//        barChart.setDrawBarShadow(false);
-//        barChart.setDrawValueAboveBar(true);
-//        barChart.setMaxVisibleValueCount(50);
-//        barChart.setPinchZoom(false);
-//        barChart.setDrawGridBackground(true);
-//
-//        ArrayList<BarEntry> barEntries = new ArrayList<>();
-//        barEntries.add(new BarEntry(1, 40f));
-//        barEntries.add(new BarEntry(2, 44f));
-//        barEntries.add(new BarEntry(3, 50f));
-//        barEntries.add(new BarEntry(4, 36f));
-//
-//        ArrayList<BarEntry> barEntries1 = new ArrayList<>();
-//        barEntries1.add(new BarEntry(1, 44f));
-//        barEntries1.add(new BarEntry(2, 40f));
-//        barEntries1.add(new BarEntry(3, 55f));
-//        barEntries1.add(new BarEntry(4, 32f));
-//
-//        BarDataSet barDataSet = new BarDataSet(barEntries, "Tax Payed");
-//        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//
-//        BarDataSet barDataSet1 = new BarDataSet(barEntries1, "Expected Tax");
-//        barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
-//
-//        BarData data = new BarData(barDataSet, barDataSet1);
-//
-//        float groupSpace = 0.1f;
-//        float barSpace = 0.02f;
-//        float barWidh = 0.43f;
-//
-//        barChart.setData(data);
-//
-//        data.setBarWidth(barWidh);
-//        barChart.groupBars(1,groupSpace, barSpace);
-//
-//        String months[] = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "June"};
-//
-//        XAxis xAxis = barChart.getXAxis();
-//        xAxis.setValueFormatter(new MyXAxisValueFormatter(months));
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setGranularity(1);
-//        xAxis.setCenterAxisLabels(true);
-//        xAxis.setAxisMinimum(1);
+
 
 
         //Welcome animation setup
@@ -107,6 +61,7 @@ public class AppIntroActivity extends AppCompatActivity {
             }
         });
 
+
         l1 = (LinearLayout) findViewById(R.id.l1);
         l2 = (LinearLayout) findViewById(R.id.l2);
         uptodown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
@@ -114,36 +69,39 @@ public class AppIntroActivity extends AppCompatActivity {
         l1.setAnimation(uptodown);
         l2.setAnimation(downtoup);
 
-   //     barChart = (BarChart) findViewById(R.id.chart);
        setupChart();
+
     }
 
-//    public class MyXAxisValueFormatter implements IAxisValueFormatter
-//    {
-//        private String[] mValues;
-//        public MyXAxisValueFormatter(String[] values) {
-//            this.mValues = values;
-//        }
-//
-//        @Override
-//        public String getFormattedValue(float value, AxisBase axis) {
-//            return mValues[(int)value];
-//        }
-//    }
-
-
-    private void setupChart()
+      private void setupChart()
     {
         //Populating a list of pie entries
 
         List<PieEntry> pieEntries = new ArrayList<>();
+
          for(int i = 0; i < salary.length; i++)
          {
              pieEntries.add(new PieEntry(salary[i], months[i]));
          }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Salary for 2018");
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Taxes payed");
         PieData data = new PieData(dataSet);
+        data.setValueTextSize(25f);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
+        dataSet.setValueLinePart1Length(0.2f);
+        dataSet.setValueLinePart2Length(0.4f);
+        dataSet.setSliceSpace(7f);
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setValueFormatter(new PercentFormatter());
+
+
+        data.setValueTextColor(Color.WHITE);
+        dataSet.setValueLinePart1OffsetPercentage(10.f);
+        dataSet.setValueLinePart1Length(0.60f);
+        dataSet.setValueLinePart2Length(.1f);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setSelectionShift(65);
 
         //Display the chart
 
@@ -152,11 +110,32 @@ public class AppIntroActivity extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(2100);
         chart.invalidate();
+        chart.setTransparentCircleColor(Color.RED);
+        chart.setMaxAngle(360);
+        chart.setDrawCenterText(true);
+        chart.setCenterText("TEST");
+        chart.setHoleRadius(25);
+        chart.setTransparentCircleRadius(0);
+        chart.getDescription().setText("TaxMe");
+        chart.getDescription().setTextColor(Color.YELLOW);
+        chart.getDescription().setTextSize(12);
+        chart.setUsePercentValues(true);
+
+
+
+
+        chart.setEntryLabelColor(Color.WHITE);
+
+        //legend display
+        Legend legend = chart.getLegend();
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setTextSize(20f);
+        legend.setTextColor(Color.WHITE);
+        legend.setDrawInside(false);
+
+
     }
 
-//    public void main(View view)
-//    {
-//        Intent intent = new Intent(this , MainActivity.class);
-//        startActivity(intent);
-//    }
 }
