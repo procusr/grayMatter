@@ -3,9 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#6B5AF5</item>
-        <item name="colorPrimaryDark">#4635DB</item>
-        <item name="colorAccent">#000</item>
+        <item name="colorPrimary">#496CAF</item>
+        <item name="colorPrimaryDark">#335374</item>
+        <item name="colorAccent">#FCF9F9</item>
+
     </style>
     <style name="AppTheme.Custom">
         <item name="android:windowIsTranslucent">true</item>

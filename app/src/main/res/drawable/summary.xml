@@ -2,11 +2,11 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="#EBB564"/>
+            <solid android:color="#223F60"/>
         </shape>
     </item>
     <item
-        android:drawable="@drawable/ic_iconfinder_file_excel_285675"
+        android:drawable="@drawable/summary1"
         android:bottom="20dp"
         android:left="20dp"
         android:right="20dp"
