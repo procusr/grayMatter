@@ -34,39 +34,34 @@
         android:layout_height="120dp"
         android:orientation="vertical"
         android:layout_marginBottom="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:gravity="top"
         >
 
-        <Button
-            android:id="@+id/btn_Start_Updates"
-            android:layout_gravity="center"
-            android:layout_width="240dp"
-            android:layout_height="120dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:onClick="startUpdatesButtonHandler"
-            android:text="Start"
-            android:background="@drawable/btn_shape"
-            android:shadowColor="@color/colorAccent"
-            android:shadowRadius="20"
-            android:textColor="#ddd"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_Stop_Updates"
-            android:layout_gravity="center"
-            android:layout_width="240dp"
-            android:layout_height="120dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:background="@drawable/btn_shape"
-            android:gravity="center"
-            android:onClick="stopUpdatesButtonHandler"
-            android:text="Stop"
-            android:shadowColor="@color/colorAccent"
-            android:shadowRadius="20"
-            android:textColor="#ddd"
-            android:textSize="30sp" />
+            <TextView
+                android:id="@+id/TV_traker"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Start" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
