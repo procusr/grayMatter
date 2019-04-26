@@ -14,7 +14,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.BuildConfig;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -102,23 +101,23 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-//        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.getMenu().getItem(1).setChecked(true);
-        setContentView(R.layout.activity_maps);
+
+
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(1).setChecked(true);
+        //setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
 
         textView = (TextView) findViewById(R.id.distance);
-//        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
-//        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
+        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
+        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
 
         switch1=findViewById(R.id.switch1);
         switch1.setOnCheckedChangeListener(this);
 
         traker=findViewById(R.id.TV_traker);
-
-
         // start location services, including permissions checks, etc.
         //context = this;
         mRequestingLocationUpdates = false;

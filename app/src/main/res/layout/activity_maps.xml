@@ -34,7 +34,20 @@
         android:layout_height="120dp"
         android:orientation="vertical"
         android:layout_marginBottom="30dp"
-        />
+        >
+
+        <Button
+            android:id="@+id/btn_Start_Updates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btn_Stop_Updates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
