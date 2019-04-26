@@ -108,7 +108,7 @@ public class AppIntroActivity extends AppCompatActivity {
         PieChart chart = findViewById(R.id.chart);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         chart.setData(data);
-        chart.animateY(2100);
+        chart.animateY(2800);
         chart.invalidate();
         chart.setTransparentCircleColor(Color.RED);
         chart.setMaxAngle(360);
