@@ -2,56 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
+    android:gravity="center"
     android:layout_weight="1"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+       >
 
         <TextView
 
             android:id="@+id/distance"
             android:layout_width="match_parent"
-            android:layout_height="113dp"
+            android:layout_height="80dp"
             android:layout_marginBottom="300dp"
             android:gravity="center"
             android:hint="Distance"
             android:textColorHint="@color/colorAccent"
-            android:textSize="34sp" />
+            android:textSize="34sp"
+            android:shadowColor="@color/colorAccent"
+            android:shadowRadius="20"
+            android:textColor="#ddd"
+           />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:orientation="vertical"
+        android:layout_marginBottom="30dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:gravity="top"
         >
 
-        <Button
-            android:id="@+id/btn_Start_Updates"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:onClick="startUpdatesButtonHandler"
-            android:text="Start"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_Stop_Updates"
-            android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="stopUpdatesButtonHandler"
-            android:text="Stop"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp" />
+            <TextView
+                android:id="@+id/TV_traker"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Start" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

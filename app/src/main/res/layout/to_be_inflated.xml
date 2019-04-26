@@ -6,18 +6,20 @@
     android:elevation="10dp"
     android:layout_margin="10dp"
     app:cardElevation="15dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#ddd">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:background="@android:color/transparent"
             android:gravity="center">
 
             <TextView
@@ -47,6 +49,7 @@
                 android:maxLines="1"
                 android:padding="4dp"
                 android:hint="Company"
+                android:textColorHint="#070707"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
                 android:visibility="visible" />
@@ -81,7 +84,8 @@
                 android:text="Actual tax"
                 android:textAlignment="viewStart"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="start" />
 
         </LinearLayout>
 
