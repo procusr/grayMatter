@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mytax">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,17 +14,21 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"/>
-        <activity android:name=".Car"/>
+        <activity android:name=".AutoCarActivity"/>
         <activity android:name=".Summary"/>
         <activity android:name=".Plus"/>
         <activity android:name=".House"/>
         <activity android:name=".Percentage"/>
         <activity android:name=".Salary"/>
+        <activity android:name=".CarMain"/>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".DrawerBarActivity" />
+        <activity android:name=".ManualCarActivity"/>
         <activity android:name=".LoginActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,6 +45,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key"/>
     </application>
 
 </manifest>
