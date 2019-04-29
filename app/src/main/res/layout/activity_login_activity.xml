@@ -1,47 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#DAD2D2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_main"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alegreya"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Welcome to TaxMe"
-        android:textColor="#050505"
-        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/logonew">
+
+    </LinearLayout>
+
+
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Email"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColorLink="@color/design_default_color_primary_dark" />
+            android:textColor="#DD030303" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Password"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:focusableInTouchMode="true"
             android:hint="Password"
             android:imeOptions="actionUnspecified"
@@ -56,10 +59,11 @@
         android:id="@+id/Btn_Login"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="#4635DB"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttondesign"
         android:text="Login"
-        android:textColor="#050505" />
+        android:textColor="#050505"
+        android:textSize="15sp" />
 
     <!-- Link to Login Screen -->
 
@@ -69,9 +73,11 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#4635DB"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/buttondesign"
         android:text="Sign Up"
         android:textColor="#050505"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <!-- Link to Forget Password -->
@@ -81,10 +87,10 @@
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="3dp"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingTop="15dp"
         android:text="Forget Password"
         android:textColor="#000"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 </LinearLayout>
