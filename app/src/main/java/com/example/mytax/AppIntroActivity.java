@@ -84,7 +84,7 @@ public class AppIntroActivity extends AppCompatActivity {
              pieEntries.add(new PieEntry(salary[i], months[i]));
          }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Taxes payed");
+        PieDataSet dataSet = new PieDataSet(pieEntries, "");
         PieData data = new PieData(dataSet);
         data.setValueTextSize(25f);
         dataSet.setValueLinePart1OffsetPercentage(80.f);
@@ -113,11 +113,11 @@ public class AppIntroActivity extends AppCompatActivity {
         chart.setTransparentCircleColor(Color.RED);
         chart.setMaxAngle(360);
         chart.setDrawCenterText(true);
-        chart.setCenterText("TEST");
-        chart.setHoleRadius(25);
+        chart.setCenterText("Gross Salary \n" + "kr 75.000");
+        chart.setHoleRadius(40);
         chart.setTransparentCircleRadius(0);
         chart.getDescription().setText("TaxMe");
-        chart.getDescription().setTextColor(Color.YELLOW);
+        chart.getDescription().setTextColor(Color.BLACK);
         chart.getDescription().setTextSize(12);
         chart.setUsePercentValues(true);
 
@@ -129,10 +129,10 @@ public class AppIntroActivity extends AppCompatActivity {
         //legend display
         Legend legend = chart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        legend.setTextSize(20f);
-        legend.setTextColor(Color.WHITE);
+        legend.setTextSize(12f);
+        legend.setTextColor(Color.BLACK);
         legend.setDrawInside(false);
 
 
