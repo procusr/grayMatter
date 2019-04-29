@@ -18,6 +18,9 @@ android {
         }
     }
 }
+    repositories {
+        maven { url 'https://jitpack.io'}
+    }
 
 dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.8'
@@ -71,7 +74,10 @@ dependencies {
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
 
+    implementation 'com.github.apl-devs:appintro:v4.2.3'
 
+   // iplementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
 }
 apply plugin: 'com.android.application'
