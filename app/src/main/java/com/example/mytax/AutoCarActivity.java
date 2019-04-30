@@ -110,7 +110,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 //        getLayoutInflater().inflate(R.layout.activity_car_add, contentFrameLayout);
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.getMenu().getItem(1).setChecked(true);
-        setContentView(R.layout.activity_car_add);
+        setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
 
         textView = (TextView) findViewById(R.id.distance);
@@ -120,8 +120,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         switch1=findViewById(R.id.switch_gpsDistance);
         switch1.setOnCheckedChangeListener(this);
 
-        traker=findViewById(R.id.TV_traker);
-        // start location services, including permissions checks, etc.
+        traker=findViewById(R.id.TV_traker);// start location services, including permissions checks, etc.
         //context = this;
 
         distance_tracker = findViewById(R.id.distance_tracker);
