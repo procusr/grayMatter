@@ -327,10 +327,10 @@ public class Salary extends DrawerBarActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
-                viewHolder.setCompanyName("Company        :   " + model.getCompanyName());
-                viewHolder.setSalary     ("Salary              :   " + model.getSalary());
-                viewHolder.setActualTax  ("Actual tax     :   " + model.getActualTax());
-                viewHolder.setExpectedTax("Expected tax   :   " +model.getExpectedTax());
+                viewHolder.setCompanyName( model.getCompanyName());
+                viewHolder.setSalary     ( model.getSalary()+" kr");
+                viewHolder.setActualTax  (model.getActualTax() + " kr");
+                viewHolder.setExpectedTax(model.getExpectedTax()+" kr");
                 viewHolder.setDate( model.getDate());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
