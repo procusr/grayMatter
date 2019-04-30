@@ -44,12 +44,7 @@ public class MainActivity extends DrawerBarActivity {
 
         }
 
-
-
-
-
-
-    public void setting (View view){
+        public void setting (View view){
         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
         startActivity(intent);
     }

@@ -50,12 +50,6 @@
       android:hint="Gps Distance"
      />
 
-  <EditText
-      android:id="@+id/edit_text_gps"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="6dp"
-      android:hint="Gps Distance" />
 
 
   <EditText
@@ -81,7 +75,9 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"
-      android:hint="Amount"/>
+      android:hint="Amount"
+      />
+
   <LinearLayout
       android:layout_width="match_parent"
       android:orientation="horizontal"
@@ -122,10 +118,5 @@
 
   </LinearLayout>
 
-  <TextView
-      android:id="@+id/distance_tracker"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="TextView" />
 
 </LinearLayout>

@@ -123,7 +123,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         traker=findViewById(R.id.TV_traker);// start location services, including permissions checks, etc.
         //context = this;
 
-        distance_tracker = findViewById(R.id.distance_tracker);
+        //distance_tracker = findViewById(R.id.distance_tracker);
         mRequestingLocationUpdates = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //preferences.edit().remove("multi_pref_constellation").apply();   //used to clear existing preference if required
