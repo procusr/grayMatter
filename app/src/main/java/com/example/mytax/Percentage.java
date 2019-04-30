@@ -2,7 +2,6 @@ package com.example.mytax;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,15 +11,13 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
+
 
 public class Percentage extends DrawerBarActivity {
     private TextView list;
@@ -35,7 +32,6 @@ public class Percentage extends DrawerBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_percentage);
         FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.activity_percentage, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -64,7 +60,6 @@ public class Percentage extends DrawerBarActivity {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        //list.setText(kommunes.get(position) + "  : " + kommunes.get(position).getLocalTaxRate() + "%");
                         list.setText(kommunes.get(position).getLocalTaxRate());
                         kommuneName.setText(kommunes.get(position).getMunicipality());
 
@@ -87,22 +82,20 @@ public class Percentage extends DrawerBarActivity {
             @Override
             public void onClick(View v) {
                 if(grossSalary.getText().toString().isEmpty() || netSalary.getText().toString().isEmpty()){
-                    grossSalary.setError("Enter All fields");
-                    netSalary.setError("Enter all fields");
+                    grossSalary.setError("Enter All the fields");
+                    netSalary.setError("Enter All the fields");
                     return;
                 }
                 else{
                     calculatePercentage();
-                    //comparator(Double.parseDouble(list.getText().toString()),Double.parseDouble(result.getText().toString()));
                 }
             }
         });
     }
+
     public void calculatePercentage() {
         Double grossSal = Double.parseDouble(grossSalary.getText().toString());
         Double netSal = Double.parseDouble(netSalary.getText().toString());
-
-        double difference = grossSal-netSal;
         double percentage = (netSal/grossSal)*100;
         String resul = String.format("%.2f", percentage);
         result.setText(resul);
