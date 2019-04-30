@@ -15,11 +15,15 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.api.ApiException;
@@ -47,7 +51,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class AutoCarActivity extends DrawerBarActivity {
+public class AutoCarActivity extends DrawerBarActivity implements CompoundButton.OnCheckedChangeListener {
 
     // For location services
     private static final String TAG = AutoCarActivity.class.getSimpleName();
@@ -61,6 +65,8 @@ public class AutoCarActivity extends DrawerBarActivity {
     private LocationSettingsRequest mLocationSettingsRequest;
     private Location mCurrentLocation;
     Context context;
+    private Switch switch1;
+    private TextView traker;
     final int REQUEST_CHECK_SETTINGS = 1;
     final int REQUEST_LOCATION = 2;
     public Boolean locUpdates;
@@ -73,6 +79,7 @@ public class AutoCarActivity extends DrawerBarActivity {
     static Double lon2 = null;
     static Double distance = 0.0;
     static int status = 0;
+    private TextView distance_tracker;
     private Boolean mRequestingLocationUpdates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -97,21 +104,26 @@ public class AutoCarActivity extends DrawerBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(1).setChecked(true);
-        //setContentView(R.layout.activity_maps);
+
+//
+//        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+//        getLayoutInflater().inflate(R.layout.activity_car_add, contentFrameLayout);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.getMenu().getItem(1).setChecked(true);
+        setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
         textView = (TextView) findViewById(R.id.distance);
-        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
-        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
+//        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
+//        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
 
+        switch1=findViewById(R.id.switch_gpsDistance);
+        switch1.setOnCheckedChangeListener(this);
 
-        // start location services, including permissions checks, etc.
+        traker=findViewById(R.id.TV_traker);// start location services, including permissions checks, etc.
         //context = this;
+
+        distance_tracker = findViewById(R.id.distance_tracker);
         mRequestingLocationUpdates = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //preferences.edit().remove("multi_pref_constellation").apply();   //used to clear existing preference if required
@@ -125,18 +137,29 @@ public class AutoCarActivity extends DrawerBarActivity {
         buildLocationSettingsRequest();
         loginToFirebase();
 
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+
+                    try {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                distance_tracker.setText(String.valueOf(distance));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        t.start();
+
 
     }
-        /*btnStartUpdates.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-               checkPermissions();
-
-            }
-        });*/
 
 
     private void updateValuesFromBundle(Bundle savedInstanceState) {
@@ -264,7 +287,7 @@ public class AutoCarActivity extends DrawerBarActivity {
     public void startUpdatesButtonHandler(View view) {
         if (!mRequestingLocationUpdates) {
             mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
+            //setButtonsEnabledState();
             startLocationUpdates();
         }
     }
@@ -334,19 +357,19 @@ public class AutoCarActivity extends DrawerBarActivity {
      * Updates all UI fields.
      */
     private void updateUI() {
-        setButtonsEnabledState();
+        //  setButtonsEnabledState();
         updateLocationUI();
     }
 
-    private void setButtonsEnabledState() {
-        if (mRequestingLocationUpdates) {
-            btnStartUpdates.setEnabled(false);
-            btnStopUpdates.setEnabled(true);
-        } else {
-            btnStartUpdates.setEnabled(true);
-            btnStopUpdates.setEnabled(false);
-        }
-    }
+//    private void setButtonsEnabledState() {
+//        if (mRequestingLocationUpdates) {
+//            btnStartUpdates.setEnabled(false);
+//            btnStopUpdates.setEnabled(true);
+//        } else {
+//            btnStartUpdates.setEnabled(true);
+//            btnStopUpdates.setEnabled(false);
+//        }
+//    }
 
 
     private void stopLocationUpdates() {
@@ -363,7 +386,7 @@ public class AutoCarActivity extends DrawerBarActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         mRequestingLocationUpdates = false;
-                        setButtonsEnabledState();
+                        //setButtonsEnabledState();
                     }
                 });
     }
@@ -572,5 +595,31 @@ public class AutoCarActivity extends DrawerBarActivity {
     }
 
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (switch1.isChecked()){
+            mRequestingLocationUpdates = true;
+            //setButtonsEnabledState();
+            startLocationUpdates();
+            traker.setText("Stop");
+        }else{
+            stopLocationUpdates();
+            traker.setText("Start");
+            System.out.println(distance);
 
+        }
+    }
+
+    // public void sentToMain() {
+
+       /* Intent intent = new Intent(this, CarMain.class);
+        intent.putExtra("Key",distance);
+        startActivity(intent);*/
 }
+
+//    public void goAuto1(View view) {
+//        Intent intent = new Intent(getApplicationContext(), AutoCarActivity.class);
+//        startActivity(intent);
+//    }
+
+

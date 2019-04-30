@@ -36,15 +36,19 @@
       android:layout_marginTop="16dp"
       android:text="End Date:"
       android:textAppearance="@android:style/TextAppearance.Medium" />
-
-
+  <TextView
+      android:id="@+id/TV_traker"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Start" />
 
   <Switch
       android:id="@+id/switch_gpsDistance"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:hint="Gps Distance" />
+      android:hint="Gps Distance"
+     />
 
   <EditText
       android:id="@+id/edit_text_gps"
@@ -93,6 +97,8 @@
           android:id="@+id/btnSave"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_marginTop="0dp"
           android:background="@color/colorPrimary"
           android:text="Save"
           android:textColor="@android:color/black" />
@@ -115,4 +121,11 @@
 
 
   </LinearLayout>
+
+  <TextView
+      android:id="@+id/distance_tracker"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="TextView" />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -58,6 +59,7 @@ public class CarMain extends AppCompatActivity {
     private String destination;
     private String purpose;
     private String amount;
+
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -67,6 +69,8 @@ public class CarMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
+
+
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -218,6 +222,7 @@ public class CarMain extends AppCompatActivity {
         dialog.show();
     }
 
+
     public void submitRecord() {
 
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
@@ -232,6 +237,7 @@ public class CarMain extends AppCompatActivity {
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(text_view_endDate);
         final Switch gpsSwitch = myView.findViewById(switch_gpsDistance);
+
         final EditText gpsDistance = myView.findViewById(R.id.edit_text_gps);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
@@ -270,7 +276,7 @@ public class CarMain extends AppCompatActivity {
                     k = Double.parseDouble(distance.getText().toString());
                     Double d = k * 1.85;
                     String mam = String.format("%.2f", d);
-                    amount.setText(" " + mam + "  kr");
+                    amount.setText(" " + mam );
                 }
 
 
@@ -435,14 +441,15 @@ public class CarMain extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Car model) {
-                viewHolder.setDistance("Distance       :" + model.getDistance());
-                viewHolder.setStartDate("Start Date    :" + model.getStartDate());
-                viewHolder.setEndDate ("End Date         :   " + model.getEndDate());
-                viewHolder.setGpsDistance("Gps Distance :   " +model.getGpsDistance());
-                viewHolder.setOrigin("Origin           :   " +model.getOrigin());
-                viewHolder.setDestination("Destination  :   " +model.getDestination());
-                viewHolder.setPurpose("Purpose          :   " +model.getPurpose());
-                viewHolder.setAmount("Amount            :   " +model.getAmount());
+                viewHolder.setDistance(model.getDistance());
+                viewHolder.setStartDate(model.getStartDate());
+                viewHolder.setEndDate (model.getEndDate());
+                /*viewHolder.setGpsDistance("Gps Distance :   " +model.getGpsDistance());*/
+                viewHolder.setOrigin(model.getOrigin());
+                viewHolder.setDestination(model.getDestination());
+                viewHolder.setPurpose(model.getPurpose());
+                viewHolder.setAmount(model.getAmount() +" kr" );
+
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -500,11 +507,11 @@ public class CarMain extends AppCompatActivity {
            endDate.setText(string);
         }
 
-        public void setGpsDistance(String string) {
+      /* *//* public void setGpsDistance(String string) {
             gpsDistance = mView.findViewById(R.id.text_view_gpsDistance);
-            gpsDistance.setText(string);
+            gpsDistance.setText(string);*//*
         }
-
+*/
         public void setOrigin(String string) {
             origin = mView.findViewById(R.id.text_view_origin);
             origin.setText(string);
