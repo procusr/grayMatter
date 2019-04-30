@@ -200,7 +200,7 @@ public class CarMain extends AppCompatActivity {
 
 
 
-                Car car = new Car(distance, startDate, endDate,gpsDistance, origin,destination, purpose, amount);
+                Car car = new Car(distance, startDate, endDate, origin,destination, purpose, amount);
                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
 
                 dialog.dismiss();
@@ -368,7 +368,7 @@ public class CarMain extends AppCompatActivity {
                  LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
                  String eDate = e.format(formatter);
 
-                 Car car = new Car(mDistance, sDate, eDate, mGpsdistance, mOrgin, mDestination, mPurpose, mAmount);
+                 Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
@@ -396,7 +396,6 @@ public class CarMain extends AppCompatActivity {
                                 return new Car(snapshot.child("distance").getValue().toString(),
                                         snapshot.child("startDate").getValue().toString(),
                                         snapshot.child("endDate").getValue().toString(),
-                                        snapshot.child("gpsDistance").getValue().toString(),
                                         snapshot.child("origin").getValue().toString(),
                                         snapshot.child("destination").getValue().toString(),
                                         snapshot.child("purpose").getValue().toString(),

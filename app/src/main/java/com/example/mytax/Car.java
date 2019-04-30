@@ -20,13 +20,12 @@ public class Car {
     }
 
 
-    public Car(String mDistance, String mStartDate, String mEndDate, String mGpsdistance, String mOrigin,
+    public Car(String mDistance, String mStartDate, String mEndDate,  String mOrigin,
                String mDestination, String mPurpose, String mAmount){
 
 
         this.distance = mDistance;
         this.startDate =mStartDate;
-        this.gpsDistance =mGpsdistance;
         this.endDate = mEndDate;
         this.origin=mOrigin;
         this.destination = mDestination;
