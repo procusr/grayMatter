@@ -220,7 +220,7 @@ public class CarMain extends AppCompatActivity {
 
     public void submitRecord() {
 
-        AlertDialog.Builder myDialog = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_car_add, null);
         myDialog.setView(myView);
@@ -292,12 +292,12 @@ public class CarMain extends AppCompatActivity {
 
 
 
-                DatePickerDialog dialog = new DatePickerDialog(
+                DatePickerDialog dialog2 = new DatePickerDialog(
                         CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog2.show();
 
 
             }
@@ -322,12 +322,12 @@ public class CarMain extends AppCompatActivity {
 
 
 
-                DatePickerDialog dialog = new DatePickerDialog(
+                DatePickerDialog dialog1 = new DatePickerDialog(
                         CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         eDateSetListener, year, month, day);
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog1.show();
             }
         });
 

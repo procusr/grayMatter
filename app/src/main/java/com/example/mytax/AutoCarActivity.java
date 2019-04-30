@@ -664,7 +664,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog dialog = new DatePickerDialog(
-                        getApplicationContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -691,7 +691,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        getApplicationContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         eDateSetListener, year, month, day);
 
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
