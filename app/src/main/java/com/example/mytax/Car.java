@@ -20,7 +20,7 @@ public class Car {
     }
 
 
-    public Car(String mDistance, String mStartDate, String mEndDate, String mOrigin,
+    public Car(String mDistance, String mStartDate, String mEndDate,  String mOrigin,
                String mDestination, String mPurpose, String mAmount){
 
 
