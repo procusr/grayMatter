@@ -220,7 +220,7 @@ public class CarMain extends AppCompatActivity {
 
     public void submitRecord() {
 
-        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(getApplicationContext());
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_car_add, null);
         myDialog.setView(myView);
