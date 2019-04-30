@@ -124,10 +124,8 @@ public class CarMain extends AppCompatActivity {
         final EditText mamount = myView.findViewById(R.id.update_amount);
         mamount.setKeyListener(null);
 
-
         mdistance.setText(distance);
         mdistance.setSelection(distance.length());
-
 
         mstartDate.setText(startDate);
         mstartDate.setSelection(startDate.length());
@@ -147,10 +145,8 @@ public class CarMain extends AppCompatActivity {
         mamount.setText(amount);
         mamount.setSelection(amount.length());
 
-
         Button btnDelete = myView.findViewById(R.id.btnDelete);
         Button btnUpdate = myView.findViewById(R.id.btnUpdate);
-        System.out.println("mahi");
 
         mdistance.addTextChangedListener(new TextWatcher() {
 
@@ -196,12 +192,8 @@ public class CarMain extends AppCompatActivity {
                 destination = mdestination.getText().toString().trim();
                 purpose = mpurpose.getText().toString().trim();
                 amount = mamount.getText().toString().trim();
-
-
-
                 Car car = new Car(distance, startDate, endDate, origin,destination, purpose, amount);
                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
-
                 dialog.dismiss();
             }
         });
@@ -241,12 +233,10 @@ public class CarMain extends AppCompatActivity {
         final Button btnAdd = myView.findViewById(R.id.btnSave);
 
 
-
         distance.addTextChangedListener(new TextWatcher() {
 
             // the user's changes are saved here
             public void onTextChanged(CharSequence c, int start, int before, int count) {
-
 
             }
 
@@ -272,14 +262,7 @@ public class CarMain extends AppCompatActivity {
                     String mam = String.format("%.2f", d);
                     amount.setText(" " + mam );
                 }
-
-
-
-
-
             }
-
-
         });
 
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -439,7 +422,7 @@ public class CarMain extends AppCompatActivity {
                 viewHolder.setOrigin(model.getOrigin());
                 viewHolder.setDestination(model.getDestination());
                 viewHolder.setPurpose(model.getPurpose());
-                viewHolder.setAmount(model.getAmount() +" kr" );
+                viewHolder.setAmount(model.getAmount() + " kr" );
 
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -497,11 +480,6 @@ public class CarMain extends AppCompatActivity {
            endDate.setText(string);
         }
 
-      /* *//* public void setGpsDistance(String string) {
-            gpsDistance = mView.findViewById(R.id.text_view_gpsDistance);
-            gpsDistance.setText(string);*//*
-        }
-*/
         public void setOrigin(String string) {
             origin = mView.findViewById(R.id.text_view_origin);
             origin.setText(string);
