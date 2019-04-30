@@ -22,10 +22,5 @@ public class ManualCarActivity extends DrawerBarActivity {
 
     }
 
-    protected void autoCar(View view){
-        Intent intent= new Intent(this, AutoCarActivity.class);
-        startActivity(intent);
 
-
-    }
 }
