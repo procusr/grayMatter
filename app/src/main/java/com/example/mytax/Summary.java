@@ -24,15 +24,16 @@ public class Summary extends AppCompatActivity {
     private TextView mTotalRebate;
     private TextView mHouseRebate;
     private double sumCar = 0;
-    private int sum = 0;
-    private int sume = 0;
-    private int sump = 0;
+    private double sum = 0;
+    private double sume = 0;
+    private double sump = 0;
     private double sumRebate;
     private double sumHouse = 0;
     private double sumDue;
     private double pvalue;
     private double avalue;
     private double evalue;
+    private double cvalue;
 
     private DatabaseReference dbtax;
     private DatabaseReference dbRebate;
@@ -58,26 +59,32 @@ public class Summary extends AppCompatActivity {
         dbRebate = FirebaseDatabase.getInstance().getReference("mainDb").child("cardb");
 
 
-
         dbRebate.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                for (DataSnapshot dsalary : dataSnapshot.getChildren()) {
+                try {
+                    for (DataSnapshot dsalary : dataSnapshot.getChildren()) {
 
-                    Map<String, Object> mapcar = (Map<String, Object>) dsalary.getValue();
-                    Object car = mapcar.get("amount");
-                    double cvalue = Double.parseDouble(String.valueOf(car));
-                    sumCar += cvalue;
+                        Map<String, Object> mapcar = (Map<String, Object>) dsalary.getValue();
+                        Object car = mapcar.get("amount");
+                        cvalue = Double.parseDouble(String.valueOf(car));
+                        sumCar += cvalue;
 
-                    mCarRebate.setText(String.valueOf(cvalue));
+                        mCarRebate.setText(String.valueOf(sumCar));
 
-                    sumRebate = sumCar + sumHouse;
-                   mTotalRebate.setText(String.valueOf(sumRebate));
+                        sumRebate = sumCar + sumHouse;
+                        mTotalRebate.setText(String.valueOf(sumRebate));
 
+                    }
+
+                } catch (NumberFormatException e) {
+
+                    mCarRebate.setText(String.valueOf(0));
 
                 }
+
             }
 
             @Override
@@ -92,39 +99,53 @@ public class Summary extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot dsalary : dataSnapshot.getChildren()) {
+                try {
+                    for (DataSnapshot dsalary : dataSnapshot.getChildren()) {
 
-                    Map<String, Object> map = (Map<String, Object>) dsalary.getValue();
-                    Object salary = map.get("salary");
-                    pvalue = Integer.parseInt(String.valueOf(salary));
-                    sum += pvalue;
+                        Map<String, Object> map = (Map<String, Object>) dsalary.getValue();
+                        Object salary = map.get("salary");
+                        pvalue = Double.parseDouble(String.valueOf(salary));
+                        sum += pvalue;
 
-                    mTotalSalary.setText(String.valueOf(sum));
+                        mTotalSalary.setText(String.valueOf(sum));
 
+                    }
+                }
+
+                catch (NumberFormatException e) {
+
+
+                    mTotalSalary.setText(String.valueOf(0));
                 }
 
 
-
-
+             try{
                     for (DataSnapshot dpaid : dataSnapshot.getChildren()) {
 
                         Map<String, Object> map_paid = (Map<String, Object>) dpaid.getValue();
                         Object ex_tax = map_paid.get("actualTax");
-                        int avalue = Integer.parseInt(String.valueOf(ex_tax));
+                        avalue = Double.parseDouble(String.valueOf(ex_tax));
                         sump += avalue;
 
                         mTotalPaid.setText(String.valueOf(sump));
 
                     }
+             }
+
+                    catch (NumberFormatException e) {
+
+                        mTotalPaid.setText(String.valueOf(0));
 
 
+                    }
 
+                    try{
 
                     for (DataSnapshot dpaid : dataSnapshot.getChildren()) {
 
                         Map<String, Object> mape = (Map<String, Object>) dpaid.getValue();
                         Object ex_tax = mape.get("expectedTax");
-                         evalue = Double.parseDouble(String.valueOf(ex_tax));
+                        evalue = Double.parseDouble(String.valueOf(ex_tax));
                         sume += evalue;
 
 
@@ -132,31 +153,33 @@ public class Summary extends AppCompatActivity {
 
                     }
 
-
-
-
-
-                    sumDue = sume -sump- sumCar - sumHouse;
+                    sumDue = sume - sump - sumCar - sumHouse;
                     mTotalTaxDue.setText(String.valueOf(sumDue));
+
+                } catch (NumberFormatException e) {
+
+
+                        mTotalTaxDue.setText(String.valueOf(0));
+
+            }
+                }
+
+                @Override
+                public void onCancelled (@NonNull DatabaseError databaseError){
+
 
                 }
 
 
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-
-            }
         });
 
 
+}
 
     }
 
 
-    }
+
 
 
 
