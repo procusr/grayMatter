@@ -8,13 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,7 +42,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 //import static com.example.myapplication.R.id.date;
-
+import static com.example.mytax.R.id.switch_gpsDistance;
 import static com.example.mytax.R.id.text_view_endDate;
 
 
@@ -55,41 +53,34 @@ public class CarMain extends AppCompatActivity {
     private String distance;
     private String startDate;
     private String endDate;
-    private String gpsDistance;
     private String origin;
     private String destination;
     private String purpose;
     private String amount;
-    private Toolbar toolbar;
-
-    private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     public DatePickerDialog.OnDateSetListener eDateSetListener;
+    private DatabaseReference mDatabase;
+
+
+
     private Double k;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
-
-
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
-        mDatabase.keepSynced(true);
-
-
-        toolbar=findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Car Info");
-
+        //mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
-
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser mUser = mAuth.getCurrentUser();
+        FirebaseUser mUser=mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,6 +185,9 @@ public class CarMain extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
                 distance = mdistance.getText().toString().trim();
                 startDate = mstartDate.getText().toString().trim();
@@ -203,7 +197,7 @@ public class CarMain extends AppCompatActivity {
                 purpose = mpurpose.getText().toString().trim();
                 amount = mamount.getText().toString().trim();
                 Car car = new Car(distance, startDate, endDate, origin,destination, purpose, amount);
-                mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
+                mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 dialog.dismiss();
             }
         });
@@ -211,7 +205,9 @@ public class CarMain extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("cardb").child(startDate).removeValue();
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
+                mDatabase.child(uid).child("cardb").child(startDate).removeValue();
                 dialog.dismiss();
             }
         });
@@ -233,6 +229,7 @@ public class CarMain extends AppCompatActivity {
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(text_view_endDate);
+        final Switch gpsSwitch = myView.findViewById(switch_gpsDistance);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
@@ -357,8 +354,12 @@ public class CarMain extends AppCompatActivity {
                  LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
                  String eDate = e.format(formatter);
 
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
+                //mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb").child("cardb").child(uid);
+
                  Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
-                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
+                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
             }
@@ -374,7 +375,12 @@ public class CarMain extends AppCompatActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("cardb");
+        FirebaseUser mUser=mAuth.getCurrentUser();
+
+        String uid=mUser.getUid();
+
+
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("cardb");
 
         FirebaseRecyclerOptions<Car> options =
                 new FirebaseRecyclerOptions.Builder<Car>()
@@ -435,10 +441,10 @@ public class CarMain extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        String key=getRef(position).getKey();
                         distance = model.getDistance();
                         startDate = model.getStartDate();
                         endDate = model.getEndDate();
-                        gpsDistance = model.getGpsDistance();
                         origin=model.getOrigin();
                         destination =model.getDestination();
                         purpose=model.getPurpose();

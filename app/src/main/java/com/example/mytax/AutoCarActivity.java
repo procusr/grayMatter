@@ -49,6 +49,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -71,6 +72,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     private Location mCurrentLocation;
     private DatabaseReference mDatabase;
     final int REQUEST_CHECK_SETTINGS = 1;
+    private FirebaseAuth mAuth;
     final int REQUEST_LOCATION = 2;
     private TextView traker;
     public Boolean locUpdates;
@@ -613,7 +615,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(R.id.text_view_endDate);
-        //final Switch gpsSwitch = myView.findViewById(R.id.switch_gpsDistance);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
@@ -736,9 +737,11 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 String eDate = e.format(formatter);
-
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
                 Car car = new Car(mDistance, sDate, eDate, mOrgin, mDestination, mPurpose, mAmount);
-                mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
+                mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
