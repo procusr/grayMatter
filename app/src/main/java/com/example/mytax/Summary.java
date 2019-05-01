@@ -17,4 +17,4 @@ public class Summary extends DrawerBarActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(3).setChecked(true);
     }
-}
+}git status

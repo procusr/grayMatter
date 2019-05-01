@@ -251,7 +251,7 @@ public class Salary extends DrawerBarActivity {
                     return;
                 }
 
-                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String Date = s.format(FOMATTER);
 

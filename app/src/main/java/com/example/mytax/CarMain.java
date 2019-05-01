@@ -273,8 +273,6 @@ public class CarMain extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
-
                 DatePickerDialog dialog2 = new DatePickerDialog(
                         CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
@@ -343,11 +341,11 @@ public class CarMain extends AppCompatActivity {
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String sDate = s.format(formatter);
 
-                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
                  String eDate = e.format(formatter);
 
                  Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
@@ -455,7 +453,7 @@ public class CarMain extends AppCompatActivity {
         View mView;
         public TextView distance;
         public TextView startDate;
-        public TextView  endDate;
+        public TextView endDate;
         public TextView origin;
         public TextView destination;
         public TextView purpose;
