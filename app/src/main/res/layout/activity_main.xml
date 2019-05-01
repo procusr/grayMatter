@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/main_activity">
+    android:background="#ddd"
+    tools:context=".MainActivity">
 
     #We should merge this button with the slide icon "setting"
 
@@ -38,8 +38,6 @@
         tools:ignore="VectorDrawableCompat" />
 
 
-
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,102 +50,103 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="30dp"
             android:gravity="center"
+            android:paddingTop="30dp"
             android:weightSum="2"
             >
 
-            <ImageButton
-                android:id="@+id/Btn_house"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="40dp"
-                android:background="@android:color/transparent"
-                android:onClick="house"
-                app:srcCompat="@drawable/house"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+               >
 
-            <ImageButton
-                android:id="@+id/Btn_car"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
-                android:onClick="car"
-                app:srcCompat="@drawable/car"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp" />
+                <ImageButton
+                    android:id="@+id/Btn_house"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="house"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/house_icon"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp" />
+
+                <ImageButton
+                    android:id="@+id/Btn_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="car"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/car_icon"
+                    android:paddingRight="20dp"
+                    android:paddingEnd="20dp" />
+            </LinearLayout>
+
         </TableRow>
-
 
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="30dp"
             android:gravity="center"
+            android:paddingTop="20dp"
             >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageButton
+                    android:id="@+id/Btn_percentage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="percentage"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/percentage_icon"
+                    android:paddingLeft="20dp"
+                    android:paddingStart="20dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/Btn_salary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:onClick="salary"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/salary_icon"
+                    android:paddingRight="20dp"
+                    android:paddingEnd="20dp"/>
+
+
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="20dp">
 
             <ImageButton
                 android:id="@+id/Btn_summary"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:onClick="summary"
-                app:srcCompat="@drawable/summary"
-                tools:layout_editor_absoluteX="78dp"
-                tools:layout_editor_absoluteY="320dp" />
-
-            <ImageButton
-                android:id="@+id/Btn_salary"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
                 android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
-                android:onClick="salary"
-                app:srcCompat="@drawable/salary"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="30dp"
-            android:gravity="center" >
-            <ImageButton
-                android:id="@+id/Btn_percentage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                tools:layout_editor_absoluteX="78dp"
-                tools:layout_editor_absoluteY="320dp"
-                android:background="@android:color/transparent"
-                android:onClick="percentage"
-                app:srcCompat="@drawable/percentage" />
-
-            <ImageButton
-                android:id="@+id/Btn_plus"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:background="@android:color/transparent"
-                android:onClick="plus"
-                app:srcCompat="@drawable/plus"
-                 />
+                app:srcCompat="@drawable/summary_icon2" />
 
 
         </TableRow>
