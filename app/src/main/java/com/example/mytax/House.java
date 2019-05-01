@@ -1,4 +1,5 @@
 package com.example.mytax;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -48,16 +49,6 @@ public class House extends DrawerBarActivity {
 
 
 
-       // RelativeLayout constraintLayout = findViewById(R.id.content_house);
-       // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-       // animationDrawable.setEnterFadeDuration(2000);
-       // animationDrawable.setExitFadeDuration(4000);
-       // animationDrawable.start();
-
-       // Toolbar toolbar = findViewById(R.id.;
-       // setSupportActionBar(toolbar);
-
-
 
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
@@ -81,26 +72,16 @@ public class House extends DrawerBarActivity {
 
                 profitValue.setText(String.valueOf(profit));
 
-              // showToast(String.valueOf("Profit to declare \n" + profit));
             }
         });
 
-
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void showToast(String text)
-//    {
-//        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
    }
+    public void setting (View view){
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
+
+    public void pop (View view){
+        startActivity(new Intent(this, PopMain.class));
+    }
 }

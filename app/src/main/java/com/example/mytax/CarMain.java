@@ -383,7 +383,6 @@ public class CarMain extends AppCompatActivity implements CompoundButton.OnCheck
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(text_view_endDate);
         //final Switch gpsSwitch = myView.findViewById(switch_gpsDistance);
-        final EditText gpsDistance = myView.findViewById(R.id.edit_text_gps);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
@@ -501,7 +500,6 @@ public class CarMain extends AppCompatActivity implements CompoundButton.OnCheck
                 String mDistance = distance.getText().toString().trim();
                 String mStartDate = startDate.getText().toString().trim();
                 String mEndDate = endDate.getText().toString().trim();
-                String mGpsdistance = gpsDistance.getText().toString().trim();
                 String mOrgin = origin.getText().toString().trim();
                 String mDestination = destination.getText().toString().trim();
                 String mPurpose = purpose.getText().toString().trim();
@@ -520,7 +518,7 @@ public class CarMain extends AppCompatActivity implements CompoundButton.OnCheck
                  LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
                  String eDate = e.format(formatter);
 
-                 Car car = new Car(mDistance, sDate, eDate, mGpsdistance, mOrgin, mDestination, mPurpose, mAmount);
+                 Car car = new Car(mDistance, sDate, eDate, mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();

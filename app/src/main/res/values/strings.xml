@@ -31,6 +31,7 @@
     <string name="you_can_drag_the_card_left_or_right_to_delete_it">You can drag the card left or right to delete it</string>
     <string name="click_on_the_card_to_edit">Click on the card to edit</string>
     <string name="todo">TODO</string>
+    <string name="calculate">calculate</string>
 
 
 </resources>

@@ -1,143 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".House"
-        tools:showIn="@layout/activity_house"
-        android:background="@drawable/"
-        android:id="@+id/content_house">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/house_pic"
+    android:orientation="vertical"
+    tools:context=".House">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:weightSum="2">
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="0dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right">
 
-            <EditText
-                android:id="@+id/bought"
-                android:layout_width="320dp"
-                android:layout_height="52dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/edit_text_bck"
-                android:drawableLeft="@drawable/ic_bought"
-                android:drawablePadding="20dp"
-                android:gravity="left|center_vertical"
-                android:hint="Buying price"
-                android:maxLines="1"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="#050505"
-                android:textColorHint="@drawable/text_hint_selector"
-                android:typeface="sans" />
+            <ImageButton
+                android:id="@+id/Btn_Setting"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/transparent"
+                android:onClick="setting"
+                app:layout_constraintEnd_toStartOf="@+id/info"
 
-            <EditText
-                android:id="@+id/sold"
-                android:layout_width="320dp"
-                android:layout_height="52dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/edit_text_bck"
-                android:drawableLeft="@drawable/ic_sell"
-                android:drawablePadding="20dp"
-                android:gravity="left|center_vertical"
-                android:hint="Selling price"
-                android:maxLines="1"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="#050505"
-                android:textColorHint="@drawable/text_hint_selector"
-                android:typeface="sans" />
+                app:srcCompat="@drawable/ic_settings_applications_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
 
-            <EditText
-                android:id="@+id/broker"
-                android:layout_width="320dp"
-                android:layout_height="52dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/edit_text_bck"
-                android:drawableLeft="@drawable/ic_broker"
-                android:drawablePadding="20dp"
-                android:gravity="left|center_vertical"
-                android:hint="Broker price"
-                android:maxLines="1"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="#050505"
-                android:textColorHint="@drawable/text_hint_selector"
-                android:typeface="sans" />
-
-            <EditText
-                android:id="@+id/listing"
-                android:layout_width="320dp"
-                android:layout_height="52dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/edit_text_bck"
-                android:drawableLeft="@drawable/ic_listing"
-                android:drawablePadding="20dp"
-                android:gravity="left|center_vertical"
-                android:hint="Listing price"
-                android:maxLines="1"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="#050505"
-                android:textColorHint="@drawable/text_hint_selector"
-                android:typeface="sans" />
-
-            <TextView
-                android:id="@+id/profit"
-                android:layout_width="350dp"
-                android:layout_height="52dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/edit_text_bck"
-                android:drawableLeft="@drawable/profit"
-                android:drawablePadding="20dp"
-                android:gravity="left|center_vertical"
-                android:hint="Profit"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="#050505"
-                android:textColorHint="@drawable/text_hint_selector"
-                android:typeface="sans" />
-
-            <Button
-                android:id="@+id/Btn_Calculate"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|clip_vertical"
-                android:layout_marginTop="25dp"
-                android:textColor="#050505"
-                android:gravity="center|center_horizontal"
-                android:text="calculate"
-                android:background="@drawable/btn_shape"/>
+            <ImageButton
+                android:id="@+id/info"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/transparent"
+                android:onClick="pop"
+                app:srcCompat="@drawable/ic_info_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
         </LinearLayout>
 
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+       >
 
-    </RelativeLayout>
+        <EditText
+            android:id="@+id/bought"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_shape"
+            android:baselineAligned="false"
+            android:drawableLeft="@drawable/ic_bought"
+            android:drawablePadding="20dp"
+            android:hint="Buying price"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/sold"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_shape"
+            android:drawableLeft="@drawable/ic_sell"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:hint="Selling price"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/broker"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_shape"
+            android:drawableLeft="@drawable/ic_broker"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:hint="Broker price"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
+
+        <EditText
+            android:id="@+id/listing"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_shape"
+            android:drawableLeft="@drawable/ic_listing"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:hint="Listing price"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/profit"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_shape"
+            android:drawableLeft="@drawable/profit"
+            android:drawablePadding="20dp"
+            android:gravity="left|center_vertical"
+            android:hint="Profit"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:textColor="#050505"
+            android:textColorHint="@drawable/text_hint_selector"
+            android:typeface="sans" />
+
+        <Button
+            android:id="@+id/Btn_Calculate"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|clip_vertical"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/btn_shape2"
+            android:gravity="center|center_horizontal"
+            android:text="@string/calculate"
+            android:textColor="#050505" />
+    </LinearLayout>
+
+
+</LinearLayout>
