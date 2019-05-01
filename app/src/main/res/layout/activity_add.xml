@@ -1,124 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/setting2"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:textColor="@android:color/background_dark"
+    >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Add Income Details"
-        android:gravity="center"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         android:padding="10dp"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/background_dark" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Company : "
-                android:layout_margin="10dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                />
+                android:textColor="@android:color/background_dark"
+                android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/company_name"
-                />
+                android:textColor="@android:color/background_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Salary:"
-                android:layout_margin="10dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                />
+                android:textColor="@android:color/background_dark"
+                android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
             <EditText
+                android:id="@+id/salary"
+                android:textColor="@android:color/background_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/salary"
-                android:inputType="number"
-                />
+                android:inputType="number" />
         </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Commune:"
                 android:layout_margin="10dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                />
+                android:text="Commune:"
+                android:textSize="16dp"
+                android:textColor="@android:color/background_dark"
+                android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="10dp"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:layout_height="wrap_content">
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="14dp">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="2dp"
-                android:entries="@array/commune" />
+                android:entries="@array/commune"
+                android:scrollbarSize="10dp"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@android:color/background_dark"
                 />
+
         </RelativeLayout>
-
-
-
 
 
     </LinearLayout>
@@ -133,98 +144,104 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:hint="Percentage(%)" />
+            android:hint="Percentage(%)"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/kommune_percent"
             android:layout_width="wrap_content"
             android:layout_height="29dp"
-            android:hint= " "
             android:layout_marginLeft="10dp"
-            />
+            android:hint=" "
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/date"
-            android:layout_marginLeft="60dp"
             android:layout_width="match_parent"
-            android:gravity="right"
-            android:textAlignment="center"
             android:layout_height="36dp"
             android:layout_gravity="right"
-            android:hint="Select Date" />
+            android:layout_marginLeft="60dp"
+            android:gravity="right"
+            android:hint="Select Date"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actual tax:"
                 android:layout_margin="10dp"
-                android:textAppearance="?android:textAppearanceMedium"
-                />
+                android:text="Actual tax:"
+                android:textColor="@android:color/background_dark"
+                android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
             <EditText
+                android:id="@+id/actual_tax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/actual_tax"
                 android:inputType="number"
-                />
+                android:textColor="@android:color/background_dark"/>
         </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:id="@+id/btnCancel"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/btn_shape2"
                 android:text="Cancel"
-                />
+                android:textColor="@android:color/white" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
             <Button
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:id="@+id/btnSave"
-                android:textColor="@android:color/white"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_shape2"
                 android:text="Save"
-                />
+                android:textColor="@android:color/white" />
         </RelativeLayout>
-
 
 
     </LinearLayout>

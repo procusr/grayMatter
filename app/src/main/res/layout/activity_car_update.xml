@@ -128,7 +128,52 @@
                 android:textSize="20dp"
                 />
         </RelativeLayout>
+
+
+
     </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="-12dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gps Distance:"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/update_gps_distance"
+                android:textSize="20dp"
+                />
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -240,7 +285,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="-12dp"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -251,7 +296,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Amount:"
-                android:layout_marginTop="10dp"
                 android:layout_margin="10dp"
                 android:textSize="20dp"
                 android:textAppearance="?android:textAppearanceMedium"
@@ -266,9 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/update_amount"
-                android:background="@null"
                 android:textSize="20dp"
-                android:layout_marginTop="10dp"
                 />
         </RelativeLayout>
 

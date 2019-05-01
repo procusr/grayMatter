@@ -27,18 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="12dp"
-        android:text="Tax ME"
-        android:textColor="#DD070707"
+        android:text="Tax Me"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#DD070707"
         android:textSize="18sp"
-        app:fontFamily="@font/autour_one" />
+        app:fontFamily="@font/amita" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="android.studio@android.com"
-        android:visibility="gone" />
 
 
 

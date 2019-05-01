@@ -1,10 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ddd"
+    android:background="@drawable/forgetpass"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+
+
+    >
 
 
     <TextView
@@ -20,32 +23,38 @@
 
     <Button
         android:id="@+id/change_password_button"
-        android:layout_width="fill_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="#4635DB"
+        android:background="@drawable/btn_shape"
         android:text="Change Password"
-        android:textColor="#000" />
+        android:shadowColor="#ddd"
+        android:shadowRadius="40"
+        android:textColor="#070707" />
 
 
     <Button
         android:id="@+id/change_email_button"
-        android:layout_width="fill_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="#4635DB"
+        android:background="@drawable/btn_shape"
         android:text="Change Email"
-        android:textColor="#000" />
+        android:shadowColor="#ddd"
+        android:shadowRadius="40"
+        android:textColor="#070707" />
 
 
     <Button
         android:id="@+id/sign_out_button"
-        android:layout_width="fill_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
-        android:background="#4635DB"
+        android:background="@drawable/btn_shape"
         android:text="Sign Out"
-        android:textColor="#000" />
+        android:shadowColor="#ddd"
+        android:shadowRadius="40"
+        android:textColor="#070707" />
 
 
 </LinearLayout>
