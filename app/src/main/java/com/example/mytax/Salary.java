@@ -58,7 +58,6 @@ public class Salary extends DrawerBarActivity {
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +78,9 @@ public class Salary extends DrawerBarActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -139,7 +141,8 @@ public class Salary extends DrawerBarActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
                 companyName = mCompanyName.getText().toString().trim();
                 salary = mSalary.getText().toString().trim();
                 expectedTax = mExpectedTax.getText().toString().trim();
@@ -152,7 +155,7 @@ public class Salary extends DrawerBarActivity {
                     return;
                 }
                 Company company = new Company(companyName, salary, expectedTax, actualTax,date);
-                mDatabase.child("salary").child(company.getDate()).setValue(company);
+                mDatabase.child(uid).child("salary").child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -161,7 +164,9 @@ public class Salary extends DrawerBarActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("salary").child(date).removeValue();
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
+                mDatabase.child(uid).child("salary").child(date).removeValue();
                 dialog.dismiss();
             }
         });
@@ -260,10 +265,11 @@ public class Salary extends DrawerBarActivity {
                 double num2 = Double.parseDouble(salary.getText().toString());
                 double num3 = num1 * num2 / 100;
                 String mExpectedTax = String.format("%.2f", num3);
-
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
 
                 Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
-                mDatabase.child("salary").child(company.getDate()).setValue(company);
+                mDatabase.child(uid).child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -279,7 +285,8 @@ public class Salary extends DrawerBarActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("salary");
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").
+                child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
