@@ -730,11 +730,11 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String sDate = s.format(formatter);
 
-                LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 String eDate = e.format(formatter);
 
                 Car car = new Car(mDistance, sDate, eDate, mOrgin, mDestination, mPurpose, mAmount);

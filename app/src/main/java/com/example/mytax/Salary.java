@@ -285,8 +285,9 @@ public class Salary extends DrawerBarActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").
-                child("salary");
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
