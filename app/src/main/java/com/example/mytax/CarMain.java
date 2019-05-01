@@ -8,11 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -58,6 +60,8 @@ public class CarMain extends AppCompatActivity {
     private String destination;
     private String purpose;
     private String amount;
+    private Toolbar toolbar;
+
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -67,11 +71,20 @@ public class CarMain extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
+
+
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
+
+
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Car Info");
+
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
+
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -115,25 +128,20 @@ public class CarMain extends AppCompatActivity {
         final EditText mdistance = myView.findViewById(R.id.update_distance);
         final EditText mstartDate = myView.findViewById(R.id.update_start_date);
         final EditText mendDate = myView.findViewById(R.id.update_end_date);
-        final EditText mgpsDistance= myView.findViewById(R.id.update_gps_distance);
         final EditText morigin = myView.findViewById(R.id.update_origin);
         final EditText mdestination = myView.findViewById(R.id.update_destination);
         final EditText mpurpose = myView.findViewById(R.id.update_purpose);
         final EditText mamount = myView.findViewById(R.id.update_amount);
-
+        mamount.setKeyListener(null);
 
         mdistance.setText(distance);
         mdistance.setSelection(distance.length());
-
 
         mstartDate.setText(startDate);
         mstartDate.setSelection(startDate.length());
 
         mendDate.setText(endDate);
         mendDate.setSelection(endDate.length());
-
-        mgpsDistance.setText(gpsDistance);
-        mgpsDistance.setSelection(gpsDistance.length());
 
         morigin.setText(origin);
         morigin.setSelection(origin.length());
@@ -147,10 +155,8 @@ public class CarMain extends AppCompatActivity {
         mamount.setText(amount);
         mamount.setSelection(amount.length());
 
-
         Button btnDelete = myView.findViewById(R.id.btnDelete);
         Button btnUpdate = myView.findViewById(R.id.btnUpdate);
-        System.out.println("mahi");
 
         mdistance.addTextChangedListener(new TextWatcher() {
 
@@ -192,17 +198,12 @@ public class CarMain extends AppCompatActivity {
                 distance = mdistance.getText().toString().trim();
                 startDate = mstartDate.getText().toString().trim();
                 endDate= mendDate.getText().toString().trim();
-                gpsDistance = mgpsDistance.getText().toString().trim();
                 origin = morigin.getText().toString().trim();
                 destination = mdestination.getText().toString().trim();
                 purpose = mpurpose.getText().toString().trim();
                 amount = mamount.getText().toString().trim();
-
-
-
-                Car car = new Car(distance, startDate, endDate,gpsDistance, origin,destination, purpose, amount);
+                Car car = new Car(distance, startDate, endDate, origin,destination, purpose, amount);
                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
-
                 dialog.dismiss();
             }
         });
@@ -218,6 +219,7 @@ public class CarMain extends AppCompatActivity {
         dialog.show();
     }
 
+
     public void submitRecord() {
 
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
@@ -232,21 +234,19 @@ public class CarMain extends AppCompatActivity {
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(text_view_endDate);
         final Switch gpsSwitch = myView.findViewById(switch_gpsDistance);
-        final EditText gpsDistance = myView.findViewById(R.id.edit_text_gps);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
+        amount.setKeyListener(null);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
-
 
 
         distance.addTextChangedListener(new TextWatcher() {
 
             // the user's changes are saved here
             public void onTextChanged(CharSequence c, int start, int before, int count) {
-
 
             }
 
@@ -270,16 +270,9 @@ public class CarMain extends AppCompatActivity {
                     k = Double.parseDouble(distance.getText().toString());
                     Double d = k * 1.85;
                     String mam = String.format("%.2f", d);
-                    amount.setText(" " + mam + "  kr");
+                    amount.setText(" " + mam );
                 }
-
-
-
-
-
             }
-
-
         });
 
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -290,14 +283,12 @@ public class CarMain extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
-
-                DatePickerDialog dialog = new DatePickerDialog(
+                DatePickerDialog dialog2 = new DatePickerDialog(
                         CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                dialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog2.show();
 
 
             }
@@ -322,12 +313,12 @@ public class CarMain extends AppCompatActivity {
 
 
 
-                DatePickerDialog dialog = new DatePickerDialog(
+                DatePickerDialog dialog1 = new DatePickerDialog(
                         CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         eDateSetListener, year, month, day);
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog1.show();
             }
         });
 
@@ -349,7 +340,6 @@ public class CarMain extends AppCompatActivity {
                 String mDistance = distance.getText().toString().trim();
                 String mStartDate = startDate.getText().toString().trim();
                 String mEndDate = endDate.getText().toString().trim();
-                String mGpsdistance = gpsDistance.getText().toString().trim();
                 String mOrgin = origin.getText().toString().trim();
                 String mDestination = destination.getText().toString().trim();
                 String mPurpose = purpose.getText().toString().trim();
@@ -361,14 +351,14 @@ public class CarMain extends AppCompatActivity {
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String sDate = s.format(formatter);
 
-                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
                  String eDate = e.format(formatter);
 
-                 Car car = new Car(mDistance, sDate, eDate, mGpsdistance, mOrgin, mDestination, mPurpose, mAmount);
+                 Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
@@ -396,7 +386,6 @@ public class CarMain extends AppCompatActivity {
                                 return new Car(snapshot.child("distance").getValue().toString(),
                                         snapshot.child("startDate").getValue().toString(),
                                         snapshot.child("endDate").getValue().toString(),
-                                        snapshot.child("gpsDistance").getValue().toString(),
                                         snapshot.child("origin").getValue().toString(),
                                         snapshot.child("destination").getValue().toString(),
                                         snapshot.child("purpose").getValue().toString(),
@@ -435,14 +424,14 @@ public class CarMain extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Car model) {
-                viewHolder.setDistance("Distance       :" + model.getDistance());
-                viewHolder.setStartDate("Start Date    :" + model.getStartDate());
-                viewHolder.setEndDate ("End Date         :   " + model.getEndDate());
-                viewHolder.setGpsDistance("Gps Distance :   " +model.getGpsDistance());
-                viewHolder.setOrigin("Origin           :   " +model.getOrigin());
-                viewHolder.setDestination("Destination  :   " +model.getDestination());
-                viewHolder.setPurpose("Purpose          :   " +model.getPurpose());
-                viewHolder.setAmount("Amount            :   " +model.getAmount());
+                viewHolder.setDistance(model.getDistance());
+                viewHolder.setStartDate(model.getStartDate());
+                viewHolder.setEndDate (model.getEndDate());
+                viewHolder.setOrigin(model.getOrigin());
+                viewHolder.setDestination(model.getDestination());
+                viewHolder.setPurpose(model.getPurpose());
+                viewHolder.setAmount(model.getAmount() + " kr" );
+
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -474,8 +463,7 @@ public class CarMain extends AppCompatActivity {
         View mView;
         public TextView distance;
         public TextView startDate;
-        public TextView  endDate;
-        public TextView gpsDistance;
+        public TextView endDate;
         public TextView origin;
         public TextView destination;
         public TextView purpose;
@@ -498,11 +486,6 @@ public class CarMain extends AppCompatActivity {
         public void setEndDate(String string) {
             endDate = mView.findViewById(text_view_endDate);
            endDate.setText(string);
-        }
-
-        public void setGpsDistance(String string) {
-            gpsDistance = mView.findViewById(R.id.text_view_gpsDistance);
-            gpsDistance.setText(string);
         }
 
         public void setOrigin(String string) {

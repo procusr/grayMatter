@@ -6,20 +6,18 @@
     android:elevation="10dp"
     android:layout_margin="10dp"
     app:cardElevation="15dp"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#ddd">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@color/colorPrimary"
             android:gravity="center">
 
             <TextView
@@ -37,57 +35,157 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="392dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/company_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:hint="Company"
-                android:textColorHint="#070707"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:visibility="visible" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/salary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:text="Salary"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:visibility="visible" />
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="Company "
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20dp" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/expected_tax"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="4dp"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:text="Expected tax"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+                >
 
-            <TextView
-                android:id="@+id/actual_tax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="4dp"
-                android:text="Actual tax"
-                android:textAlignment="viewStart"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:gravity="start" />
+                <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:textSize="20dp" />
+            </RelativeLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="Salary "
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="4dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/salary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="Expected Tax "
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="4dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/expected_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:text="Actual Tax "
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="4dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/actual_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:inputType="numberDecimal"
+                    android:linksClickable="true"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
 
 
     </LinearLayout>

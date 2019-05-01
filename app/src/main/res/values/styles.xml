@@ -3,20 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#496CAF</item>
-        <item name="colorPrimaryDark">#335374</item>
-        <item name="colorAccent">#FCF9F9</item>
-
+        <item name="colorPrimary">#6B5AF5</item>
+        <item name="colorPrimaryDark">#4635DB</item>
+        <item name="colorAccent">#000</item>
     </style>
+
     <style name="AppTheme.Custom">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
-
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 </resources>

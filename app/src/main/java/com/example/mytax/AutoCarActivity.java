@@ -1,26 +1,33 @@
 package com.example.mytax;
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +46,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-//import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +53,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AutoCarActivity extends DrawerBarActivity implements CompoundButton.OnCheckedChangeListener {
@@ -54,29 +63,32 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     // For location services
     private static final String TAG = AutoCarActivity.class.getSimpleName();
     TextView textView;
-    Button btnStartUpdates;
-    Button btnStopUpdates;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
     private SettingsClient mSettingsClient;
     private LocationCallback mLocationCallback;
     private LocationSettingsRequest mLocationSettingsRequest;
     private Location mCurrentLocation;
-    Context context;
-    private Switch switch1;
-    private TextView traker;
+    private DatabaseReference mDatabase;
     final int REQUEST_CHECK_SETTINGS = 1;
     final int REQUEST_LOCATION = 2;
+    private TextView traker;
     public Boolean locUpdates;
     public Boolean useGPS;  // pref: use_device_location
-    //private Boolean hasLocPermissions;
+    private Switch switch1;
     SharedPreferences preferences;
+
     static Double lat1 = null;
     static Double lon1 = null;
     static Double lat2 = null;
     static Double lon2 = null;
     static Double distance = 0.0;
     static int status = 0;
+    String distanceTracker;
+    TextView distance_tracker;
+    public DatePickerDialog.OnDateSetListener mDateSetListener;
+    public DatePickerDialog.OnDateSetListener eDateSetListener;
+    Button save;
     private Boolean mRequestingLocationUpdates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -101,29 +113,17 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(1).setChecked(true);
-        //setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        save = findViewById(R.id.btnSave);
         textView = (TextView) findViewById(R.id.distance);
-//        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
-//        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         switch1=findViewById(R.id.switch1);
         switch1.setOnCheckedChangeListener(this);
-
         traker=findViewById(R.id.TV_traker);
-
-
-        // start location services, including permissions checks, etc.
-        //context = this;
+        distance_tracker = findViewById(R.id.distance_tracker);
         mRequestingLocationUpdates = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //preferences.edit().remove("multi_pref_constellation").apply();   //used to clear existing preference if required
         useGPS = preferences.getBoolean("use_device_location", false);
         locUpdates = false;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -134,18 +134,36 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         buildLocationSettingsRequest();
         loginToFirebase();
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              submitRecord();
+            }
+        });
+
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+
+                    try {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                distance_tracker.setText(String.valueOf(distance));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        t.start();
+
 
     }
-        /*btnStartUpdates.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-               checkPermissions();
-
-            }
-        });*/
 
 
     private void updateValuesFromBundle(Bundle savedInstanceState) {
@@ -233,7 +251,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference(path);
             ref.setValue(distance);
 
-
             if (mCurrentLocation != null) {
                 Log.d(TAG, "location update " + mCurrentLocation);
                 //ref.setValue(location);
@@ -241,8 +258,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         }
     }
-
-
 
 
     @Override
@@ -273,7 +288,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     public void startUpdatesButtonHandler(View view) {
         if (!mRequestingLocationUpdates) {
             mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
             startLocationUpdates();
         }
     }
@@ -343,19 +357,11 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
      * Updates all UI fields.
      */
     private void updateUI() {
-        setButtonsEnabledState();
         updateLocationUI();
     }
 
-    private void setButtonsEnabledState() {
-        if (mRequestingLocationUpdates) {
-            btnStartUpdates.setEnabled(false);
-            btnStopUpdates.setEnabled(true);
-        } else {
-            btnStartUpdates.setEnabled(true);
-            btnStopUpdates.setEnabled(false);
-        }
-    }
+
+
 
 
     private void stopLocationUpdates() {
@@ -372,7 +378,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         mRequestingLocationUpdates = false;
-                        setButtonsEnabledState();
                     }
                 });
     }
@@ -585,7 +590,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (switch1.isChecked()){
             mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
+            //setButtonsEnabledState();
             startLocationUpdates();
             traker.setText("Stop");
         }else{
@@ -594,4 +599,161 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         }
     }
+
+    public void submitRecord() {
+
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        View myView = inflater.inflate(R.layout.activity_car_add, null);
+        myDialog.setView(myView);
+        final AlertDialog dialog = myDialog.create();
+
+        dialog.setCancelable(false);
+
+        final EditText distance = myView.findViewById(R.id.edit_text_distance);
+        final TextView startDate = myView.findViewById(R.id.text_view_startDate);
+        final TextView endDate = myView.findViewById(R.id.text_view_endDate);
+        //final Switch gpsSwitch = myView.findViewById(R.id.switch_gpsDistance);
+        final EditText origin = myView.findViewById(R.id.edit_text_origin);
+        final EditText destination = myView.findViewById(R.id.edit_text_destination);
+        final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
+        final EditText amount = myView.findViewById(R.id.edit_text_amount);
+        final Button btnCancel = myView.findViewById(R.id.btnCancel);
+        final Button btnAdd = myView.findViewById(R.id.btnSave);
+
+
+        distance.addTextChangedListener(new TextWatcher() {
+
+            // the user's changes are saved here
+            public void onTextChanged(CharSequence c, int start, int before, int count) {
+            }
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+
+                // this space intentionally left blank
+            }
+
+            public void afterTextChanged(Editable c) {
+                // this one too
+                if((distance.getText().toString()).isEmpty()){
+
+                    distance.setError("Empty");
+                }
+                else if ( Double.parseDouble(distance.getText().toString())< 5 || distance.getText().toString().isEmpty()
+                        ||startDate.getText().toString().isEmpty()) {
+                    distance.setError("Please provide all the inputs or your distance is less than 5 Km");
+
+                    return;
+                }else{
+                    double k = Double.parseDouble(distance.getText().toString());
+                    Double d = k * 1.85;
+                    String mam = String.format("%.2f", d);
+                    amount.setText(" " + mam + "  kr");
+                }
+
+            }
+
+
+        });
+
+        startDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(
+                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = month + " " + day + " " + year;
+                startDate.setText(date);
+            }
+        };
+
+        endDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        eDateSetListener, year, month, day);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        eDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = month + " " + day + " " + year;
+                endDate.setText(date);
+            }
+        };
+
+       String mgpsDistance = distance_tracker.getText().toString().trim();
+       distance.setText(mgpsDistance);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+
+                String mDistance = distance.getText().toString().trim();
+                String mStartDate = startDate.getText().toString().trim();
+                String mEndDate = endDate.getText().toString().trim();
+                String mOrgin = origin.getText().toString().trim();
+                String mDestination = destination.getText().toString().trim();
+                String mPurpose = purpose.getText().toString().trim();
+                String mAmount = amount.getText().toString().trim();
+
+                if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
+                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                String sDate = s.format(formatter);
+
+                LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
+                String eDate = e.format(formatter);
+
+                Car car = new Car(mDistance, sDate, eDate, mOrgin, mDestination, mPurpose, mAmount);
+                mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
+                Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
 }
+
+
+

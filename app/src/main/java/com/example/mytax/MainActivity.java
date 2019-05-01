@@ -28,9 +28,6 @@ public class MainActivity extends DrawerBarActivity {
 
     }
 
-
-
-
     public void setting (View view){
         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
         startActivity(intent);
@@ -42,7 +39,7 @@ public class MainActivity extends DrawerBarActivity {
 
 
     public void car(View view) {
-        Intent intent = new Intent(MainActivity.this, CarMain.class);
+        Intent intent = new Intent(MainActivity.this,CarMain.class);
     startActivity(intent);}
 
     public void house(View view) {
@@ -62,7 +59,7 @@ public class MainActivity extends DrawerBarActivity {
         startActivity(intent);}
 
     public void plus(View view) {
-        Intent intent = new Intent(MainActivity.this, Plus.class);
+        Intent intent = new Intent(MainActivity.this, AutoCarActivity.class);
         startActivity(intent);}
 
 
