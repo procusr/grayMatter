@@ -8,20 +8,42 @@
     app:cardElevation="15dp"
     android:layout_height="wrap_content">
 
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:gravity="center">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_view_startDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:padding="10dp"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textStyle="bold" />
 
 
         </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,44 +89,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="0dp"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="175dp"
-                    android:layout_height="wrap_content"
-                    android:text="Start Date "
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textSize="20dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="4dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"
-                >
-
-                <TextView
-                    android:id="@+id/text_view_startDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:inputType="numberDecimal"
-                    android:linksClickable="true"
-                    android:textSize="20dp" />
-            </RelativeLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="0dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -115,6 +109,8 @@
                 <TextView
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
                     android:text="End Date"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
@@ -140,7 +136,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="0dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -179,7 +175,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="0dp"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
@@ -221,7 +217,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="0dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -261,7 +257,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="0dp"
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
