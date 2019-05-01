@@ -59,7 +59,7 @@ public class MainActivity extends DrawerBarActivity {
         startActivity(intent);}
 
     public void plus(View view) {
-        Intent intent = new Intent(MainActivity.this, Plus.class);
+        Intent intent = new Intent(MainActivity.this, AutoCarActivity.class);
         startActivity(intent);}
 
 
