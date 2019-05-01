@@ -44,7 +44,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 
-public class Salary extends DrawerBarActivity {
+public class Salary extends DrawerBarActivity  {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
@@ -79,6 +79,7 @@ public class Salary extends DrawerBarActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -191,9 +192,11 @@ public class Salary extends DrawerBarActivity {
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
         final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Salary.this, R.array.commune,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                Salary.this,
+                R.array.commune,
                 android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -357,6 +360,10 @@ public class Salary extends DrawerBarActivity {
         fetch();
         adapter.startListening();
     }
+
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;

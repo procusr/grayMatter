@@ -15,8 +15,10 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -77,6 +79,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     static Double lon2 = null;
     static Double distance = 0.0;
     static int status = 0;
+    private TextView distance_tracker;
     private Boolean mRequestingLocationUpdates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -97,32 +100,23 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     private final static String KEY_LOCATION = "location";
     private final static String KEY_LAST_UPDATED_TIME_STRING = "last-updated-time-string";
 
-    // display DSObjectFragment when MainActivity first loads
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-        getLayoutInflater().inflate(R.layout.activity_maps, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.getMenu().getItem(1).setChecked(true);
-        //setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_car_add);
         FirebaseApp.initializeApp(this);
 
         textView = (TextView) findViewById(R.id.distance);
-        btnStartUpdates = (Button) findViewById(R.id.btn_Start_Updates);
-        btnStopUpdates = findViewById(R.id.btn_Stop_Updates);
 
-        switch1=findViewById(R.id.switch1);
+        switch1 = findViewById(R.id.switch1);
         switch1.setOnCheckedChangeListener(this);
 
-        traker=findViewById(R.id.TV_traker);
-        // start location services, including permissions checks, etc.
-        //context = this;
+        traker = findViewById(R.id.TV_traker);
+
+        distance_tracker = findViewById(R.id.distance_tracker);
         mRequestingLocationUpdates = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //preferences.edit().remove("multi_pref_constellation").apply();   //used to clear existing preference if required
         useGPS = preferences.getBoolean("use_device_location", false);
         locUpdates = false;
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -132,6 +126,27 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         createLocationRequest();
         buildLocationSettingsRequest();
         loginToFirebase();
+
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+
+                    try {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                distance_tracker.setText(String.valueOf(distance));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        t.start();
 
 
     }
@@ -163,15 +178,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     // Start Fused Location services
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
-
-        // Sets the desired interval for active location updates. This interval is
-        // inexact. You may not receive updates at all if no location sources are available, or
-        // you may receive them slower than requested. You may also receive updates faster than
-        // requested if other applications are requesting location at a faster interval.
         mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
 
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
 
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -225,13 +233,11 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
             if (mCurrentLocation != null) {
                 Log.d(TAG, "location update " + mCurrentLocation);
-                //ref.setValue(location);
+
             }
 
         }
     }
-
-
 
 
     @Override
@@ -262,7 +268,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     public void startUpdatesButtonHandler(View view) {
         if (!mRequestingLocationUpdates) {
             mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
+            //setButtonsEnabledState();
             startLocationUpdates();
         }
     }
@@ -272,9 +278,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
      */
 
     public void stopUpdatesButtonHandler(View view) {
-        // It is a good practice to remove location requests when the activity is in a paused or
-        // stopped state. Doing so helps battery performance and is especially
-        // recommended in applications that request frequent location updates.
         stopLocationUpdates();
     }
 
@@ -332,18 +335,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
      * Updates all UI fields.
      */
     private void updateUI() {
-        setButtonsEnabledState();
+        //  setButtonsEnabledState();
         updateLocationUI();
-    }
-
-    private void setButtonsEnabledState() {
-        if (mRequestingLocationUpdates) {
-            btnStartUpdates.setEnabled(false);
-            btnStopUpdates.setEnabled(true);
-        } else {
-            btnStartUpdates.setEnabled(true);
-            btnStopUpdates.setEnabled(false);
-        }
     }
 
 
@@ -353,15 +346,12 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             return;
         }
 
-        // It is a good practice to remove location requests when the activity is in a paused or
-        // stopped state. Doing so helps battery performance and is especially
-        // recommended in applications that request frequent location updates.
         mFusedLocationClient.removeLocationUpdates(mLocationCallback)
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         mRequestingLocationUpdates = false;
-                        setButtonsEnabledState();
+
                     }
                 });
     }
@@ -369,8 +359,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     @Override
     public void onResume() {
         super.onResume();
-        // Within {@code onPause()}, we remove location updates. Here, we resume receiving
-        // location updates if the user has requested them.
         if (mRequestingLocationUpdates && checkPermissions()) {
             startLocationUpdates();
         } else if (!checkPermissions()) {
@@ -384,7 +372,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     protected void onPause() {
         super.onPause();
 
-        // Remove location updates to save battery.
         stopLocationUpdates();
     }
 
@@ -396,14 +383,9 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     }
 
 
-
     private void showSnackbar(final int mainTextStringId, final int actionStringId,
                               View.OnClickListener listener) {
-        /*Snackbar.make(
-                findViewById(android.R.id.content),
-                getString(mainTextStringId),
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(getString(actionStringId), listener).show();*/
+
     }
 
     /**
@@ -420,8 +402,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.ACCESS_FINE_LOCATION);
 
-        // Provide an additional rationale to the user. This would happen if the user denied the
-        // request previously, but didn't check the "Don't ask again" checkbox.
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.");
             showSnackbar(R.string.permission_rationale,
@@ -436,9 +416,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     });
         } else {
             Log.i(TAG, "Requesting permission");
-            // Request permission. It's possible this can be auto answered if device policy
-            // sets the permission in a given state or the user denied the permission
-            // previously and checked "Never ask again".
             ActivityCompat.requestPermissions(AutoCarActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_PERMISSIONS_REQUEST_CODE);
@@ -463,17 +440,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     startLocationUpdates();
                 }
             } else {
-                // Permission denied.
 
-                // Notify the user via a SnackBar that they have rejected a core permission for the
-                // app, which makes the Activity useless. In a real app, core permissions would
-                // typically be best requested during a welcome-screen flow.
-
-                // Additionally, it is important to remember that a permission might have been
-                // rejected without asking the user for permission (device policy or "Never ask
-                // again" prompts). Therefore, a user interface affordance is typically implemented
-                // when permissions are denied. Otherwise, your app could appear unresponsive to
-                // touches or interactions which have required permissions.
                 showSnackbar(R.string.permission_denied_explanation,
                         R.string.settings, new View.OnClickListener() {
                             @Override
@@ -554,7 +521,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         String email = "dishabahre@gmail.com";
         String password = "dishabahre09";
         FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
+                email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -572,15 +539,16 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (switch1.isChecked()){
+        if (switch1.isChecked()) {
             mRequestingLocationUpdates = true;
-            setButtonsEnabledState();
             startLocationUpdates();
             traker.setText("Stop");
-        }else{
+        } else {
             stopLocationUpdates();
             traker.setText("Start");
+            System.out.println(distance);
 
         }
     }
+
 }

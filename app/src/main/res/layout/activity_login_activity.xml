@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/pic_6"
+    android:background="@drawable/login_pic"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
@@ -13,15 +13,14 @@
         android:fontFamily="@font/alegreya"
         android:gravity="center"
         android:padding="10dp"
+        android:shadowColor="@color/colorAccent"
+        android:shadowRadius="10"
         android:text="TaxMe"
         android:textColor="#55789B"
         android:textSize="48sp"
-        android:shadowColor="@color/colorAccent"
-        android:shadowRadius="100"
+        app:fontFamily="@font/artifika"
 
-        app:fontFamily="@font/akronim"
-
-       />
+        />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -40,7 +39,7 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColorLink="@color/design_default_color_primary_dark" />
+            android:textColor="#205E84" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -63,7 +62,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="#DD030303" />
+            android:textColor="#205E84" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -73,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dip"
         android:background="@drawable/btn_shape"
+
         android:text="Login"
         android:textColor="#55789B" />
 

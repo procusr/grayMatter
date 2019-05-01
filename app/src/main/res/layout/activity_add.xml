@@ -4,8 +4,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@drawable/setting2"
     android:orientation="vertical"
+    android:textColor="@android:color/background_dark"
     >
 
     <TextView
@@ -17,7 +18,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/background_dark" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Company : "
+                android:textColor="@android:color/background_dark"
                 android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
@@ -45,6 +47,7 @@
 
             <EditText
                 android:id="@+id/company_name"
+                android:textColor="@android:color/background_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -67,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Salary:"
+                android:textColor="@android:color/background_dark"
                 android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
@@ -77,6 +81,7 @@
 
             <EditText
                 android:id="@+id/salary"
+                android:textColor="@android:color/background_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -100,21 +105,30 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Commune:"
+                android:textSize="16dp"
+                android:textColor="@android:color/background_dark"
                 android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="14dp">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="2dp"
-                android:entries="@array/commune" />
-            />
+                android:entries="@array/commune"
+                android:scrollbarSize="10dp"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@android:color/background_dark"
+                />
+
         </RelativeLayout>
 
 
@@ -130,14 +144,18 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
-            android:hint="Percentage(%)" />
+            android:hint="Percentage(%)"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/kommune_percent"
             android:layout_width="wrap_content"
             android:layout_height="29dp"
             android:layout_marginLeft="10dp"
-            android:hint=" " />
+            android:hint=" "
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"/>
 
         <TextView
             android:id="@+id/date"
@@ -147,6 +165,8 @@
             android:layout_marginLeft="60dp"
             android:gravity="right"
             android:hint="Select Date"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@android:color/background_dark"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -168,6 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Actual tax:"
+                android:textColor="@android:color/background_dark"
                 android:textAppearance="?android:textAppearanceMedium" />
         </RelativeLayout>
 
@@ -180,7 +201,8 @@
                 android:id="@+id/actual_tax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@android:color/background_dark"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -201,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_shape2"
                 android:text="Cancel"
                 android:textColor="@android:color/white" />
         </RelativeLayout>
@@ -216,7 +238,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_shape2"
                 android:text="Save"
                 android:textColor="@android:color/white" />
         </RelativeLayout>

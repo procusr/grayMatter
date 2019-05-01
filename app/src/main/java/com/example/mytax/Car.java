@@ -71,4 +71,5 @@ public class Car {
     public String getAmount() {
         return amount;
     }
+
 }

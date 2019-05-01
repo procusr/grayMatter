@@ -38,6 +38,7 @@ public class SettingActivity extends DrawerBarActivity {
                         int width = dm.widthPixels;
                         int height = dm.heightPixels;
                         getWindow().setLayout((int)(width*.8),(int)(height*.6));
+
         //=================
 
 
