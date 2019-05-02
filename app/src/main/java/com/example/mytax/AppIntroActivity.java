@@ -38,6 +38,8 @@ public class AppIntroActivity extends AppCompatActivity {
 
 
     float salary[] = {6500, 4500, 5200, 5100, 4800};
+
+
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
     @Override
@@ -45,12 +47,14 @@ public class AppIntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
+
         //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
         myLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_LONG).show();
+
                 Intent intent = new Intent(AppIntroActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;

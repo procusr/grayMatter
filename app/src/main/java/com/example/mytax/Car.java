@@ -20,13 +20,12 @@ public class Car {
     }
 
 
-    public Car(String mDistance, String mStartDate, String mEndDate,  String mOrigin,
+    public Car(String mDistance, String mStartDate,String mOrigin,
                String mDestination, String mPurpose, String mAmount){
 
 
         this.distance = mDistance;
         this.startDate =mStartDate;
-        this.endDate = mEndDate;
         this.origin=mOrigin;
         this.destination = mDestination;
         this.purpose =mPurpose;

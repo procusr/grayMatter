@@ -39,12 +39,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 
-public class Salary extends DrawerBarActivity  {
+public class Salary extends DrawerBarActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
@@ -57,7 +60,6 @@ public class Salary extends DrawerBarActivity  {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,9 @@ public class Salary extends DrawerBarActivity  {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid=mUser.getUid();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,7 +144,8 @@ public class Salary extends DrawerBarActivity  {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
                 companyName = mCompanyName.getText().toString().trim();
                 salary = mSalary.getText().toString().trim();
                 expectedTax = mExpectedTax.getText().toString().trim();
@@ -153,7 +158,7 @@ public class Salary extends DrawerBarActivity  {
                     return;
                 }
                 Company company = new Company(companyName, salary, expectedTax, actualTax,date);
-                mDatabase.child("salary").child(company.getDate()).setValue(company);
+                mDatabase.child(uid).child("salary").child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -162,7 +167,9 @@ public class Salary extends DrawerBarActivity  {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child("salary").child(date).removeValue();
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
+                mDatabase.child(uid).child("salary").child(date).removeValue();
                 dialog.dismiss();
             }
         });
@@ -192,11 +199,9 @@ public class Salary extends DrawerBarActivity  {
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
         final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                Salary.this,
-                R.array.commune,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Salary.this, R.array.commune,
                 android.R.layout.simple_spinner_item);
-
+        spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -254,19 +259,19 @@ public class Salary extends DrawerBarActivity  {
                     return;
                 }
 
-                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String Date = s.format(FOMATTER);
+
+               String formattedDate = dateFormatter(mDate);
 
 
                 double num1 = Double.parseDouble(list.getText().toString());
                 double num2 = Double.parseDouble(salary.getText().toString());
                 double num3 = num1 * num2 / 100;
                 String mExpectedTax = String.format("%.2f", num3);
+                FirebaseUser mUser=mAuth.getCurrentUser();
+                String uid=mUser.getUid();
 
-
-                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
-                mDatabase.child("salary").child(company.getDate()).setValue(company);
+                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, formattedDate);
+                mDatabase.child(uid).child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -281,8 +286,25 @@ public class Salary extends DrawerBarActivity  {
         dialog.show();
     }
 
+
+
+    public static String dateFormatter(String mDate){
+        SimpleDateFormat parser = new SimpleDateFormat("M d yyyy");
+        Date date = null;
+        try {
+            date = parser.parse(mDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        return  formatter.format(date);
+    }
+
+
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("salary");
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
@@ -360,10 +382,6 @@ public class Salary extends DrawerBarActivity  {
         fetch();
         adapter.startListening();
     }
-
-
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
