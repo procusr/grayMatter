@@ -11,22 +11,26 @@
     android:background="@android:color/white">
     <LinearLayout
         android:id="@+id/l1"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical">
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+       >
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/l1" />
+            android:layout_height="400dp"
+            android:layout_below="@+id/l1"
+
+           />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/l2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="135dp"
         android:orientation="vertical"/>
 

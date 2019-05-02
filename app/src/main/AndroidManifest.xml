@@ -32,7 +32,6 @@
         </activity>
         <activity android:name=".CarMain" />
         <activity android:name=".Summary" />
-        <activity android:name=".Plus" />
         <activity android:name=".House" />
         <activity android:name=".Percentage" />
         <activity android:name=".Salary" />

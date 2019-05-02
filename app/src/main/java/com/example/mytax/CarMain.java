@@ -1,6 +1,9 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -16,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -227,7 +231,8 @@ public class CarMain extends AppCompatActivity {
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
-        amount.setKeyListener(null);
+        final Button gps =myView.findViewById(R.id.btn_gps);
+       // amount.setKeyListener(null);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
 
@@ -291,6 +296,18 @@ public class CarMain extends AppCompatActivity {
                 startDate.setText(date);
             }
         };
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    dialog.dismiss();
+                }
+                return true;
+            }
+        });
 
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,6 +338,15 @@ public class CarMain extends AppCompatActivity {
             }
         };
 
+        gps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),AutoCarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -349,7 +375,9 @@ public class CarMain extends AppCompatActivity {
                  mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
+
             }
+
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -450,6 +478,11 @@ public class CarMain extends AppCompatActivity {
         adapter.startListening();
     }
 
+    public void goAuto(View view) {
+        Intent intent = new Intent(this,AutoCarActivity.class);
+        startActivity(intent);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
         public TextView distance;
@@ -497,5 +530,13 @@ public class CarMain extends AppCompatActivity {
             amount = mView.findViewById(R.id.text_view_amount);
             amount.setText(string);
         }
+    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+
     }
 }

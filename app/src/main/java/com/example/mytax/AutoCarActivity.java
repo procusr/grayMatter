@@ -90,7 +90,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     TextView distance_tracker;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     public DatePickerDialog.OnDateSetListener eDateSetListener;
-    Button save;
     private Boolean mRequestingLocationUpdates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -117,7 +116,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
-        save = findViewById(R.id.btnSave);
         textView = (TextView) findViewById(R.id.distance);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         switch1=findViewById(R.id.switch1);
@@ -136,12 +134,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         buildLocationSettingsRequest();
         loginToFirebase();
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              submitRecord();
-            }
-        });
+
 
         Thread t = new Thread(){
             @Override
@@ -353,7 +346,21 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     }
                 });
     }
+//    @Override
+//    public void onBackPressed()
+//    {
+//        super.onBackPressed();
+//        startActivity(new Intent(getApplicationContext(), CarMain.myDialog.class));
+//        finish();
+//
+//    }
 
+//    builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//            MyActivity.super.onBackPressed();
+//        }
+//    });
+//        builder.show();
 
     /**
      * Updates all UI fields.
@@ -598,8 +605,11 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         }else{
             stopLocationUpdates();
             traker.setText("Start");
+            submitRecord();
+            mRequestingLocationUpdates = null;
 
         }
+
     }
 
     public void submitRecord() {
@@ -726,7 +736,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
 
 
@@ -739,6 +748,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(),CarMain.class);
+                        startActivity(intent);
             }
         });
 

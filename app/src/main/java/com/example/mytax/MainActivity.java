@@ -58,9 +58,6 @@ public class MainActivity extends DrawerBarActivity {
         Intent intent = new Intent(MainActivity.this, Salary.class);
         startActivity(intent);}
 
-    public void plus(View view) {
-        Intent intent = new Intent(MainActivity.this, Plus.class);
-        startActivity(intent);}
 
 
 }
