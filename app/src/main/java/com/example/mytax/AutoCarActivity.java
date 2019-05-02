@@ -88,7 +88,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     TextView distance_tracker;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     public DatePickerDialog.OnDateSetListener eDateSetListener;
-    Button save;
     private Boolean mRequestingLocationUpdates;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
@@ -115,7 +114,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         FirebaseApp.initializeApp(this);
-        save = findViewById(R.id.btnSave);
         textView = (TextView) findViewById(R.id.distance);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         switch1=findViewById(R.id.switch1);
@@ -134,12 +132,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         buildLocationSettingsRequest();
         loginToFirebase();
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              submitRecord();
-            }
-        });
+
 
         Thread t = new Thread(){
             @Override
@@ -596,8 +589,10 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         }else{
             stopLocationUpdates();
             traker.setText("Start");
-
+            submitRecord();
+            mRequestingLocationUpdates = null;
         }
+
     }
 
     public void submitRecord() {
@@ -741,6 +736,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(),CarMain.class);
+                        startActivity(intent);
             }
         });
 

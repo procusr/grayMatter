@@ -47,18 +47,6 @@ public class House extends DrawerBarActivity {
         navigationView.getMenu().getItem(0).setChecked(true);
 
 
-
-       // RelativeLayout constraintLayout = findViewById(R.id.content_house);
-       // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-       // animationDrawable.setEnterFadeDuration(2000);
-       // animationDrawable.setExitFadeDuration(4000);
-       // animationDrawable.start();
-
-       // Toolbar toolbar = findViewById(R.id.;
-       // setSupportActionBar(toolbar);
-
-
-
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
         brokerPrice =  findViewById(R.id.broker);
@@ -76,31 +64,12 @@ public class House extends DrawerBarActivity {
                 sell = Integer.parseInt(sellPrice.getText().toString());
                 broker = Integer.parseInt(brokerPrice.getText().toString());
                 list = Integer.parseInt(listPrice.getText().toString());
-
                 profit = (sell - (buy + broker + list));
-
                 profitValue.setText(String.valueOf(profit));
 
-              // showToast(String.valueOf("Profit to declare \n" + profit));
+
             }
         });
 
-
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void showToast(String text)
-//    {
-//        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
    }
 }

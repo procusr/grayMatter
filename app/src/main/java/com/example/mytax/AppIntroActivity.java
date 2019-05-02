@@ -45,16 +45,12 @@ public class AppIntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-
-
-
         //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
         myLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent(AppIntroActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;
