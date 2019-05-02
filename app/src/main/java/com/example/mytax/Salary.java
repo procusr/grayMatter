@@ -259,20 +259,6 @@ public class Salary extends DrawerBarActivity {
                     return;
                 }
 
-                /*LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String Date = s.format(FOMATTER);*/
-
-
-               /* SimpleDateFormat parser = new SimpleDateFormat("M d yyyy");
-                Date date = null;
-                try {
-                    date = parser.parse(mDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-                 formatter.format(date);*/
 
                String formattedDate = dateFormatter(mDate);
 
