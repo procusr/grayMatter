@@ -71,7 +71,6 @@ public class CarMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
         recyclerView = findViewById(R.id.list);
-        mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         linearLayoutManager.setReverseLayout(true);
@@ -96,7 +95,6 @@ public class CarMain extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
 
         });
 
@@ -231,7 +229,7 @@ public class CarMain extends AppCompatActivity {
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
         final Button gps =myView.findViewById(R.id.btn_gps);
-       // amount.setKeyListener(null);
+        amount.setKeyListener(null);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
 
@@ -308,34 +306,7 @@ public class CarMain extends AppCompatActivity {
             }
         });
 
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
-
-                DatePickerDialog dialog1 = new DatePickerDialog(
-                        CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        eDateSetListener, year, month, day);
-
-                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog1.show();
-            }
-        });
-
-        eDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = month + " " + day + " " + year;
-                endDate.setText(date);
-            }
-        };
 
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
