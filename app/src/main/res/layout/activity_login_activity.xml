@@ -1,68 +1,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/login_pic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alegreya"
-        android:gravity="center"
-        android:padding="10dp"
-        android:shadowColor="@color/colorAccent"
-        android:shadowRadius="10"
-        android:text="TaxMe"
-        android:textColor="#55789B"
-        android:textSize="48sp"
-        app:fontFamily="@font/artifika"
 
-        />
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/logonew">
+
+    </LinearLayout>
+
+
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColorHint="#55789B"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp">
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Email"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="#205E84" />
+            android:textColor="#DD030303" />
 
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColorHint="#55789B"
-        android:paddingStart="20dp"
-        android:paddingLeft="20dp"
-        android:paddingEnd="20dp"
-        android:paddingRight="20dp">
+        android:textColorHint="#000">
 
         <EditText
             android:id="@+id/ET_Password"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:focusableInTouchMode="true"
             android:hint="Password"
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="#205E84" />
+            android:textColor="#DD030303" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -70,11 +58,11 @@
         android:id="@+id/Btn_Login"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="@drawable/btn_shape"
-
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttondesign"
         android:text="Login"
-        android:textColor="#55789B" />
+        android:textColor="#050505"
+        android:textSize="15sp" />
 
     <!-- Link to Login Screen -->
 
@@ -84,23 +72,24 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/btn_shape"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/buttondesign"
         android:text="Sign Up"
-        android:textColor="#55789B"
+        android:textColor="#050505"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
+    <!-- Link to Forget Password -->
 
     <TextView
         android:id="@+id/forget_password_button"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="3dp"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingTop="15dp"
         android:text="Forget Password"
-        android:textColor="#6D6D6F"
-        android:textStyle="bold" />
-
-
+        android:textColor="#000"
+        android:textStyle="normal" />
 </LinearLayout>
