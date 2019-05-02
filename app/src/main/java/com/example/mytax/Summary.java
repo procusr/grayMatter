@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,13 +24,11 @@ public class Summary extends AppCompatActivity {
     private TextView mTotalPaid;
     private TextView mCarRebate;
     private TextView mTotalRebate;
-    private TextView mHouseRebate;
     private double sumCar = 0;
     private double sum = 0;
     private double sume = 0;
     private double sump = 0;
     private double sumRebate;
-    private double sumHouse = 0;
     private double sumDue;
     private double pvalue;
     private double avalue;
@@ -37,6 +37,8 @@ public class Summary extends AppCompatActivity {
 
     private DatabaseReference dbtax;
     private DatabaseReference dbRebate;
+    private FirebaseAuth mAuth;
+
 
 
     @Override
@@ -51,12 +53,15 @@ public class Summary extends AppCompatActivity {
         mTotalPaid = (TextView) findViewById(R.id.btn_tax_paid);
         mCarRebate = (TextView) findViewById(R.id.btn_rebate_car);
         mTotalRebate = (TextView) findViewById(R.id.btn_total_rebate);
-        mHouseRebate = (TextView) findViewById(R.id.btn_rebate_house);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
 
+            String uid = mUser.getUid();
 
         //1. SELECT * FROM Artists
-        dbtax = FirebaseDatabase.getInstance().getReference("mainDb").child("salary");
-        dbRebate = FirebaseDatabase.getInstance().getReference("mainDb").child("cardb");
+
+        dbtax = FirebaseDatabase.getInstance().getReference("mainDb").child(uid).child("salary");
+        dbRebate = FirebaseDatabase.getInstance().getReference("mainDb").child(uid).child("cardb");
 
 
         dbRebate.addValueEventListener(new ValueEventListener() {
@@ -74,7 +79,7 @@ public class Summary extends AppCompatActivity {
 
                         mCarRebate.setText(String.valueOf(sumCar));
 
-                        sumRebate = sumCar + sumHouse;
+                        sumRebate = sumCar;
                         mTotalRebate.setText(String.valueOf(sumRebate));
 
                     }
@@ -82,6 +87,7 @@ public class Summary extends AppCompatActivity {
                 } catch (NumberFormatException e) {
 
                     mCarRebate.setText(String.valueOf(0));
+                    mTotalRebate.setText(String.valueOf(0));
 
                 }
 
@@ -153,8 +159,7 @@ public class Summary extends AppCompatActivity {
 
                     }
 
-                    sumDue = sume - sump - sumCar - sumHouse;
-                    mTotalTaxDue.setText(String.valueOf(sumDue));
+
 
                 } catch (NumberFormatException e) {
 
@@ -162,6 +167,10 @@ public class Summary extends AppCompatActivity {
                         mTotalTaxDue.setText(String.valueOf(0));
 
             }
+
+                sumDue = sume- sump - sumCar;
+                mTotalTaxDue.setText(String.valueOf(sumDue));
+
                 }
 
                 @Override
