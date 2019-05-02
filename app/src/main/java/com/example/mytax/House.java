@@ -1,39 +1,32 @@
 package com.example.mytax;
-import android.graphics.drawable.AnimationDrawable;
+
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.widget.FrameLayout;
 
-
 public class House extends DrawerBarActivity {
-
 
     int buy;
     int sell;
     int broker;
     int list;
     int profit;
+    int spentM;
 
     EditText buyPrice;
     EditText sellPrice;
     EditText brokerPrice;
     EditText listPrice;
-    TextView profitValue;
+    TextView profitMade;
+    TextView moneySpent;
+
 
     Button tbdButton;
 
@@ -47,23 +40,16 @@ public class House extends DrawerBarActivity {
         navigationView.getMenu().getItem(0).setChecked(true);
 
 
-
-       // RelativeLayout constraintLayout = findViewById(R.id.content_house);
-       // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-       // animationDrawable.setEnterFadeDuration(2000);
-       // animationDrawable.setExitFadeDuration(4000);
-       // animationDrawable.start();
-
-       // Toolbar toolbar = findViewById(R.id.;
-       // setSupportActionBar(toolbar);
-
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
         brokerPrice =  findViewById(R.id.broker);
-        profitValue =  findViewById(R.id.profit);
         listPrice = findViewById(R.id.listing);
+        profitMade = findViewById(R.id.profit);
+        moneySpent = findViewById(R.id.spentMoney);
+
 
         tbdButton = findViewById(R.id.Btn_Calculate);
 
@@ -79,28 +65,20 @@ public class House extends DrawerBarActivity {
 
                 profit = (sell - (buy + broker + list));
 
-                profitValue.setText(String.valueOf(profit));
+                spentM = buy+broker+list;
 
-              // showToast(String.valueOf("Profit to declare \n" + profit));
+
+                profitMade.setText(String.valueOf(profit));
+                moneySpent.setText(String.valueOf(spentM));
+
+               showToast(String.valueOf("Profit to declare \n" + profit));
             }
         });
+    }
 
-
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void showToast(String text)
-//    {
-//        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
+    private void showToast(String text)
+    {
+        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
    }
+
 }

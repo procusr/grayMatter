@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mytax">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- Required to act as a custom watch face. -->
+
+
+    <!-- Required for complications to receive complication data and open the provider chooser. -->
+
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,16 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity android:name=".AppIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +49,9 @@
         <activity android:name=".Percentage" />
         <activity android:name=".Salary" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".DrawerBarActivity"/>
-        <activity android:name=".ManualCarActivity"/>
-        <activity android:name=".AutoCarActivity"/>
+        <activity android:name=".DrawerBarActivity" />
+        <activity android:name=".ManualCarActivity" />
+        <activity android:name=".AutoCarActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,8 +72,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
-
 
 </manifest>

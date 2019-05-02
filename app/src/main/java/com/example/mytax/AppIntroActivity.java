@@ -1,6 +1,5 @@
 package com.example.mytax;
-import android.app.slice.Slice;
-import android.app.slice.SliceItem;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -20,8 +19,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Utils;
-import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +33,6 @@ public class AppIntroActivity extends AppCompatActivity {
     //Graphs
 
 
-
     float salary[] = {6500, 4500, 5200, 5100, 4800};
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
@@ -44,9 +40,6 @@ public class AppIntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
-
-
-
 
         //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
@@ -95,7 +88,7 @@ public class AppIntroActivity extends AppCompatActivity {
         dataSet.setValueFormatter(new PercentFormatter());
 
 
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
         dataSet.setValueLinePart1OffsetPercentage(10.f);
         dataSet.setValueLinePart1Length(0.60f);
         dataSet.setValueLinePart2Length(.1f);
@@ -121,10 +114,7 @@ public class AppIntroActivity extends AppCompatActivity {
         chart.getDescription().setTextSize(12);
         chart.setUsePercentValues(true);
 
-
-
-
-        chart.setEntryLabelColor(Color.WHITE);
+        chart.setEntryLabelColor(Color.BLACK);
 
         //legend display
         Legend legend = chart.getLegend();
@@ -134,7 +124,6 @@ public class AppIntroActivity extends AppCompatActivity {
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
         legend.setDrawInside(false);
-
 
     }
 
