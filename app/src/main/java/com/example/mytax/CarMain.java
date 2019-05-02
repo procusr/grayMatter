@@ -41,8 +41,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-//import static com.example.myapplication.R.id.date;
-import static com.example.mytax.R.id.switch_gpsDistance;
 import static com.example.mytax.R.id.text_view_endDate;
 
 
@@ -229,7 +227,6 @@ public class CarMain extends AppCompatActivity {
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
         final TextView endDate = myView.findViewById(text_view_endDate);
-        final Switch gpsSwitch = myView.findViewById(switch_gpsDistance);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);

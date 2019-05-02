@@ -70,14 +70,6 @@ android:background="@drawable/setting2"
           android:textSize="16dp" />
 
       <EditText
-          android:id="@+id/edit_text_gps"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="6dp"
-          android:hint="Gps Distance"
-          android:textColorHint="@color/colorPrimary"/>
-
-      <EditText
           android:id="@+id/edit_text_origin"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
