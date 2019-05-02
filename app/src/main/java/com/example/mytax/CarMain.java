@@ -116,7 +116,6 @@ public class CarMain extends AppCompatActivity {
 
         final EditText mdistance = myView.findViewById(R.id.update_distance);
         final EditText mstartDate = myView.findViewById(R.id.update_start_date);
-        final EditText mendDate = myView.findViewById(R.id.update_end_date);
         final EditText morigin = myView.findViewById(R.id.update_origin);
         final EditText mdestination = myView.findViewById(R.id.update_destination);
         final EditText mpurpose = myView.findViewById(R.id.update_purpose);
@@ -129,8 +128,6 @@ public class CarMain extends AppCompatActivity {
         mstartDate.setText(startDate);
         mstartDate.setSelection(startDate.length());
 
-        mendDate.setText(endDate);
-        mendDate.setSelection(endDate.length());
 
         morigin.setText(origin);
         morigin.setSelection(origin.length());
@@ -189,12 +186,11 @@ public class CarMain extends AppCompatActivity {
 
                 distance = mdistance.getText().toString().trim();
                 startDate = mstartDate.getText().toString().trim();
-                endDate= mendDate.getText().toString().trim();
                 origin = morigin.getText().toString().trim();
                 destination = mdestination.getText().toString().trim();
                 purpose = mpurpose.getText().toString().trim();
                 amount = mamount.getText().toString().trim();
-                Car car = new Car(distance, startDate, endDate, origin,destination, purpose, amount);
+                Car car = new Car(distance, startDate, origin,destination, purpose, amount);
                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 dialog.dismiss();
             }
@@ -338,24 +334,19 @@ public class CarMain extends AppCompatActivity {
                 String mPurpose = purpose.getText().toString().trim();
                 String mAmount = amount.getText().toString().trim();
 
-                if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
+                if(mDistance.isEmpty()|| mStartDate.startsWith("S")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String sDate = s.format(formatter);
-
-                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                 String eDate = e.format(formatter);
+                //Date formatter from salalry class
+                String sDate = Salary.dateFormatter(mStartDate);
 
                 FirebaseUser mUser=mAuth.getCurrentUser();
                 String uid=mUser.getUid();
-                //mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb").child("cardb").child(uid);
 
-                 Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
+                 Car car = new Car(mDistance, sDate,  mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                  Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                  dialog.dismiss();
@@ -387,7 +378,6 @@ public class CarMain extends AppCompatActivity {
                             public Car parseSnapshot(@NonNull DataSnapshot snapshot) {
                                 return new Car(snapshot.child("distance").getValue().toString(),
                                         snapshot.child("startDate").getValue().toString(),
-                                        snapshot.child("endDate").getValue().toString(),
                                         snapshot.child("origin").getValue().toString(),
                                         snapshot.child("destination").getValue().toString(),
                                         snapshot.child("purpose").getValue().toString(),

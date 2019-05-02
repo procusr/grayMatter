@@ -39,9 +39,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class Salary extends DrawerBarActivity {
@@ -256,9 +259,22 @@ public class Salary extends DrawerBarActivity {
                     return;
                 }
 
-                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
+                /*LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String Date = s.format(FOMATTER);
+                String Date = s.format(FOMATTER);*/
+
+
+               /* SimpleDateFormat parser = new SimpleDateFormat("M d yyyy");
+                Date date = null;
+                try {
+                    date = parser.parse(mDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+                 formatter.format(date);*/
+
+               String formattedDate = dateFormatter(mDate);
 
 
                 double num1 = Double.parseDouble(list.getText().toString());
@@ -268,7 +284,7 @@ public class Salary extends DrawerBarActivity {
                 FirebaseUser mUser=mAuth.getCurrentUser();
                 String uid=mUser.getUid();
 
-                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
+                Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, formattedDate);
                 mDatabase.child(uid).child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -284,14 +300,19 @@ public class Salary extends DrawerBarActivity {
         dialog.show();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String dateFormatter(String date) {
-        LocalDate s = LocalDate.parse(date, DateTimeFormatter.ofPattern("M d yyyy"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return s.format(formatter);
+
+
+    public static String dateFormatter(String mDate){
+        SimpleDateFormat parser = new SimpleDateFormat("M d yyyy");
+        Date date = null;
+        try {
+            date = parser.parse(mDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        return  formatter.format(date);
     }
-
-
 
 
     private void fetch() {

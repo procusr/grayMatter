@@ -729,16 +729,13 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String sDate = s.format(formatter);
 
-                LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                String eDate = e.format(formatter);
+                String sDate =Salary.dateFormatter(mStartDate);
+
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser mUser=mAuth.getCurrentUser();
                 String uid=mUser.getUid();
-                Car car = new Car(mDistance, sDate, eDate, mOrgin, mDestination, mPurpose, mAmount);
+                Car car = new Car(mDistance, sDate, mOrgin, mDestination, mPurpose, mAmount);
                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
