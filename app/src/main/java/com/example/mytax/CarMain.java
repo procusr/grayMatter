@@ -76,7 +76,6 @@ public class CarMain extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser=mAuth.getCurrentUser();
-        String uid=mUser.getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
