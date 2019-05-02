@@ -344,7 +344,21 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     }
                 });
     }
+//    @Override
+//    public void onBackPressed()
+//    {
+//        super.onBackPressed();
+//        startActivity(new Intent(getApplicationContext(), CarMain.myDialog.class));
+//        finish();
+//
+//    }
 
+//    builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//            MyActivity.super.onBackPressed();
+//        }
+//    });
+//        builder.show();
 
     /**
      * Updates all UI fields.
@@ -591,6 +605,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             traker.setText("Start");
             submitRecord();
             mRequestingLocationUpdates = null;
+
         }
 
     }
