@@ -341,12 +341,16 @@ public class CarMain extends AppCompatActivity {
 
                 }
 
-                LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
+                /*LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-                String sDate = s.format(formatter);
+                String sDate = s.format(formatter);*/
 
-                 LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
-                 String eDate = e.format(formatter);
+                 /*LocalDate e = LocalDate.parse(mEndDate, DateTimeFormatter.ofPattern("M d yyyy"));
+                 String eDate = e.format(formatter);*/
+
+
+                 String sDate = dateFormatter(mStartDate);
+                 String eDate = dateFormatter(mEndDate);
 
                  Car car = new Car(mDistance, sDate, eDate,  mOrgin, mDestination, mPurpose, mAmount);
                  mDatabase.child("cardb").child(car.getStartDate()).setValue(car);
@@ -354,6 +358,8 @@ public class CarMain extends AppCompatActivity {
                  dialog.dismiss();
             }
         });
+
+
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -363,6 +369,16 @@ public class CarMain extends AppCompatActivity {
         });
         dialog.show();
     }
+
+
+    public static String dateFormatter( String date) {
+        LocalDate s = LocalDate.parse(date, DateTimeFormatter.ofPattern("M d yyyy"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return s.format(formatter);
+     }
+
+
+
 
     private void fetch() {
         Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("cardb");
