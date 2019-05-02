@@ -1,3 +1,9 @@
+
+/*
+* A class for Automatic Distance measurement (Gps) and adding the record to the database with
+* required fields
+* */
+
 package com.example.mytax;
 import android.Manifest;
 import android.app.Activity;
@@ -346,21 +352,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     }
                 });
     }
-//    @Override
-//    public void onBackPressed()
-//    {
-//        super.onBackPressed();
-//        startActivity(new Intent(getApplicationContext(), CarMain.myDialog.class));
-//        finish();
-//
-//    }
-
-//    builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
-//        public void onClick(DialogInterface dialog, int id) {
-//            MyActivity.super.onBackPressed();
-//        }
-//    });
-//        builder.show();
 
     /**
      * Updates all UI fields.
@@ -612,8 +603,9 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
     }
 
+    //create dialog box for adding distance travelled on a specified date and
+    //add it to the database
     public void submitRecord() {
-
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_car_add, null);
@@ -624,14 +616,12 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
-        final TextView endDate = myView.findViewById(R.id.text_view_endDate);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
-
 
         distance.addTextChangedListener(new TextWatcher() {
 
@@ -644,7 +634,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             }
 
             public void afterTextChanged(Editable c) {
-                // this one too
+                // on text change evaluate corresponding SEK the  distance travelled
                 if((distance.getText().toString()).isEmpty()){
 
                     distance.setError("Empty");
@@ -666,6 +656,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         });
 
+        //Date picker
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -691,11 +682,9 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         };
 
 
-
-
-
-       String mgpsDistance = distance_tracker.getText().toString().trim();
-       distance.setText(mgpsDistance);
+        //gets the distance from  Gps for saving
+        String mgpsDistance = distance_tracker.getText().toString().trim();
+        distance.setText(mgpsDistance);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -714,7 +703,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     return;
                 }
 
-
+                //parse the date using a method from Salary class
                 String sDate =Salary.dateFormatter(mStartDate);
 
                 mAuth = FirebaseAuth.getInstance();

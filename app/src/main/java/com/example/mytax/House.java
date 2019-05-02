@@ -1,27 +1,17 @@
+
+
+
 package com.example.mytax;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.widget.FrameLayout;
 
-
 public class House extends DrawerBarActivity {
-
 
     int buy;
     int sell;
@@ -66,7 +56,6 @@ public class House extends DrawerBarActivity {
                 list = Integer.parseInt(listPrice.getText().toString());
                 profit = (sell - (buy + broker + list));
                 profitValue.setText(String.valueOf(profit));
-
 
             }
         });

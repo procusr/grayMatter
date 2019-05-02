@@ -1,3 +1,8 @@
+
+//Fetches Muncipality data from api and compare the percentage from Salary anc check if the
+//User is paying the right percentage
+
+
 package com.example.mytax;
 
 import android.os.Bundle;
@@ -44,6 +49,7 @@ public class Percentage extends DrawerBarActivity {
         netSalary =(EditText)  findViewById(R.id.netSalary);
         btnCalculate = findViewById(R.id.btnCalculate);
 
+        //Populate the dropdown menu from APi
         Retrofit retro = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retro.create(Api.class);
@@ -66,7 +72,6 @@ public class Percentage extends DrawerBarActivity {
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-                        // your code here
                     }
                 });
             }

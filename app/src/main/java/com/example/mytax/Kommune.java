@@ -1,3 +1,7 @@
+
+//Model class for fetching data from Api
+
+
 package com.example.mytax;
 
 public class Kommune {
@@ -17,13 +21,6 @@ public class Kommune {
         return LocalTaxRate;
     }
 
-    public void setMunicipality(String municipality) {
-        Municipality = municipality;
-    }
-
-    public void setLocalTaxRate(String localTaxRate) {
-        LocalTaxRate = localTaxRate;
-    }
     public String toString(){
         return this.Municipality;
     }

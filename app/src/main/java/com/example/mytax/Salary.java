@@ -1,3 +1,8 @@
+/*Adding Salary details for the specified companies including getting data from Api for
+    appropriate tax percentage depending on the Muncipality that person is and add, update and delete records.
+    this will help to inform the user where he is paying the percentage specified or not
+ */
+
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
@@ -135,7 +140,6 @@ public class Salary extends DrawerBarActivity {
 
         mDate.setText(date);
         mDate.setSelection(date.length());
-
 
 
         Button btnDelete = myView.findViewById(R.id.btnDelete);

@@ -1,6 +1,7 @@
-package com.example.mytax;
 
-import java.util.Date;
+//Model class for Car activity
+
+package com.example.mytax;
 
 public class Car {
 
@@ -13,11 +14,6 @@ public class Car {
     private String purpose;
     private String amount;
 
-
-    public Car(){
-//empty constructor needed
-
-    }
 
 
     public Car(String mDistance, String mStartDate,String mOrigin,

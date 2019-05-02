@@ -1,5 +1,8 @@
-package com.example.mytax;
 
+//Menu drawer
+
+
+package com.example.mytax;
 
 
 import android.content.Intent;

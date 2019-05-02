@@ -1,3 +1,6 @@
+//A class for adding,Updating and removing travelling expense
+//Automatic tracking can be launched from this class.
+
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
@@ -23,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -37,11 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.Calendar;
-
-import static com.example.mytax.R.id.text_view_endDate;
-
 
 public class CarMain extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -57,8 +55,6 @@ public class CarMain extends AppCompatActivity {
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     public DatePickerDialog.OnDateSetListener eDateSetListener;
     private DatabaseReference mDatabase;
-
-
 
     private Double k;
     @Override
@@ -90,7 +86,6 @@ public class CarMain extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
 
         });
 
@@ -143,19 +138,15 @@ public class CarMain extends AppCompatActivity {
 
         mdistance.addTextChangedListener(new TextWatcher() {
 
-            // the user's changes are saved here
+
             public void onTextChanged(CharSequence c, int start, int before, int count) {
-
-
             }
 
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
-
-                // this space intentionally left blank
             }
 
             public void afterTextChanged(Editable c) {
-                // this one too
+                // Calculate on Text change with appropriate conditions
                 if((mdistance.getText().toString()).isEmpty()){
 
                     mdistance.setError("Empty");
@@ -231,18 +222,15 @@ public class CarMain extends AppCompatActivity {
 
         distance.addTextChangedListener(new TextWatcher() {
 
-            // the user's changes are saved here
             public void onTextChanged(CharSequence c, int start, int before, int count) {
 
             }
 
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
 
-                // this space intentionally left blank
             }
 
             public void afterTextChanged(Editable c) {
-                // this one too
                 if((distance.getText().toString()).isEmpty()){
 
                     distance.setError("Empty");
@@ -339,13 +327,10 @@ public class CarMain extends AppCompatActivity {
     }
 
 
-
+        //Fetch data from database and display it in recycler view
     private void fetch() {
         FirebaseUser mUser=mAuth.getCurrentUser();
-
         String uid=mUser.getUid();
-
-
         Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("cardb");
 
         FirebaseRecyclerOptions<Car> options =
@@ -364,7 +349,7 @@ public class CarMain extends AppCompatActivity {
                         })
                         .build();
 
-
+        //To enable on swipe to delete a record
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -426,6 +411,8 @@ public class CarMain extends AppCompatActivity {
         fetch();
         adapter.startListening();
     }
+
+    //View Holder class for Our recycler view
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
