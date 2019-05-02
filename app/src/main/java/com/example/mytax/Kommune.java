@@ -24,4 +24,7 @@ public class Kommune {
     public void setLocalTaxRate(String localTaxRate) {
         LocalTaxRate = localTaxRate;
     }
+    public String toString(){
+        return this.Municipality;
+    }
 }

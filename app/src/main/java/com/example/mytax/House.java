@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -14,8 +15,12 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.widget.FrameLayout;
 
-public class House extends AppCompatActivity {
+
+public class House extends DrawerBarActivity {
 
 
     int buy;
@@ -34,19 +39,12 @@ public class House extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house);
-
-       // RelativeLayout constraintLayout = findViewById(R.id.content_house);
-       // AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-       // animationDrawable.setEnterFadeDuration(2000);
-       // animationDrawable.setExitFadeDuration(4000);
-       // animationDrawable.start();
-
-       // Toolbar toolbar = findViewById(R.id.;
-       // setSupportActionBar(toolbar);
-
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_house, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
 
         buyPrice =  findViewById(R.id.bought);
@@ -66,30 +64,12 @@ public class House extends AppCompatActivity {
                 sell = Integer.parseInt(sellPrice.getText().toString());
                 broker = Integer.parseInt(brokerPrice.getText().toString());
                 list = Integer.parseInt(listPrice.getText().toString());
-
                 profit = (sell - (buy + broker + list));
-
                 profitValue.setText(String.valueOf(profit));
 
-              // showToast(String.valueOf("Profit to declare \n" + profit));
+
             }
         });
 
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                Snackbar.make(view, "Refer to the help tab for more information.", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//
-//            }
-//        });
-//    }
-//
-//    private void showToast(String text)
-//    {
-//        Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
    }
 }

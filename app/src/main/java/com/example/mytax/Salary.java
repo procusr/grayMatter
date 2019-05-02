@@ -9,13 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.NavigationView;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,19 +39,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
-public class Salary extends AppCompatActivity {
+
+public class Salary extends DrawerBarActivity  {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
     private String companyName;
     private String salary;
+    private Toolbar toolbar;
     private String expectedTax;
     private String actualTax;
     private String date;
@@ -63,9 +62,15 @@ public class Salary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rec_list);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.rec_list, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(2).setChecked(true);
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Salary details");
         recyclerView = findViewById(R.id.list);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
@@ -74,6 +79,7 @@ public class Salary extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -147,7 +153,7 @@ public class Salary extends AppCompatActivity {
                     return;
                 }
                 Company company = new Company(companyName, salary, expectedTax, actualTax,date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
 
                 dialog.dismiss();
             }
@@ -156,7 +162,7 @@ public class Salary extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDatabase.child(date).removeValue();
+                mDatabase.child("salary").child(date).removeValue();
                 dialog.dismiss();
             }
         });
@@ -165,7 +171,6 @@ public class Salary extends AppCompatActivity {
     }
 
     private void submitRecord() {
-
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_add, null);
@@ -187,9 +192,11 @@ public class Salary extends AppCompatActivity {
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
         final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Salary.this, R.array.commune,
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                Salary.this,
+                R.array.commune,
                 android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -247,7 +254,7 @@ public class Salary extends AppCompatActivity {
                     return;
                 }
 
-                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M dd yyyy"));
+                LocalDate s = LocalDate.parse(mDate, DateTimeFormatter.ofPattern("M d yyyy"));
                 DateTimeFormatter FOMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
                 String Date = s.format(FOMATTER);
 
@@ -259,7 +266,7 @@ public class Salary extends AppCompatActivity {
 
 
                 Company company = new Company(mCompanyName, mSalary, mExpectedTax, mActualTax, Date);
-                mDatabase.child(company.getDate()).setValue(company);
+                mDatabase.child("salary").child(company.getDate()).setValue(company);
                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -275,7 +282,7 @@ public class Salary extends AppCompatActivity {
     }
 
     private void fetch() {
-        Query query = FirebaseDatabase.getInstance().getReference().child("MonthlyIncome");
+        Query query = FirebaseDatabase.getInstance().getReference().child("mainDb").child("salary");
 
         FirebaseRecyclerOptions<Company> options =
                 new FirebaseRecyclerOptions.Builder<Company>()
@@ -323,10 +330,10 @@ public class Salary extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Company model) {
-                viewHolder.setCompanyName("Company        :   " + model.getCompanyName());
-                viewHolder.setSalary     ("Salary              :   " + model.getSalary());
-                viewHolder.setActualTax  ("Actual tax     :   " + model.getActualTax());
-                viewHolder.setExpectedTax("Expected tax   :   " +model.getExpectedTax());
+                viewHolder.setCompanyName( model.getCompanyName());
+                viewHolder.setSalary     ( model.getSalary()+" kr");
+                viewHolder.setActualTax  (model.getActualTax() + " kr");
+                viewHolder.setExpectedTax(model.getExpectedTax()+" kr");
                 viewHolder.setDate( model.getDate());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -344,7 +351,7 @@ public class Salary extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    
+
 
 
     @Override
@@ -353,6 +360,10 @@ public class Salary extends AppCompatActivity {
         fetch();
         adapter.startListening();
     }
+
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;

@@ -1,11 +1,24 @@
 package com.example.mytax;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+public class MainActivity extends DrawerBarActivity {
 
-public class MainActivity extends AppCompatActivity {
 
 
     @Override
@@ -14,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
+
     public void setting (View view){
         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
         startActivity(intent);
@@ -25,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void car(View view) {
-        Intent intent = new Intent(MainActivity.this, Car.class);
+        Intent intent = new Intent(MainActivity.this,CarMain.class);
     startActivity(intent);}
 
     public void house(View view) {
@@ -45,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);}
 
     public void plus(View view) {
-        Intent intent = new Intent(MainActivity.this, Plus.class);
+        Intent intent = new Intent(MainActivity.this, AutoCarActivity.class);
         startActivity(intent);}
 
 
