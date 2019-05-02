@@ -604,7 +604,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             stopLocationUpdates();
             traker.setText("Start");
             submitRecord();
-            mRequestingLocationUpdates = null;
+            distance = 0.0;
 
         }
 
