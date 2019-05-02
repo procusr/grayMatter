@@ -690,32 +690,9 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             }
         };
 
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        eDateSetListener, year, month, day);
 
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
 
-        eDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = month + " " + day + " " + year;
-                endDate.setText(date);
-            }
-        };
 
        String mgpsDistance = distance_tracker.getText().toString().trim();
        distance.setText(mgpsDistance);
@@ -727,13 +704,12 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
                 String mDistance = distance.getText().toString().trim();
                 String mStartDate = startDate.getText().toString().trim();
-                String mEndDate = endDate.getText().toString().trim();
                 String mOrgin = origin.getText().toString().trim();
                 String mDestination = destination.getText().toString().trim();
                 String mPurpose = purpose.getText().toString().trim();
                 String mAmount = amount.getText().toString().trim();
 
-                if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
+                if(mDistance.isEmpty()|| mStartDate.startsWith("S")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
                 }

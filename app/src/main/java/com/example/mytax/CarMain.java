@@ -1,8 +1,6 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import static com.example.mytax.R.id.text_view_endDate;
@@ -71,6 +66,7 @@ public class CarMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
         recyclerView = findViewById(R.id.list);
+        //mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         linearLayoutManager.setReverseLayout(true);
@@ -78,7 +74,6 @@ public class CarMain extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser=mAuth.getCurrentUser();
-        String uid=mUser.getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
@@ -95,6 +90,7 @@ public class CarMain extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
 
         });
 
@@ -223,12 +219,11 @@ public class CarMain extends AppCompatActivity {
 
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
-        final TextView endDate = myView.findViewById(text_view_endDate);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
-        final Button gps =myView.findViewById(R.id.btn_gps);
+        final Button gps = myView.findViewById(R.id.btn_gps);
         amount.setKeyListener(null);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
@@ -252,9 +247,9 @@ public class CarMain extends AppCompatActivity {
 
                     distance.setError("Empty");
                 }
-               else if ( Double.parseDouble(distance.getText().toString())< 5 || distance.getText().toString().isEmpty()
+                else if ( Double.parseDouble(distance.getText().toString())< 5 || distance.getText().toString().isEmpty()
                         ||startDate.getText().toString().isEmpty()) {
-                   distance.setError("Please provide all the inputs or your distance is less than 5 Km");
+                    distance.setError("Please provide all the inputs or your distance is less than 5 Km");
 
                     return;
                 }else{
@@ -293,25 +288,11 @@ public class CarMain extends AppCompatActivity {
                 startDate.setText(date);
             }
         };
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                // TODO Auto-generated method stub
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    dialog.dismiss();
-                }
-                return true;
-            }
-        });
-
-
 
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),AutoCarActivity.class);
+                Intent intent = new Intent(CarMain.this,AutoCarActivity.class);
                 startActivity(intent);
             }
         });
@@ -341,13 +322,11 @@ public class CarMain extends AppCompatActivity {
                 FirebaseUser mUser=mAuth.getCurrentUser();
                 String uid=mUser.getUid();
 
-                 Car car = new Car(mDistance, sDate,  mOrgin, mDestination, mPurpose, mAmount);
-                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
-                 Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
-                 dialog.dismiss();
-
+                Car car = new Car(mDistance, sDate,  mOrgin, mDestination, mPurpose, mAmount);
+                mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
+                Toast.makeText(getApplicationContext(), "Record added", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
-
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -358,6 +337,8 @@ public class CarMain extends AppCompatActivity {
         });
         dialog.show();
     }
+
+
 
     private void fetch() {
         FirebaseUser mUser=mAuth.getCurrentUser();
@@ -415,7 +396,6 @@ public class CarMain extends AppCompatActivity {
             protected void onBindViewHolder(ViewHolder viewHolder, final int position, final Car model) {
                 viewHolder.setDistance(model.getDistance());
                 viewHolder.setStartDate(model.getStartDate());
-                viewHolder.setEndDate (model.getEndDate());
                 viewHolder.setOrigin(model.getOrigin());
                 viewHolder.setDestination(model.getDestination());
                 viewHolder.setPurpose(model.getPurpose());
@@ -447,16 +427,10 @@ public class CarMain extends AppCompatActivity {
         adapter.startListening();
     }
 
-    public void goAuto(View view) {
-        Intent intent = new Intent(this,AutoCarActivity.class);
-        startActivity(intent);
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         View mView;
         public TextView distance;
         public TextView startDate;
-        public TextView endDate;
         public TextView origin;
         public TextView destination;
         public TextView purpose;
@@ -475,10 +449,6 @@ public class CarMain extends AppCompatActivity {
         public void setStartDate(String string) {
             startDate = mView.findViewById(R.id.text_view_startDate);
             startDate.setText(string);
-        }
-        public void setEndDate(String string) {
-            endDate = mView.findViewById(text_view_endDate);
-           endDate.setText(string);
         }
 
         public void setOrigin(String string) {
@@ -499,13 +469,5 @@ public class CarMain extends AppCompatActivity {
             amount = mView.findViewById(R.id.text_view_amount);
             amount.setText(string);
         }
-    }
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
-
     }
 }
