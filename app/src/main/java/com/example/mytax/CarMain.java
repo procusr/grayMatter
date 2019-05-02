@@ -328,7 +328,6 @@ public class CarMain extends AppCompatActivity {
 
                 String mDistance = distance.getText().toString().trim();
                 String mStartDate = startDate.getText().toString().trim();
-                String mEndDate = endDate.getText().toString().trim();
                 String mOrgin = origin.getText().toString().trim();
                 String mDestination = destination.getText().toString().trim();
                 String mPurpose = purpose.getText().toString().trim();
