@@ -27,7 +27,8 @@ android:background="@drawable/setting2"
           android:hint="Distance"
           android:textColor="@color/colorA"
           android:textColorHint="@color/colorPrimary"
-           />
+
+          />
 
       <TextView
           android:id="@+id/text_view_startDate"

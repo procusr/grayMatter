@@ -309,24 +309,8 @@ public class CarMain extends AppCompatActivity {
             }
         });
 
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-
-                DatePickerDialog dialog1 = new DatePickerDialog(
-                        CarMain.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        eDateSetListener, year, month, day);
-
-                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog1.show();
-            }
-        });
 
         eDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
