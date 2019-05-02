@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Add Income Details"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorA"
         android:gravity="center"
         android:padding="10dp"
         android:textAppearance="?android:textAppearanceMedium"
