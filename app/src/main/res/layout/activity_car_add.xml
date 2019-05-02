@@ -54,7 +54,7 @@ android:background="@drawable/setting2"
           android:layout_gravity="center"
           android:background="@drawable/btn_shape"
           android:text="GPS Auto"
-          android:onClick="goAuto"
+         
           android:textColor="@color/colorA"/>
 
       <EditText

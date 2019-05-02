@@ -243,7 +243,7 @@ public class CarMain extends AppCompatActivity {
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
         final Button gps =myView.findViewById(R.id.btn_gps);
-        amount.setKeyListener(null);
+       // amount.setKeyListener(null);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
 
