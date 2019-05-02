@@ -50,7 +50,6 @@ public class CarMain extends AppCompatActivity {
     private FirebaseRecyclerAdapter adapter;
     private String distance;
     private String startDate;
-    private String endDate;
     private String origin;
     private String destination;
     private String purpose;
@@ -429,7 +428,6 @@ public class CarMain extends AppCompatActivity {
                         String key=getRef(position).getKey();
                         distance = model.getDistance();
                         startDate = model.getStartDate();
-                        endDate = model.getEndDate();
                         origin=model.getOrigin();
                         destination =model.getDestination();
                         purpose=model.getPurpose();
