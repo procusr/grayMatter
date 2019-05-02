@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/login_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ddd"
     android:gravity="center"
     android:orientation="vertical"
 
@@ -11,17 +11,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
         android:text="Tax Me"
+        android:gravity="center"
         android:textColor="#000"
-        android:textSize="24dp" />
+        android:textSize="24dp"
+        android:padding="10dp"/>
 
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#000">
+        android:textColorHint="#000"
+        >
 
 
         <EditText
@@ -31,7 +32,8 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+             />
 
 
     </android.support.design.widget.TextInputLayout>
@@ -40,7 +42,8 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#000">
+        android:textColorHint="#000"
+        >
 
 
         <EditText
@@ -67,9 +70,10 @@
         android:layout_marginTop="16dp"
         android:background="#4635DB"
         android:text="Sign Up"
-        android:textColor="#000" />
+        android:textColor="#000"
+         />
 
-    <!--
+<!--
     &lt;!&ndash; Link to Login Screen &ndash;&gt;
     <Button
         android:id="@+id/sign_in_button"
