@@ -54,7 +54,6 @@ public class CarMain extends AppCompatActivity {
     private FirebaseRecyclerAdapter adapter;
     private String distance;
     private String startDate;
-    private String endDate;
     private String origin;
     private String destination;
     private String purpose;
@@ -72,7 +71,7 @@ public class CarMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
         recyclerView = findViewById(R.id.list);
-        //mDatabase.keepSynced(true);
+        mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         linearLayoutManager.setReverseLayout(true);
@@ -458,7 +457,6 @@ public class CarMain extends AppCompatActivity {
                         String key=getRef(position).getKey();
                         distance = model.getDistance();
                         startDate = model.getStartDate();
-                        endDate = model.getEndDate();
                         origin=model.getOrigin();
                         destination =model.getDestination();
                         purpose=model.getPurpose();
