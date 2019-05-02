@@ -737,7 +737,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                 if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
 
                 LocalDate s = LocalDate.parse(mStartDate, DateTimeFormatter.ofPattern("M d yyyy"));
