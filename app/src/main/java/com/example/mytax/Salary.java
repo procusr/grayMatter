@@ -284,6 +284,16 @@ public class Salary extends DrawerBarActivity {
         dialog.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String dateFormatter(String date) {
+        LocalDate s = LocalDate.parse(date, DateTimeFormatter.ofPattern("M d yyyy"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return s.format(formatter);
+    }
+
+
+
+
     private void fetch() {
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uid=mUser.getUid();

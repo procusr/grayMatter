@@ -38,14 +38,14 @@ public class AppIntroActivity extends AppCompatActivity {
 
 
     float salary[] = {6500, 4500, 5200, 5100, 4800};
+
+
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
-
-
 
 
         //Welcome animation setup
