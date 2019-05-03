@@ -55,6 +55,7 @@ public class AppIntroActivity extends AppCompatActivity{
 
 
 
+        //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
         myLayout.setOnTouchListener(new View.OnTouchListener() {
 

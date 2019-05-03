@@ -1,23 +1,19 @@
+
+//Model class for Car activity
+
 package com.example.mytax;
 
-import java.util.Date;
-
-public class Car {
+public class
+Car {
 
     private String distance;
     private String startDate;
-    private String endDate;
     private String gpsDistance;
     private String origin;
     private String destination;
     private String purpose;
     private String amount;
 
-
-    public Car(){
-//empty constructor needed
-
-    }
 
 
     public Car(String mDistance, String mStartDate,String mOrigin,
@@ -41,13 +37,6 @@ public class Car {
     }
     public void setStartDate(String startDate) {
         this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     public String getGpsDistance() {

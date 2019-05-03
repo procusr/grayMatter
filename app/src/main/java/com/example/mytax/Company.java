@@ -1,3 +1,9 @@
+
+
+//Model class for company where person works
+
+
+
 package com.example.mytax;
 
 public class Company {
@@ -16,12 +22,6 @@ public class Company {
         this.salary = salary;
     }
 
-    public Company(String companyName, String salary, String expectedTax, String actualTax) {
-        this.companyName = companyName;
-        this.expectedTax = expectedTax;
-        this.actualTax = actualTax;
-        this.salary = salary;
-    }
 
 
 
