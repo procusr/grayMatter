@@ -3,11 +3,11 @@
 
 package com.example.mytax;
 
-public class Car {
+public class
+Car {
 
     private String distance;
     private String startDate;
-    private String endDate;
     private String gpsDistance;
     private String origin;
     private String destination;
@@ -37,13 +37,6 @@ public class Car {
     }
     public void setStartDate(String startDate) {
         this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
     }
 
     public String getGpsDistance() {

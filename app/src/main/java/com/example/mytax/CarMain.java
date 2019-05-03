@@ -28,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
@@ -53,26 +54,25 @@ public class CarMain extends AppCompatActivity {
     private String amount;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
-    public DatePickerDialog.OnDateSetListener eDateSetListener;
     private DatabaseReference mDatabase;
-
+    private Toolbar toolbar;
     private Double k;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_rec_list);
         recyclerView = findViewById(R.id.list);
-        //mDatabase.keepSynced(true);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Trips");
         FirebaseUser mUser=mAuth.getCurrentUser();
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
-
 
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -81,12 +81,10 @@ public class CarMain extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "No data Exists", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -327,7 +325,7 @@ public class CarMain extends AppCompatActivity {
     }
 
 
-        //Fetch data from database and display it in recycler view
+    //Fetch data from database and display it in recycler view
     private void fetch() {
         FirebaseUser mUser=mAuth.getCurrentUser();
         String uid=mUser.getUid();
