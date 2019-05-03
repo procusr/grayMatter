@@ -10,17 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView5"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="Check your Tax Percentage"
-            android:textColor="@android:color/background_dark"
-            android:textSize="18sp"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="39dp" />
+
+
 
         <LinearLayout
             android:layout_marginTop="20dp"
@@ -56,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Your Net Salary"
+            android:hint="Tax Paid"
             android:inputType="textPersonName" />
 
         <LinearLayout

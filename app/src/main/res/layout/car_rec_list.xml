@@ -7,8 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".CarMain">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="39dp" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

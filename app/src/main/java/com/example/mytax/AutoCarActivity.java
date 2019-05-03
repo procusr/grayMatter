@@ -1,3 +1,9 @@
+
+/*
+* A class for Automatic Distance measurement (Gps) and adding the record to the database with
+* required fields
+* */
+
 package com.example.mytax;
 import android.Manifest;
 import android.app.Activity;
@@ -52,10 +58,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -346,21 +349,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
                     }
                 });
     }
-//    @Override
-//    public void onBackPressed()
-//    {
-//        super.onBackPressed();
-//        startActivity(new Intent(getApplicationContext(), CarMain.myDialog.class));
-//        finish();
-//
-//    }
-
-//    builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
-//        public void onClick(DialogInterface dialog, int id) {
-//            MyActivity.super.onBackPressed();
-//        }
-//    });
-//        builder.show();
 
     /**
      * Updates all UI fields.
@@ -606,14 +594,15 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             stopLocationUpdates();
             traker.setText("Start");
             submitRecord();
-            distance = 0.0;
+            mRequestingLocationUpdates = null;
 
         }
 
     }
 
+    //create dialog box for adding distance travelled on a specified date and
+    //add it to the database
     public void submitRecord() {
-
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_car_add, null);
@@ -624,14 +613,12 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         final EditText distance = myView.findViewById(R.id.edit_text_distance);
         final TextView startDate = myView.findViewById(R.id.text_view_startDate);
-        final TextView endDate = myView.findViewById(R.id.text_view_endDate);
         final EditText origin = myView.findViewById(R.id.edit_text_origin);
         final EditText destination = myView.findViewById(R.id.edit_text_destination);
         final EditText purpose = myView.findViewById(R.id.edit_text_purpose);
         final EditText amount = myView.findViewById(R.id.edit_text_amount);
         final Button btnCancel = myView.findViewById(R.id.btnCancel);
         final Button btnAdd = myView.findViewById(R.id.btnSave);
-
 
         distance.addTextChangedListener(new TextWatcher() {
 
@@ -644,7 +631,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             }
 
             public void afterTextChanged(Editable c) {
-                // this one too
+                // on text change evaluate corresponding SEK the  distance travelled
                 if((distance.getText().toString()).isEmpty()){
 
                     distance.setError("Empty");
@@ -666,6 +653,7 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         });
 
+        //Date picker
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -690,35 +678,10 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
             }
         };
 
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AutoCarActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        eDateSetListener, year, month, day);
-
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-        eDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = month + " " + day + " " + year;
-                endDate.setText(date);
-            }
-        };
-
-       String mgpsDistance = distance_tracker.getText().toString().trim();
-       distance.setText(mgpsDistance);
+        //gets the distance from  Gps for saving
+        String mgpsDistance = distance_tracker.getText().toString().trim();
+        distance.setText(mgpsDistance);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -727,18 +690,17 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
                 String mDistance = distance.getText().toString().trim();
                 String mStartDate = startDate.getText().toString().trim();
-                String mEndDate = endDate.getText().toString().trim();
                 String mOrgin = origin.getText().toString().trim();
                 String mDestination = destination.getText().toString().trim();
                 String mPurpose = purpose.getText().toString().trim();
                 String mAmount = amount.getText().toString().trim();
 
-                if(mDistance.isEmpty()|| mStartDate.startsWith("S")||mEndDate.startsWith("E")){
+                if(mDistance.isEmpty()|| mStartDate.startsWith("S")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-
+                //parse the date using a method from Salary class
                 String sDate =Salary.dateFormatter(mStartDate);
 
                 mAuth = FirebaseAuth.getInstance();

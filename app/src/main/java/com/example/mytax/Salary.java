@@ -1,6 +1,12 @@
+/*Adding Salary details for the specified companies including getting data from Api for
+    appropriate tax percentage depending on the Muncipality that person is and add, update and delete records.
+    this will help to inform the user where he is paying the percentage specified or not
+ */
+
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -24,6 +30,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,11 +45,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -57,6 +61,8 @@ public class Salary extends DrawerBarActivity {
     private String expectedTax;
     private String actualTax;
     private String date;
+    private Inflater info;
+    private ImageButton btnImg;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -64,13 +70,14 @@ public class Salary extends DrawerBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        FrameLayout contentFrameLayout =  findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.rec_list, contentFrameLayout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(2).setChecked(true);
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Salary details");
+        btnImg = findViewById(R.id.info);
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -82,7 +89,7 @@ public class Salary extends DrawerBarActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uid=mUser.getUid();
-
+        info=new Inflater();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,6 +103,15 @@ public class Salary extends DrawerBarActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               info.infoSalary(Salary.this);
+            }
+        });
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +151,6 @@ public class Salary extends DrawerBarActivity {
 
         mDate.setText(date);
         mDate.setSelection(date.length());
-
 
 
         Button btnDelete = myView.findViewById(R.id.btnDelete);
@@ -322,7 +337,7 @@ public class Salary extends DrawerBarActivity {
                         .build();
 
 
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -330,16 +345,33 @@ public class Salary extends DrawerBarActivity {
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-                Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
-                final int position = viewHolder.getAdapterPosition();
-                adapter.getRef(position).removeValue();
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+
+                new AlertDialog.Builder(Salary.this)
+
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Toast.makeText(Salary.this, "Deleted ", Toast.LENGTH_SHORT).show();
+                        final int position = viewHolder.getAdapterPosition();
+                        adapter.getRef(position).removeValue();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        dialog.cancel();
+                    };
+                }).show();
+
             }
         };
 
         ItemTouchHelper it = new ItemTouchHelper(simpleItemTouchCallback);
         it.attachToRecyclerView(recyclerView);
-
 
         adapter = new FirebaseRecyclerAdapter<Company, ViewHolder>(options) {
             @Override

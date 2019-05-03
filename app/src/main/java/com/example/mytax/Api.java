@@ -1,3 +1,10 @@
+/*
+* getting Kommune data from the APi specified using retrofit
+* */
+
+
+
+
 package com.example.mytax;
 
 

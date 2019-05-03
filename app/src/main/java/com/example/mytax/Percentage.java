@@ -1,3 +1,8 @@
+
+//Fetches Muncipality data from api and compare the percentage from Salary anc check if the
+//User is paying the right percentage
+
+
 package com.example.mytax;
 
 import android.os.Bundle;
@@ -8,9 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +34,9 @@ public class Percentage extends DrawerBarActivity {
     private Button btnCalculate;
     private Spinner spinner;
     private TextView kommuneName;
-
+    private Inflater info;
+    private Toolbar toolbar;
+    private ImageButton btnImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,12 @@ public class Percentage extends DrawerBarActivity {
         getLayoutInflater().inflate(R.layout.activity_percentage, contentFrameLayout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().getItem(4).setChecked(true);
+        toolbar=findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        btnImg = findViewById(R.id.info);
+        getSupportActionBar().setTitle("Percentage Check");
+
         list = (TextView) findViewById(R.id.resultFromDd);
         kommuneName = findViewById(R.id.kommuneValue);
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -43,7 +58,9 @@ public class Percentage extends DrawerBarActivity {
         grossSalary = (EditText) findViewById(R.id.grossSalary);
         netSalary =(EditText)  findViewById(R.id.netSalary);
         btnCalculate = findViewById(R.id.btnCalculate);
+        info = new Inflater();
 
+        //Populate the dropdown menu from APi
         Retrofit retro = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
         Api api = retro.create(Api.class);
@@ -66,7 +83,6 @@ public class Percentage extends DrawerBarActivity {
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-                        // your code here
                     }
                 });
             }
@@ -75,6 +91,13 @@ public class Percentage extends DrawerBarActivity {
             public void onFailure(Call<List<Kommune>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage() + "make sure You are connected to internet", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.infoPercentage(Percentage.this);
             }
         });
 

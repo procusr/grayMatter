@@ -1,3 +1,5 @@
+//Displays the whole summary of the tax activitty
+
 package com.example.mytax;
 
 import android.support.annotation.NonNull;
@@ -16,8 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class Summary extends AppCompatActivity {
-
-
     private TextView mTotalSalary;
     private TextView mTotalTaxDue;
     private TextView mTotalExtax;
@@ -38,8 +38,6 @@ public class Summary extends AppCompatActivity {
     private DatabaseReference dbtax;
     private DatabaseReference dbRebate;
     private FirebaseAuth mAuth;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
