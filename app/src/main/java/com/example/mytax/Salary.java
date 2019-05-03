@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +60,7 @@ public class Salary extends DrawerBarActivity {
     private String expectedTax;
     private String actualTax;
     private String date;
+    private ImageButton btnImg;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -73,6 +75,7 @@ public class Salary extends DrawerBarActivity {
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Salary details");
+        btnImg = findViewById(R.id.info);
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -98,6 +101,15 @@ public class Salary extends DrawerBarActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Inflater.infoSalary(Salary.this);
+            }
+        });
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

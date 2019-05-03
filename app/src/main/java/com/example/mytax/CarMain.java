@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -52,11 +53,13 @@ public class CarMain extends AppCompatActivity {
     private String destination;
     private String purpose;
     private String amount;
+    private Inflater infoCar;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatabaseReference mDatabase;
     private Toolbar toolbar;
     private Double k;
+    private ImageButton btnImg;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +70,14 @@ public class CarMain extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar=findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
         setSupportActionBar(toolbar);
+        toolbar.getMenu();
+        infoCar = new Inflater();
+        btnImg = findViewById(R.id.info);
         getSupportActionBar().setTitle("Trips");
+
         FirebaseUser mUser=mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
@@ -86,12 +93,17 @@ public class CarMain extends AppCompatActivity {
 
             }
         });
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 submitRecord();
+            }
+        });
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoCar.infoCar(CarMain.this);
             }
         });
     }
@@ -388,7 +400,6 @@ public class CarMain extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String key=getRef(position).getKey();
                         distance = model.getDistance();
                         startDate = model.getStartDate();
                         origin=model.getOrigin();
@@ -455,4 +466,6 @@ public class CarMain extends AppCompatActivity {
             amount.setText(string);
         }
     }
+
+
 }

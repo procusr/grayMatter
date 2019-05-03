@@ -47,7 +47,6 @@ public class AppIntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-
         //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
         myLayout.setOnTouchListener(new View.OnTouchListener() {
