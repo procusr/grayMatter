@@ -107,7 +107,7 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               info.infoSalary(Salary.this);
+               info.info(Salary.this,R.layout.salary_info);
             }
         });
 
