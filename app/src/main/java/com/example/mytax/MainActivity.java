@@ -58,6 +58,9 @@ public class MainActivity extends DrawerBarActivity {
         Intent intent = new Intent(MainActivity.this, Salary.class);
         startActivity(intent);}
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new Graph();
+    }
 }

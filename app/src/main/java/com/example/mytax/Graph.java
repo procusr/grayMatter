@@ -1,18 +1,24 @@
 package com.example.mytax;
+import android.app.slice.Slice;
+import android.app.slice.SliceItem;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -20,18 +26,19 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.database.collection.LLRBNode;
 import java.util.ArrayList;
-
-public class AppIntroActivity extends AppCompatActivity{
+import java.util.List;
+public class Graph extends Fragment {
     //animation
-
+    private View view;
     private RelativeLayout myLayout = null;
     private LinearLayout l1,l2;
     private Animation uptodown,downtoup;
@@ -47,32 +54,21 @@ public class AppIntroActivity extends AppCompatActivity{
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
 
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_activity_splash);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.welcome_activity, container, false);
 
 
-
-
-        myLayout = findViewById(R.id.myLayout);
-        myLayout.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_LONG).show();
-
-                Intent intent = new Intent(AppIntroActivity.this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        });
+        myLayout = view.findViewById(R.id.myLayout);
         yvalues=new ArrayList<PieEntry>();
 
-        l1 = (LinearLayout) findViewById(R.id.l1);
-        l2 = (LinearLayout) findViewById(R.id.l2);
-        uptodown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
-        downtoup = AnimationUtils.loadAnimation(this,R.anim.downtoup);
+        l1 = (LinearLayout) view.findViewById(R.id.l1);
+        l2 = (LinearLayout) view.findViewById(R.id.l2);
+        uptodown = AnimationUtils.loadAnimation(getActivity(),R.anim.uptodown);
+        downtoup = AnimationUtils.loadAnimation(getActivity(),R.anim.downtoup);
         l1.setAnimation(uptodown);
         l2.setAnimation(downtoup);
         database = FirebaseDatabase.getInstance();
@@ -103,6 +99,7 @@ public class AppIntroActivity extends AppCompatActivity{
             }
         });
 
+        return view;
     }
 
 
@@ -131,7 +128,7 @@ public class AppIntroActivity extends AppCompatActivity{
         dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setSelectionShift(65);
         //Display the chart
-        PieChart chart = findViewById(R.id.chart);
+        PieChart chart = view.findViewById(R.id.chart);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         chart.setData(data);
         chart.animateY(2800);
