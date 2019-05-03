@@ -49,7 +49,7 @@ public class Percentage extends DrawerBarActivity {
 
         setSupportActionBar(toolbar);
         btnImg = findViewById(R.id.info);
-        getSupportActionBar().setTitle("House");
+        getSupportActionBar().setTitle("Percentage Check");
 
         list = (TextView) findViewById(R.id.resultFromDd);
         kommuneName = findViewById(R.id.kommuneValue);
@@ -97,7 +97,7 @@ public class Percentage extends DrawerBarActivity {
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                info.infoHouse(Percentage.this);
+                info.infoPercentage(Percentage.this);
             }
         });
 
