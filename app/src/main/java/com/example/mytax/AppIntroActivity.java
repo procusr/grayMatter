@@ -1,8 +1,7 @@
 package com.example.mytax;
-import android.app.slice.Slice;
-import android.app.slice.SliceItem;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,86 +20,45 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AppIntroActivity extends AppCompatActivity {
-
+public class AppIntroActivity extends AppCompatActivity{
     //animation
+
     private RelativeLayout myLayout = null;
     private LinearLayout l1,l2;
     private Animation uptodown,downtoup;
-    private DatabaseReference ref ;
-    private FirebaseDatabase mDatabase;
-    public ArrayList<Integer> array;
-    private FirebaseAuth mAuth;
-    public ArrayList<Integer> arr;
-    //Graphs
+    FirebaseDatabase database;
+    DatabaseReference salaryRef;
+    FirebaseAuth mAuth;
+    ArrayList<PieEntry> yvalues;
+    Float numVoto;
 
 
-
-   private  Integer salary[] ;
-
-
-
-
+    //for ()
+    ArrayList<String> array;
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_activity);
-        mDatabase = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser mUser = mAuth.getCurrentUser();
-        String uid=mUser.getUid();
-        ref =FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("salary").child("date");
+        setContentView(R.layout.welcome_activity_splash);
 
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange (DataSnapshot dataSnapshot){
-                showDatabase(dataSnapshot);
 
-            }
-
-            private void showDatabase (DataSnapshot dataSnapshot){
-                array = new ArrayList<>();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String salary = ds.getKey();
-                    array.add(Integer.parseInt(salary));
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-        arr = new ArrayList<>();
-        arr.add(23);
-        arr.add(232);
-        arr.add(22);
-
-        for(int i=0;i<arr.size();i++){
-            salary[i] = arr.get(i);
-        }
 
 
         //Welcome animation setup
         myLayout = findViewById(R.id.myLayout);
         myLayout.setOnTouchListener(new View.OnTouchListener() {
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_LONG).show();
@@ -110,7 +68,7 @@ public class AppIntroActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        yvalues=new ArrayList<PieEntry>();
 
         l1 = (LinearLayout) findViewById(R.id.l1);
         l2 = (LinearLayout) findViewById(R.id.l2);
@@ -118,23 +76,46 @@ public class AppIntroActivity extends AppCompatActivity {
         downtoup = AnimationUtils.loadAnimation(this,R.anim.downtoup);
         l1.setAnimation(uptodown);
         l2.setAnimation(downtoup);
+        database = FirebaseDatabase.getInstance();
+        mAuth   = FirebaseAuth.getInstance();
+        String userId = mAuth.getUid();
 
-        setupChart();
+        salaryRef  = database.getReference("mainDb").child(userId).child("salary");
+        Log.e("userId? ", userId);
+        salaryRef.addValueEventListener(new ValueEventListener() {
+            // dataSnapshot.child()
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //array = new ArrayList<>();
+                for (DataSnapshot expenseSnapshot : dataSnapshot.getChildren()) {
+                    //  System.out.println(expenseSnapshot.child("date").getValue());
+                    Log.e("Checking ", expenseSnapshot.getValue().toString());
+
+                    numVoto = Float.parseFloat(String.valueOf(expenseSnapshot.child("actualTax").getValue()));
+                    yvalues.add(new PieEntry(numVoto,String.valueOf(expenseSnapshot.child("date").getValue())));
+
+                }
+                setupChart();
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
+
 
     private void setupChart()
     {
         //Populating a list of pie entries
-
-        List<PieEntry> pieEntries = new ArrayList<>();
-
-        for(int i = 0; i < salary.length; i++)
+        /*List<PieEntry> pieEntries = new ArrayList<>();
+        for(int i = 0; i < array.size(); i++)
         {
-            pieEntries.add(new PieEntry(salary[i].floatValue(), months[i]));
-        }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "");
+            pieEntries.add(new PieEntry(array[i], months[i]));
+        }*/
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         PieData data = new PieData(dataSet);
         data.setValueTextSize(25f);
         dataSet.setValueLinePart1OffsetPercentage(80.f);
@@ -143,8 +124,6 @@ public class AppIntroActivity extends AppCompatActivity {
         dataSet.setSliceSpace(7f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setValueFormatter(new PercentFormatter());
-
-
         data.setValueTextColor(Color.WHITE);
         dataSet.setValueLinePart1OffsetPercentage(10.f);
         dataSet.setValueLinePart1Length(0.60f);
@@ -152,9 +131,7 @@ public class AppIntroActivity extends AppCompatActivity {
         dataSet.setValueTextColor(Color.BLACK);
         dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setSelectionShift(65);
-
         //Display the chart
-
         PieChart chart = findViewById(R.id.chart);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         chart.setData(data);
@@ -163,19 +140,14 @@ public class AppIntroActivity extends AppCompatActivity {
         chart.setTransparentCircleColor(Color.RED);
         chart.setMaxAngle(360);
         chart.setDrawCenterText(true);
-        chart.setCenterText("Gross Salary \n" + "kr 75.000");
+        chart.setCenterText("Tax paid");
         chart.setHoleRadius(40);
         chart.setTransparentCircleRadius(0);
-        chart.getDescription().setText("TaxMe");
+        chart.getDescription().setText("");
         chart.getDescription().setTextColor(Color.BLACK);
         chart.getDescription().setTextSize(12);
         chart.setUsePercentValues(true);
-
-
-
-
         chart.setEntryLabelColor(Color.WHITE);
-
         //legend display
         Legend legend = chart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -184,8 +156,5 @@ public class AppIntroActivity extends AppCompatActivity {
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
         legend.setDrawInside(false);
-
-
     }
-
 }

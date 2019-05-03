@@ -1,10 +1,15 @@
-//Displays the whole summary of the tax activitty
+//Displays the whole summary of the tax activity
 
 package com.example.mytax;
 
+import android.app.FragmentManager;
 import android.support.annotation.NonNull;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
-public class Summary extends AppCompatActivity {
+public class Summary extends DrawerBarActivity {
+
+
     private TextView mTotalSalary;
     private TextView mTotalTaxDue;
     private TextView mTotalExtax;
@@ -39,13 +46,16 @@ public class Summary extends AppCompatActivity {
     private DatabaseReference dbRebate;
     private FirebaseAuth mAuth;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_summary, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(3).setChecked(true);
 
+       // setContentView(R.layout.activity_summary);
+        loadFragment(new Graph());
 
         mTotalSalary = (TextView) findViewById(R.id.btn_total_salary);
         mTotalTaxDue = (TextView) findViewById(R.id.btn_total_due);
@@ -77,10 +87,10 @@ public class Summary extends AppCompatActivity {
                         cvalue = Double.parseDouble(String.valueOf(car));
                         sumCar += cvalue;
 
-                        mCarRebate.setText(String.valueOf(sumCar));
+                        mCarRebate.setText(String.format("%.2f", sumCar));
 
                         sumRebate = sumCar;
-                        mTotalRebate.setText(String.valueOf(sumRebate));
+                        mTotalRebate.setText(String.format("%.2f",sumRebate));
 
                     }
 
@@ -113,7 +123,7 @@ public class Summary extends AppCompatActivity {
                         pvalue = Double.parseDouble(String.valueOf(salary));
                         sum += pvalue;
 
-                        mTotalSalary.setText(String.valueOf(sum));
+                        mTotalSalary.setText(String.format("%.2f",sum));
 
                     }
                 }
@@ -133,7 +143,7 @@ public class Summary extends AppCompatActivity {
                         avalue = Double.parseDouble(String.valueOf(ex_tax));
                         sump += avalue;
 
-                        mTotalPaid.setText(String.valueOf(sump));
+                        mTotalPaid.setText(String.format("%.2f",sump));
 
                     }
                 }
@@ -155,7 +165,8 @@ public class Summary extends AppCompatActivity {
                         sume += evalue;
 
 
-                        mTotalExtax.setText(String.valueOf(sume));
+
+                        mTotalExtax.setText(String.format("%.2f",sume));
 
                     }
 
@@ -169,7 +180,8 @@ public class Summary extends AppCompatActivity {
                 }
 
                 sumDue = sume- sump - sumCar;
-                mTotalTaxDue.setText(String.valueOf(sumDue));
+
+                mTotalTaxDue.setText(String.format("%.2f",sumDue));
 
             }
 
@@ -184,6 +196,15 @@ public class Summary extends AppCompatActivity {
 
 
     }
+
+    private void loadFragment(Fragment fragment) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit(); // save the changes
+    }
+
 
 }
 

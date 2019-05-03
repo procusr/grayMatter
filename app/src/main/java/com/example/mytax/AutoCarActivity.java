@@ -37,6 +37,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -77,10 +79,9 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     final int REQUEST_CHECK_SETTINGS = 1;
     private FirebaseAuth mAuth;
     final int REQUEST_LOCATION = 2;
-    private TextView traker;
     public Boolean locUpdates;
     public Boolean useGPS;  // pref: use_device_location
-    private Switch switch1;
+    private ToggleButton switch1;
     SharedPreferences preferences;
 
     static Double lat1 = null;
@@ -123,7 +124,6 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         switch1=findViewById(R.id.switch1);
         switch1.setOnCheckedChangeListener(this);
-        traker=findViewById(R.id.TV_traker);
         distance_tracker = findViewById(R.id.distance_tracker);
         mRequestingLocationUpdates = false;
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -587,14 +587,12 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (switch1.isChecked()){
             mRequestingLocationUpdates = true;
-            //setButtonsEnabledState();
             startLocationUpdates();
-            traker.setText("Stop");
+
         }else{
             stopLocationUpdates();
-            traker.setText("Start");
             submitRecord();
-            mRequestingLocationUpdates = null;
+            distance = 0.0;
 
         }
 

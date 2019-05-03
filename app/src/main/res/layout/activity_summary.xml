@@ -5,17 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Summary"
-    android:orientation="vertical">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1.3">
-
-    </LinearLayout>
-
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
 
     <LinearLayout
@@ -23,6 +14,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/frameLayout"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.8">
+
+        </FrameLayout>
 
 
         <LinearLayout
@@ -37,6 +37,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Tax Due"
+                android:textColor="@color/colorA"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -47,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/colorA"
                 android:gravity="center"
                 android:textSize="23sp" />
 
@@ -71,7 +73,8 @@
                 android:layout_weight="1.4"
                 android:paddingLeft="15dp"
                 android:text="Salary"
-                android:textSize="27sp"
+                android:textColor="@color/colorA"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -82,8 +85,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal|end"
                 android:paddingRight="15dp"
-                android:textColor="#FFFFFF"
-                android:textSize="23sp" />
+                android:textColor="@color/colorA"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
@@ -92,7 +95,7 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
 
@@ -104,18 +107,20 @@
                 android:gravity="center|start"
                 android:paddingLeft="15dp"
                 android:text="Total Tax"
-                android:textSize="27sp"
+                android:textColor="@color/colorA"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
             <TextView
 
                 android:id="@+id/btn_total_tax"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal|end"
                 android:paddingRight="15dp"
-                android:textSize="23sp" />
+                android:textColor="@color/colorA"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
@@ -135,7 +140,8 @@
                 android:gravity="center|start"
                 android:paddingLeft="15dp"
                 android:text="Total Paid"
-                android:textSize="27sp"
+                android:textColor="@color/colorA"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -144,9 +150,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/colorA"
                 android:gravity="center_horizontal|end"
                 android:paddingRight="15dp"
-                android:textSize="23sp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
 
@@ -164,8 +171,9 @@
                 android:layout_weight="1.4"
                 android:gravity="center|start"
                 android:paddingLeft="15dp"
-                android:text="Taxl Rebate"
-                android:textSize="27sp"
+                android:textColor="@color/colorA"
+                android:text="Tax Rebate"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -174,9 +182,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/colorA"
                 android:gravity="center_horizontal|end"
                 android:paddingRight="15dp"
-                android:textSize="23sp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
 
@@ -184,19 +193,20 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
 
             <TextView
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1.4"
                 android:gravity="center"
+                android:textColor="@color/colorA"
                 android:paddingRight="30dp"
                 android:text="Car"
-                android:textSize="23sp" />
+                android:textSize="18dp" />
 
             <TextView
 
@@ -204,9 +214,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/colorA"
                 android:gravity="clip_horizontal|end"
                 android:paddingRight="15dp"
-                android:textSize="23sp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
 
@@ -214,18 +225,9 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.4"
-                android:gravity="center"
-                android:text="House"
-                android:textSize="23sp" />
 
             <TextView
 
@@ -233,19 +235,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColor="@color/colorA"
                 android:gravity="center_horizontal|end"
                 android:paddingRight="15dp"
-                android:textSize="23sp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
-
-
-
-
     </LinearLayout>
-
-
-
-
-
 </LinearLayout>

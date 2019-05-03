@@ -10,10 +10,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -46,15 +49,9 @@ public class MainActivity extends DrawerBarActivity {
     }
 
 
-
-
     public void setting (View view){
         Intent intent = new Intent(MainActivity.this, SettingActivity.class);
         startActivity(intent);
-    }
-
-    public void pop (View view){
-        startActivity(new Intent(MainActivity.this, PopMain.class));
     }
 
 
@@ -78,6 +75,9 @@ public class MainActivity extends DrawerBarActivity {
         Intent intent = new Intent(MainActivity.this, Salary.class);
         startActivity(intent);}
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new Graph();
+    }
 }

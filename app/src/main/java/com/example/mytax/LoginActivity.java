@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(LoginActivity.this,"Authentication Failed",Toast.LENGTH_SHORT).show();
                                             //Log.v("error", task.getResult().toString());
                                         } else {
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AppIntroActivity.class);
                                             startActivity(intent);
                                             //finish();
                                         }
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("ghg");
         if (auth.getCurrentUser() != null) {
             System.out.println("hi");
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, AppIntroActivity.class));
            // finish();
         }
         super.onResume();
