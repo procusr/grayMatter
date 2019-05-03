@@ -2,7 +2,10 @@
 
 package com.example.mytax;
 
+import android.app.FragmentManager;
 import android.support.annotation.NonNull;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,6 +55,8 @@ public class Summary extends DrawerBarActivity {
         navigationView.getMenu().getItem(3).setChecked(true);
 
        // setContentView(R.layout.activity_summary);
+        loadFragment(new Graph());
+
         mTotalSalary = (TextView) findViewById(R.id.btn_total_salary);
         mTotalTaxDue = (TextView) findViewById(R.id.btn_total_due);
         mTotalExtax = (TextView) findViewById(R.id.btn_total_tax);
@@ -82,10 +87,10 @@ public class Summary extends DrawerBarActivity {
                         cvalue = Double.parseDouble(String.valueOf(car));
                         sumCar += cvalue;
 
-                        mCarRebate.setText(String.valueOf(sumCar));
+                        mCarRebate.setText(String.format("%.2f", sumCar));
 
                         sumRebate = sumCar;
-                        mTotalRebate.setText(String.valueOf(sumRebate));
+                        mTotalRebate.setText(String.format("%.2f",sumRebate));
 
                     }
 
@@ -118,7 +123,7 @@ public class Summary extends DrawerBarActivity {
                         pvalue = Double.parseDouble(String.valueOf(salary));
                         sum += pvalue;
 
-                        mTotalSalary.setText(String.valueOf(sum));
+                        mTotalSalary.setText(String.format("%.2f",sum));
 
                     }
                 }
@@ -138,7 +143,7 @@ public class Summary extends DrawerBarActivity {
                         avalue = Double.parseDouble(String.valueOf(ex_tax));
                         sump += avalue;
 
-                        mTotalPaid.setText(String.valueOf(sump));
+                        mTotalPaid.setText(String.format("%.2f",sump));
 
                     }
                 }
@@ -160,7 +165,8 @@ public class Summary extends DrawerBarActivity {
                         sume += evalue;
 
 
-                        mTotalExtax.setText(String.valueOf(sume));
+
+                        mTotalExtax.setText(String.format("%.2f",sume));
 
                     }
 
@@ -174,7 +180,8 @@ public class Summary extends DrawerBarActivity {
                 }
 
                 sumDue = sume- sump - sumCar;
-                mTotalTaxDue.setText(String.valueOf(sumDue));
+
+                mTotalTaxDue.setText(String.format("%.2f",sumDue));
 
             }
 
@@ -189,6 +196,15 @@ public class Summary extends DrawerBarActivity {
 
 
     }
+
+    private void loadFragment(Fragment fragment) {
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit(); // save the changes
+    }
+
 
 }
 
