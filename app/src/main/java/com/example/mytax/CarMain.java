@@ -296,7 +296,7 @@ public class CarMain extends AppCompatActivity {
                 String mPurpose = purpose.getText().toString().trim();
                 String mAmount = amount.getText().toString().trim();
 
-                if(mDistance.isEmpty()|| mStartDate.startsWith("S")){
+                if(mDistance.isEmpty()|| mStartDate.startsWith("D")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
 

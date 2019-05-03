@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,6 +22,13 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
@@ -32,12 +40,18 @@ public class AppIntroActivity extends AppCompatActivity {
     private RelativeLayout myLayout = null;
     private LinearLayout l1,l2;
     private Animation uptodown,downtoup;
-
+    private DatabaseReference ref ;
+    private FirebaseDatabase mDatabase;
+    public ArrayList<Integer> array;
+    private FirebaseAuth mAuth;
+    public ArrayList<Integer> arr;
     //Graphs
 
 
 
-    float salary[] = {6500, 4500, 5200, 5100, 4800};
+   private  Integer salary[] ;
+
+
 
 
     String months[] = {"Jan", "Feb", "Mar", "Apr", "May"};
@@ -46,6 +60,42 @@ public class AppIntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
+        mDatabase = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+        ref =FirebaseDatabase.getInstance().getReference().child("mainDb").child(uid).child("salary").child("date");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot){
+                showDatabase(dataSnapshot);
+
+            }
+
+            private void showDatabase (DataSnapshot dataSnapshot){
+                array = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String salary = ds.getKey();
+                    array.add(Integer.parseInt(salary));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+        arr = new ArrayList<>();
+        arr.add(23);
+        arr.add(232);
+        arr.add(22);
+
+        for(int i=0;i<arr.size();i++){
+            salary[i] = arr.get(i);
+        }
 
 
         //Welcome animation setup
@@ -69,20 +119,20 @@ public class AppIntroActivity extends AppCompatActivity {
         l1.setAnimation(uptodown);
         l2.setAnimation(downtoup);
 
-       setupChart();
+        setupChart();
 
     }
 
-      private void setupChart()
+    private void setupChart()
     {
         //Populating a list of pie entries
 
         List<PieEntry> pieEntries = new ArrayList<>();
 
-         for(int i = 0; i < salary.length; i++)
-         {
-             pieEntries.add(new PieEntry(salary[i], months[i]));
-         }
+        for(int i = 0; i < salary.length; i++)
+        {
+            pieEntries.add(new PieEntry(salary[i].floatValue(), months[i]));
+        }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         PieData data = new PieData(dataSet);
