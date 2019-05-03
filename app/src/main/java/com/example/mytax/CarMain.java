@@ -4,6 +4,7 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -52,11 +54,13 @@ public class CarMain extends AppCompatActivity {
     private String destination;
     private String purpose;
     private String amount;
+    private Inflater infoCar;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatabaseReference mDatabase;
     private Toolbar toolbar;
     private Double k;
+    private ImageButton btnImg;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +71,14 @@ public class CarMain extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar=findViewById(R.id.toolbar);
         mAuth = FirebaseAuth.getInstance();
         setSupportActionBar(toolbar);
+        toolbar.getMenu();
+        infoCar = new Inflater();
+        btnImg = findViewById(R.id.info);
         getSupportActionBar().setTitle("Trips");
+
         FirebaseUser mUser=mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
 
@@ -86,12 +94,17 @@ public class CarMain extends AppCompatActivity {
 
             }
         });
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 submitRecord();
+            }
+        });
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoCar.infoCar(CarMain.this);
             }
         });
     }
@@ -354,11 +367,29 @@ public class CarMain extends AppCompatActivity {
                 return false;
             }
 
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-                Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
-                final int position = viewHolder.getAdapterPosition();
-                adapter.getRef(position).removeValue();
+             @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+
+                new AlertDialog.Builder(CarMain.this)
+
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Toast.makeText(CarMain.this, "Deleted ", Toast.LENGTH_SHORT).show();
+                        final int position = viewHolder.getAdapterPosition();
+                        adapter.getRef(position).removeValue();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        dialog.cancel();
+                    };
+                }).show();
+
             }
         };
 
@@ -388,7 +419,6 @@ public class CarMain extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String key=getRef(position).getKey();
                         distance = model.getDistance();
                         startDate = model.getStartDate();
                         origin=model.getOrigin();
@@ -455,4 +485,6 @@ public class CarMain extends AppCompatActivity {
             amount.setText(string);
         }
     }
+
+
 }

@@ -6,6 +6,7 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,6 +30,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +61,8 @@ public class Salary extends DrawerBarActivity {
     private String expectedTax;
     private String actualTax;
     private String date;
+    private Inflater info;
+    private ImageButton btnImg;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     public DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -73,6 +77,7 @@ public class Salary extends DrawerBarActivity {
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Salary details");
+        btnImg = findViewById(R.id.info);
         recyclerView = findViewById(R.id.list);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.keepSynced(true);
@@ -84,7 +89,7 @@ public class Salary extends DrawerBarActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uid=mUser.getUid();
-
+        info=new Inflater();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("mainDb");
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -98,6 +103,15 @@ public class Salary extends DrawerBarActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               info.infoSalary(Salary.this);
+            }
+        });
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -331,16 +345,33 @@ public class Salary extends DrawerBarActivity {
             }
 
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-                Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
-                final int position = viewHolder.getAdapterPosition();
-                adapter.getRef(position).removeValue();
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+
+                new AlertDialog.Builder(Salary.this)
+
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Toast.makeText(Salary.this, "Deleted ", Toast.LENGTH_SHORT).show();
+                        final int position = viewHolder.getAdapterPosition();
+                        adapter.getRef(position).removeValue();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        dialog.cancel();
+                    };
+                }).show();
+
             }
         };
 
         ItemTouchHelper it = new ItemTouchHelper(simpleItemTouchCallback);
         it.attachToRecyclerView(recyclerView);
-
 
         adapter = new FirebaseRecyclerAdapter<Company, ViewHolder>(options) {
             @Override
