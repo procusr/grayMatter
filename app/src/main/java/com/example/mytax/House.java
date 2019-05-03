@@ -81,7 +81,7 @@ public class House extends DrawerBarActivity {
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              info.infoHouse(House.this);
+              info.info(House.this,R.layout.house_info);
             }
         });
     }

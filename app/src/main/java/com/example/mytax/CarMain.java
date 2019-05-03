@@ -115,7 +115,7 @@ public class CarMain extends DrawerBarActivity {
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                infoCar.infoCar(CarMain.this);
+                infoCar.info(CarMain.this,R.layout.car_info);
             }
         });
     }
