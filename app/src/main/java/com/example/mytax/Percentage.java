@@ -125,10 +125,10 @@ public class Percentage extends DrawerBarActivity {
 
         if(percentage < Double.parseDouble(list.getText().toString())){
 
-            result.setBackgroundResource(R.color.colorAccent);
+            result.setTextColor(getResources().getColor(R.color.colorPrimary));
         }
         else{
-            result.setBackgroundResource(R.color.colorPrimary);
+            result.setTextColor(getResources().getColor(R.color.colorA));
         }
 
     }

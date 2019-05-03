@@ -1,10 +1,12 @@
-//Displays the whole summary of the tax activitty
+//Displays the whole summary of the tax activity
 
 package com.example.mytax;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
-public class Summary extends AppCompatActivity {
+public class Summary extends DrawerBarActivity {
+
+
     private TextView mTotalSalary;
     private TextView mTotalTaxDue;
     private TextView mTotalExtax;
@@ -42,9 +46,12 @@ public class Summary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        FrameLayout contentFrameLayout = (FrameLayout) findViewById(R.id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_summary, contentFrameLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().getItem(3).setChecked(true);
 
-
+       // setContentView(R.layout.activity_summary);
         mTotalSalary = (TextView) findViewById(R.id.btn_total_salary);
         mTotalTaxDue = (TextView) findViewById(R.id.btn_total_due);
         mTotalExtax = (TextView) findViewById(R.id.btn_total_tax);

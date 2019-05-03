@@ -54,10 +54,6 @@ public class MainActivity extends DrawerBarActivity {
         startActivity(intent);
     }
 
-    public void pop (View view){
-        startActivity(new Intent(MainActivity.this, PopMain.class));
-    }
-
 
     public void car(View view) {
         Intent intent = new Intent(MainActivity.this,CarMain.class);

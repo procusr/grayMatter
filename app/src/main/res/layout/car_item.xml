@@ -8,22 +8,21 @@
     app:cardElevation="15dp"
     android:layout_height="wrap_content">
 
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:backgroundTint="@color/colorA"
                 android:gravity="center">
 
                 <TextView
@@ -31,24 +30,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
-                    android:backgroundTint="@color/colorPrimary"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:padding="10dp"
+                    android:paddingTop="10dp"
                     android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textColor="@color/colorA"
                     android:textStyle="bold" />
 
 
         </LinearLayout>
 
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="1dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -60,6 +55,7 @@
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:text="Distance "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -73,9 +69,8 @@
                     android:id="@+id/text_view_distance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/text_view_endDate"
-                    android:layout_marginBottom="0dp"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -106,6 +101,24 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="3"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="4dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="0dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -114,6 +127,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="0dp"
                     android:text="Origin "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -128,6 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -153,6 +168,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="0dp"
                         android:text="Destination "
+                        android:textColor="@color/colorA"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textSize="20dp" />
                 </RelativeLayout>
@@ -167,6 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
+                        android:textColor="@color/colorA"
                         android:inputType="numberDecimal"
                         android:linksClickable="true"
                         android:textSize="20dp" />
@@ -195,6 +212,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="0dp"
                     android:text="Purpose "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -209,6 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -235,6 +254,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="0dp"
                         android:text="Amount"
+                        android:textColor="@color/colorA"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textSize="20dp" />
                 </RelativeLayout>
@@ -249,6 +269,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
+                        android:textColor="@color/colorA"
                         android:inputType="numberDecimal"
                         android:linksClickable="true"
                         android:textSize="20dp" />

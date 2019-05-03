@@ -30,5 +30,6 @@
     <string name="TaxMe" />
     <string name="title_activity_notfication">Notfication</string>
     <string name="title_activity_car_up">Car_up</string>
+    <string name="choose_commune">Choose commune</string>
 
 </resources>
