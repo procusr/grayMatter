@@ -77,10 +77,10 @@ public class Summary extends AppCompatActivity {
                         cvalue = Double.parseDouble(String.valueOf(car));
                         sumCar += cvalue;
 
-                        mCarRebate.setText(String.valueOf(sumCar));
+                        mCarRebate.setText(String.format("%.2f", sumCar));
 
                         sumRebate = sumCar;
-                        mTotalRebate.setText(String.valueOf(sumRebate));
+                        mTotalRebate.setText(String.format("%.2f",sumRebate));
 
                     }
 
@@ -113,7 +113,7 @@ public class Summary extends AppCompatActivity {
                         pvalue = Double.parseDouble(String.valueOf(salary));
                         sum += pvalue;
 
-                        mTotalSalary.setText(String.valueOf(sum));
+                        mTotalSalary.setText(String.format("%.2f",sum));
 
                     }
                 }
@@ -133,7 +133,7 @@ public class Summary extends AppCompatActivity {
                         avalue = Double.parseDouble(String.valueOf(ex_tax));
                         sump += avalue;
 
-                        mTotalPaid.setText(String.valueOf(sump));
+                        mTotalPaid.setText(String.format("%.2f",sump));
 
                     }
                 }
@@ -155,7 +155,8 @@ public class Summary extends AppCompatActivity {
                         sume += evalue;
 
 
-                        mTotalExtax.setText(String.valueOf(sume));
+
+                        mTotalExtax.setText(String.format("%.2f",sume));
 
                     }
 
@@ -169,7 +170,8 @@ public class Summary extends AppCompatActivity {
                 }
 
                 sumDue = sume- sump - sumCar;
-                mTotalTaxDue.setText(String.valueOf(sumDue));
+
+                mTotalTaxDue.setText(String.format("%.2f",sumDue));
 
             }
 
