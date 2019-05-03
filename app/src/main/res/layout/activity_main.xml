@@ -139,7 +139,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:onClick="percentage"
+                    android:onClick="summary"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/summary_cercle_icon"
                     android:paddingLeft="20dp"

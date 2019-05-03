@@ -15,6 +15,15 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/frameLayout"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.8">
+
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="150dp"
@@ -219,16 +228,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-
-            <TextView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.4"
-                android:gravity="center"
-                android:textColor="@color/colorA"
-                android:text="House"
-                android:textSize="18dp" />
 
             <TextView
 
