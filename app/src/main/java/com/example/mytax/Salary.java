@@ -47,7 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class Salary extends DrawerBarActivity {
+public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelectedListener{
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseRecyclerAdapter adapter;
@@ -199,10 +199,13 @@ public class Salary extends DrawerBarActivity {
         final TextView mDisplayDate = myView.findViewById(R.id.date);
 
         final TypedArray percent = getResources().obtainTypedArray(R.array.percentage);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Salary.this, R.array.commune,
-                android.R.layout.simple_spinner_item);
+        Spinner coloredSpinner = findViewById(R.id.spinner);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                Salary.this,
+                R.array.commune,
+                R.layout.color_spinner_layout);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_layout);
         spinner.setAdapter(adapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -381,6 +384,16 @@ public class Salary extends DrawerBarActivity {
         super.onStart();
         fetch();
         adapter.startListening();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(this,adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

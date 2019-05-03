@@ -11,12 +11,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
             android:backgroundTint="@color/colorA"
             android:gravity="center">
 
@@ -30,14 +34,14 @@
                 android:textSize="20dp"
                 android:padding="10dp"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textColor="@color/colorA"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="1dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -49,6 +53,7 @@
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:text="Company "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -64,6 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -86,6 +92,7 @@
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:text="Salary "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -101,6 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -123,6 +131,7 @@
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:text="Expected Tax "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -138,6 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
@@ -159,6 +169,7 @@
                     android:layout_width="175dp"
                     android:layout_height="wrap_content"
                     android:text="Actual Tax "
+                    android:textColor="@color/colorA"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textSize="20dp" />
             </RelativeLayout>
@@ -174,6 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:textColor="@color/colorA"
                     android:inputType="numberDecimal"
                     android:linksClickable="true"
                     android:textSize="20dp" />
