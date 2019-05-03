@@ -4,6 +4,7 @@
 package com.example.mytax;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -366,11 +367,29 @@ public class CarMain extends AppCompatActivity {
                 return false;
             }
 
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-                Toast.makeText(getApplicationContext(), "Deleted ", Toast.LENGTH_SHORT).show();
-                final int position = viewHolder.getAdapterPosition();
-                adapter.getRef(position).removeValue();
+             @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+
+                new AlertDialog.Builder(CarMain.this)
+
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        Toast.makeText(CarMain.this, "Deleted ", Toast.LENGTH_SHORT).show();
+                        final int position = viewHolder.getAdapterPosition();
+                        adapter.getRef(position).removeValue();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int arg1) {
+                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        dialog.cancel();
+                    };
+                }).show();
+
             }
         };
 

@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.widget.FrameLayout;
 
-import com.google.firebase.auth.FirebaseAuth;
 
 public class House extends DrawerBarActivity {
     private ImageButton btnImg;
@@ -30,6 +29,7 @@ public class House extends DrawerBarActivity {
     TextView profitMade;
     TextView moneySpent;
     Toolbar toolbar;
+    private Inflater info;
 
     Button tbdButton;
 
@@ -44,9 +44,9 @@ public class House extends DrawerBarActivity {
         navigationView.getMenu().getItem(0).setChecked(true);
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        info = new Inflater();
         btnImg = findViewById(R.id.info);
         getSupportActionBar().setTitle("House");
-
         buyPrice =  findViewById(R.id.bought);
         sellPrice =  findViewById(R.id.sold);
         brokerPrice =  findViewById(R.id.broker);
@@ -81,7 +81,7 @@ public class House extends DrawerBarActivity {
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Inflater.infoHouse(House.this);
+              info.infoHouse(House.this);
             }
         });
     }

@@ -17,6 +17,17 @@ tools:context=".Salary">
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="
+Buying price: the price with which the current apartment was bought
+Selling Price: the price with which the current apartment was sold
+Broker Price: the sum payed to the broker
+Listing Price: the price that was payed to the listing service
+
+On the top boxes, the profit to be declared in  the final declaration
+will be displayed in green and the total expenses will be displayed in red."/>
 
 
 

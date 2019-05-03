@@ -34,6 +34,7 @@ public class Percentage extends DrawerBarActivity {
     private Button btnCalculate;
     private Spinner spinner;
     private TextView kommuneName;
+    private Inflater info;
     private Toolbar toolbar;
     private ImageButton btnImg;
 
@@ -57,6 +58,7 @@ public class Percentage extends DrawerBarActivity {
         grossSalary = (EditText) findViewById(R.id.grossSalary);
         netSalary =(EditText)  findViewById(R.id.netSalary);
         btnCalculate = findViewById(R.id.btnCalculate);
+        info = new Inflater();
 
         //Populate the dropdown menu from APi
         Retrofit retro = new Retrofit.Builder().baseUrl(Api.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -89,6 +91,13 @@ public class Percentage extends DrawerBarActivity {
             public void onFailure(Call<List<Kommune>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage() + "make sure You are connected to internet", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                info.infoHouse(Percentage.this);
             }
         });
 

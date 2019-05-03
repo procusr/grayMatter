@@ -35,23 +35,42 @@ public class Inflater {
         dialog.show();
     }
 
-    public static void infoSalary(Context context){
+    public void infoSalary(Context context){
         AlertDialog.Builder myDialog = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View myView = inflater.inflate(R.layout.salary_info, null);
         myDialog.setView(myView);
-
         final AlertDialog dialog = myDialog.create();
+
+        toolbar=myView.findViewById(R.id.toolbar_close);
+        btnImg =  myView.findViewById(R.id.close);
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
     }
 
-    public static void infoHouse(Context context){
+    public  void infoHouse(Context context){
         AlertDialog.Builder myDialog = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View myView = inflater.inflate(R.layout.house_info, null);
         myDialog.setView(myView);
 
         final AlertDialog dialog = myDialog.create();
+        toolbar=myView.findViewById(R.id.toolbar_close);
+        btnImg =  myView.findViewById(R.id.close);
+
+        btnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
 
     }
