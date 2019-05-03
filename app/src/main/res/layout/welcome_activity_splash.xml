@@ -34,6 +34,23 @@
         android:layout_marginTop="135dp"
         android:orientation="vertical"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/l1"
+        android:gravity="center">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap To Continue"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:textColor="@color/colorA"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
 
