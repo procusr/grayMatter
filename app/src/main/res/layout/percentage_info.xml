@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorAccent"
     android:layout_height="match_parent"
     tools:context=".Salary">
 
@@ -18,10 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-
-
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:text="Helps to identify whether the user is paying tax according to the percentage provided by the Muncipality. The User can check whether the specified amount paid by his employer match the data." />
     </android.support.design.widget.CoordinatorLayout>
 
 

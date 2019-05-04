@@ -15,7 +15,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +29,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -127,13 +125,21 @@ public class CarMain extends DrawerBarActivity {
         myDialog.setView(myView);
 
         final AlertDialog dialog = myDialog.create();
-
         final EditText mdistance = myView.findViewById(R.id.update_distance);
         final EditText mstartDate = myView.findViewById(R.id.update_start_date);
         final EditText morigin = myView.findViewById(R.id.update_origin);
         final EditText mdestination = myView.findViewById(R.id.update_destination);
         final EditText mpurpose = myView.findViewById(R.id.update_purpose);
         final EditText mamount = myView.findViewById(R.id.update_amount);
+
+           //set the toolbar title
+        final  Toolbar toolbar = myView.findViewById(R.id.toolbar_close);
+        toolbar.setTitle("Update Your data");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleMargin(200,0,0,0);
+        ((TextView)toolbar.getChildAt(1)).setTextSize(18);
+
+        //disable
         mamount.setKeyListener(null);
 
         mdistance.setText(distance);
@@ -155,6 +161,7 @@ public class CarMain extends DrawerBarActivity {
         mamount.setText(amount);
         mamount.setSelection(amount.length());
 
+        ImageButton imgBtn =myView.findViewById(R.id.close);
         Button btnDelete = myView.findViewById(R.id.btnDelete);
         Button btnUpdate = myView.findViewById(R.id.btnUpdate);
 
@@ -182,11 +189,21 @@ public class CarMain extends DrawerBarActivity {
                     k = Double.parseDouble(mdistance.getText().toString());
                     Double d = k * 1.85;
                     String mam = String.format("%.2f", d);
-                    mamount.setText(" " + mam + "  kr");
+                    mamount.setText(" " + mam );
 
                 }
             }
         });
+
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +217,12 @@ public class CarMain extends DrawerBarActivity {
                 destination = mdestination.getText().toString().trim();
                 purpose = mpurpose.getText().toString().trim();
                 amount = mamount.getText().toString().trim();
+
+                if (startDate.trim().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Car car = new Car(distance, startDate, origin,destination, purpose, amount);
                 mDatabase.child(uid).child("cardb").child(car.getStartDate()).setValue(car);
                 dialog.dismiss();
@@ -257,14 +280,14 @@ public class CarMain extends DrawerBarActivity {
 
                     distance.setError("Empty");
                 }
-                else if ( Double.parseDouble(distance.getText().toString())< 5 || distance.getText().toString().isEmpty()
+                else if ( Double.parseDouble(distance.getText().toString()) < 5 || distance.getText().toString().isEmpty()
                         ||startDate.getText().toString().isEmpty()) {
                     distance.setError("Please provide all the inputs or your distance is less than 5 Km");
 
                     return;
                 }else{
                     k = Double.parseDouble(distance.getText().toString());
-                    Double d = k * 1.85;
+                    Double d = (k * 1.85);
                     String mam = String.format("%.2f", d);
                     amount.setText(" " + mam );
                 }
@@ -320,10 +343,9 @@ public class CarMain extends DrawerBarActivity {
                 String mPurpose = purpose.getText().toString().trim();
                 String mAmount = amount.getText().toString().trim();
 
-                if(mDistance.isEmpty()|| mStartDate.startsWith("D")){
+                if(mDistance.isEmpty()|| mStartDate.startsWith("S")){
                     Toast.makeText(getApplicationContext(), "Please provide all the inputs", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
 
                 //Date formatter from salalry class
@@ -424,7 +446,7 @@ public class CarMain extends DrawerBarActivity {
                 viewHolder.setOrigin(model.getOrigin());
                 viewHolder.setDestination(model.getDestination());
                 viewHolder.setPurpose(model.getPurpose());
-                viewHolder.setAmount(model.getAmount() + " kr" );
+                viewHolder.setAmount(model.getAmount());
 
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {

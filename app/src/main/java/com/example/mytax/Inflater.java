@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
-
-
 public class Inflater {
 
     ImageButton btnImg;
@@ -35,6 +33,5 @@ public class Inflater {
 
         dialog.show();
     }
-
 
 }
