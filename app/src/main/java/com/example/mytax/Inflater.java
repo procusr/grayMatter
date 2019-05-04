@@ -23,6 +23,7 @@ public class Inflater {
         final AlertDialog dialog = myDialog.create();
 
         toolbar=myView.findViewById(R.id.toolbar_close);
+        toolbar.setTitle("Information");
         btnImg =  myView.findViewById(R.id.close);
 
         btnImg.setOnClickListener(new View.OnClickListener() {
