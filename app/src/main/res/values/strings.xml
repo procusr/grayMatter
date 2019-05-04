@@ -32,9 +32,9 @@
     <string name="title_activity_car_up">Car_up</string>
     <string name="choose_commune">Choose commune</string>
     <string name="houseinfo">"(Buying price:) the price with which the current apartment was bought<br/>
-        Selling Price: the price with which the current apartment was sold
-        Broker Price:the sum payed to the broker
+        (Selling Price:) the price with which the current apartment was sold
+        Broker Price: the sum payed to the broker
         Listing Price: the price that was paid to the listing service On the top boxes, the profit to be declared in  the final declaration
-        will be displayed in green and the total expenses will be displayed in red."</string>
+            will be displayed in green and the total expenses will be displayed in red."</string>
 
 </resources>

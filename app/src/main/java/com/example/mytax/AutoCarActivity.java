@@ -679,7 +679,8 @@ public class AutoCarActivity extends DrawerBarActivity implements CompoundButton
 
         //gets the distance from  Gps for saving
         String mgpsDistance = distance_tracker.getText().toString().trim();
-        distance.setText(mgpsDistance);
+        Double kmValue =Double.parseDouble(mgpsDistance)/1000; //Change the distance from meter to killometers
+        distance.setText(kmValue.toString());
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)

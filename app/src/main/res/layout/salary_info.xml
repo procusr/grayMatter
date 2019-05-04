@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorAccent"
     android:layout_height="match_parent"
     tools:context=".Salary">
 
@@ -19,9 +20,12 @@
         android:layout_height="match_parent">
 
 
-
-
-
+        <TextView
+            android:id="@+id/textView8"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The user is notified once in a month to enter the values listed here, The Muncipality ,Company name, and Actual tax baing paid. this helps to track and keep his salary history with detailed information of the tax amount he expected to pay or get a return. This window can be launched from the menu too and A user can enter more than one company information. " />
     </android.support.design.widget.CoordinatorLayout>
 
 

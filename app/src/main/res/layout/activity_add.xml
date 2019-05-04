@@ -190,7 +190,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/btn_shape"
                         android:gravity="center"
-                        android:hint=" Date "
+                        android:hint="Select date "
                         android:textAlignment="center"
                         android:textColor="@android:color/background_dark"
                         android:textColorHint="@android:color/background_dark" />
