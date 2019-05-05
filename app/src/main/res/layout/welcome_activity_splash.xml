@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:onClick="main"
     android:id="@+id/myLayout"
     android:background="@android:color/white">
+
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -23,7 +23,9 @@
             android:layout_height="370dp"
             android:layout_below="@+id/l1"
 
-           />
+           >
+
+        </com.github.mikephil.charting.charts.PieChart>
 
     </LinearLayout>
 
@@ -32,7 +34,24 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="135dp"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/l1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/colorA"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
 
 </RelativeLayout>
