@@ -107,7 +107,7 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               info.infoSalary(Salary.this);
+               info.info(Salary.this,R.layout.salary_info);
             }
         });
 
@@ -128,7 +128,6 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
         View myView = inflater.inflate(R.layout.activity_update, null);
         myDialog.setView(myView);
-
         final AlertDialog dialog = myDialog.create();
 
         final EditText mCompanyName = myView.findViewById(R.id.company_name);
@@ -136,6 +135,13 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         final EditText mExpectedTax = myView.findViewById(R.id.expected_tax);
         final EditText mActualTax = myView.findViewById(R.id.actual_tax);
         final EditText mDate = myView.findViewById(R.id.date);
+
+        //set the toolbar title
+        final  Toolbar toolbar = myView.findViewById(R.id.toolbar_close);
+        toolbar.setTitle("Update Your data");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.setTitleMargin(200,0,0,0);
+        ((TextView)toolbar.getChildAt(1)).setTextSize(18);
 
         mCompanyName.setText(companyName);
         mCompanyName.setSelection(companyName.length());
@@ -155,6 +161,16 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
 
         Button btnDelete = myView.findViewById(R.id.btnDelete);
         Button btnUpdate = myView.findViewById(R.id.btnUpdate);
+        ImageButton imgBtn = myView.findViewById(R.id.close);
+
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -407,8 +423,6 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         };
         recyclerView.setAdapter(adapter);
     }
-
-
 
 
     @Override

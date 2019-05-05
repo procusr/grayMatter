@@ -97,7 +97,7 @@ public class Percentage extends DrawerBarActivity {
         btnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                info.infoPercentage(Percentage.this);
+                info.info(Percentage.this,R.layout.percentage_info);
             }
         });
 

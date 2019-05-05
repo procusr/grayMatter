@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
+xmlns:tools="http://schemas.android.com/tools" android:background="@color/colorAccent"
 android:layout_width="match_parent"
 android:orientation="vertical"
 android:layout_height="match_parent"
@@ -17,17 +17,14 @@ tools:context=".Salary">
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="
-Buying price: the price with which the current apartment was bought
-Selling Price: the price with which the current apartment was sold
-Broker Price: the sum payed to the broker
-Listing Price: the price that was payed to the listing service
 
-On the top boxes, the profit to be declared in  the final declaration
-will be displayed in green and the total expenses will be displayed in red."/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:textSize="20dp"
+        android:text="@string/houseinfo"
+ />
 
 
 

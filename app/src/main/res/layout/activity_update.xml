@@ -7,22 +7,18 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <include
+        android:id="@+id/toolbar_close"
+        layout="@layout/toolbar_close"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorA"
-            android:gravity="center"
-            android:text="Update Your Data"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@android:color/white" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,7 +43,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Expected Tax:"
-                        android:textSize="14dp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/colorA" />
                 </RelativeLayout>
@@ -85,7 +80,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Actual Tax:"
-                        android:textSize="14dp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/colorA" />
                 </RelativeLayout>
@@ -123,7 +117,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Salary:"
-                        android:textSize="14dp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/colorA" />
                 </RelativeLayout>
@@ -161,7 +154,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Date:"
-                        android:textSize="14dp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/colorA" />
                 </RelativeLayout>
@@ -199,7 +191,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Company:"
-                        android:textSize="14dp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/colorA" />
                 </RelativeLayout>

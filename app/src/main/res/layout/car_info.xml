@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorAccent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Salary">
 
     <include
@@ -11,7 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="39dp" />
 
-
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_weight="1"
+        android:text="Here are the driving information provided by the user the distance is in meters and values can be entered Manually or with the aid of Gps if the user turned on the setting when starting the app.It measures and calculates the does appropriate tax calculation based on the rates provided by  Tax authorities"
+        />
 
 
 </LinearLayout>
