@@ -518,4 +518,9 @@ public class CarMain extends DrawerBarActivity {
             amount.setText(string);
         }
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+    }
 }

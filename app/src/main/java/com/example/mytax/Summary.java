@@ -3,6 +3,7 @@
 package com.example.mytax;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -204,7 +205,11 @@ public class Summary extends DrawerBarActivity {
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit(); // save the changes
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+    }
 
 }
 

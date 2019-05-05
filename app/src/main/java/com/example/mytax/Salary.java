@@ -7,6 +7,7 @@ package com.example.mytax;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -480,6 +481,11 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
             date.setText(string);
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
     }
 
 }

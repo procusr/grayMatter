@@ -1,5 +1,6 @@
 package com.example.mytax;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -89,6 +90,11 @@ public class House extends DrawerBarActivity {
     private void showToast(String text)
     {
         Toast.makeText(House.this, text, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -5,6 +5,7 @@
 
 package com.example.mytax;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.View;
@@ -131,6 +132,11 @@ public class Percentage extends DrawerBarActivity {
             result.setTextColor(getResources().getColor(R.color.colorA));
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
     }
 }
 

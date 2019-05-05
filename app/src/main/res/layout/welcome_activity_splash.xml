@@ -20,10 +20,10 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="370dp"
+            android:layout_height="355dp"
             android:layout_below="@+id/l1"
 
-           >
+            >
 
         </com.github.mikephil.charting.charts.PieChart>
 
@@ -38,20 +38,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/l1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/colorA"
-            android:layout_gravity="center"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
