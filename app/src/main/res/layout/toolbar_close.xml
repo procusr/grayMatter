@@ -15,7 +15,9 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
         android:background="@drawable/btn_white"
-        app:srcCompat="@drawable/ic_close_black_24dp"
+        android:src="@drawable/ic_close_black_24dp"
+
+
         />
 
 
