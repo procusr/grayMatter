@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -125,7 +126,7 @@ public class AppIntroActivity extends AppCompatActivity{
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setValueFormatter(new PercentFormatter());
         data.setValueTextColor(Color.WHITE);
-        dataSet.setValueLinePart1OffsetPercentage(10.f);
+        //dataSet.setValueLinePart1OffsetPercentage(10.f);
         dataSet.setValueLinePart1Length(0.60f);
         dataSet.setValueLinePart2Length(.1f);
         dataSet.setValueTextColor(Color.BLACK);
@@ -133,7 +134,8 @@ public class AppIntroActivity extends AppCompatActivity{
         dataSet.setSelectionShift(65);
         //Display the chart
         PieChart chart = findViewById(R.id.chart);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         chart.setData(data);
         chart.animateY(2800);
         chart.invalidate();
