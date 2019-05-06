@@ -10,15 +10,15 @@
     android:background="@android:color/white">
     <LinearLayout
         android:id="@+id/l1"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:gravity="center"
        >
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="330dp"
             android:layout_below="@+id/l1"
 
