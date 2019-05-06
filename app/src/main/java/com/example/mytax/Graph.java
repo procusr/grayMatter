@@ -114,14 +114,14 @@ public class Graph extends Fragment {
         PieDataSet dataSet = new PieDataSet(yvalues, "");
         PieData data = new PieData(dataSet);
         data.setValueTextSize(25f);
-        dataSet.setValueLinePart1OffsetPercentage(80.f);
+        //dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.2f);
         dataSet.setValueLinePart2Length(0.4f);
         dataSet.setSliceSpace(7f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        dataSet.setValueFormatter(new PercentFormatter());
+        //dataSet.setValueFormatter(new PercentFormatter());
         data.setValueTextColor(Color.WHITE);
-        dataSet.setValueLinePart1OffsetPercentage(10.f);
+        //dataSet.setValueLinePart1OffsetPercentage(10.f);
         dataSet.setValueLinePart1Length(0.60f);
         dataSet.setValueLinePart2Length(.1f);
         dataSet.setValueTextColor(Color.BLACK);
@@ -129,7 +129,7 @@ public class Graph extends Fragment {
         dataSet.setSelectionShift(65);
         //Display the chart
         PieChart chart = view.findViewById(R.id.chart);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         chart.setData(data);
         chart.animateY(2800);
         chart.invalidate();
@@ -142,7 +142,7 @@ public class Graph extends Fragment {
         chart.getDescription().setText("");
         chart.getDescription().setTextColor(Color.BLACK);
         chart.getDescription().setTextSize(12);
-        chart.setUsePercentValues(true);
+        chart.setUsePercentValues(false);
         chart.setEntryLabelColor(Color.WHITE);
         //legend display
         Legend legend = chart.getLegend();
