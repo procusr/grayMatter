@@ -140,8 +140,8 @@ public class Salary extends DrawerBarActivity implements AdapterView.OnItemSelec
         final  Toolbar toolbar = myView.findViewById(R.id.toolbar_close);
         toolbar.setTitle("Update Your data");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        toolbar.setTitleMargin(200,0,0,0);
-        ((TextView)toolbar.getChildAt(1)).setTextSize(18);
+        toolbar.setTitleMargin(100,0,0,0);
+        ((TextView)toolbar.getChildAt(1)).setTextSize(17);
 
         mCompanyName.setText(companyName);
         mCompanyName.setSelection(companyName.length());
