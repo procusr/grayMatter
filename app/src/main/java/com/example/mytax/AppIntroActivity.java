@@ -133,7 +133,7 @@ public class AppIntroActivity extends AppCompatActivity{
         dataSet.setSelectionShift(65);
         //Display the chart
         PieChart chart = findViewById(R.id.chart);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         chart.setData(data);
         chart.animateY(2800);
         chart.invalidate();

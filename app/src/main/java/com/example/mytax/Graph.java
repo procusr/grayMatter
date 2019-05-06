@@ -129,7 +129,7 @@ public class Graph extends Fragment {
         dataSet.setSelectionShift(65);
         //Display the chart
         PieChart chart = view.findViewById(R.id.chart);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         chart.setData(data);
         chart.animateY(2800);
         chart.invalidate();
