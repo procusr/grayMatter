@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "882094614549-n7joocael0e1849t3ja7c6tatn5fi2jf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mytax",
+            "certificate_hash": "bd2133a830a149a9cbd1b1fe32cbdfc752e2aee0"
+          }
+        },
+        {
           "client_id": "882094614549-3l0dl0eqk1ck7dhs7lnce6dp8kka7sna.apps.googleusercontent.com",
           "client_type": 3
         }

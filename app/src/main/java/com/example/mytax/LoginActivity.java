@@ -1,3 +1,6 @@
+
+//USer login
+
 package com.example.mytax;
 
 import android.app.ProgressDialog;
@@ -15,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
-
 
         PD = new ProgressDialog(this);
         PD.setMessage("Loading...");
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(LoginActivity.this,"Authentication Failed",Toast.LENGTH_SHORT).show();
                                             //Log.v("error", task.getResult().toString());
                                         } else {
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AppIntroActivity.class);
                                             startActivity(intent);
                                             //finish();
                                         }
@@ -99,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("ghg");
         if (auth.getCurrentUser() != null) {
             System.out.println("hi");
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, AppIntroActivity.class));
            // finish();
         }
         super.onResume();

@@ -2,30 +2,60 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mytax">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="FinTax"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".ForgetAndChangePasswordActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CarMain" />
+        <activity android:name=".Summary" />
+        <activity android:name=".House" />
+        <activity android:name=".Percentage" />
+        <activity android:name=".Salary" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".DrawerBarActivity"/>
+        <activity android:name=".AutoCarActivity"/>
+        <activity android:name=".AppIntroActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppTheme.Custom" />
+        <activity
+            android:name=".ForgetAndChangePasswordActivity"
+            android:theme="@style/AppTheme.Custom" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
+
 
 </manifest>
