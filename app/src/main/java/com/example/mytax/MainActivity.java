@@ -29,7 +29,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
-
 public class MainActivity extends DrawerBarActivity {
     private ImageButton imgBtn;
     private Inflater inflater;

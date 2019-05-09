@@ -113,15 +113,15 @@ public class Graph extends Fragment {
         }*/
         PieDataSet dataSet = new PieDataSet(yvalues, "");
         PieData data = new PieData(dataSet);
-        data.setValueTextSize(25f);
-        //dataSet.setValueLinePart1OffsetPercentage(80.f);
+        data.setValueTextSize(12f);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.2f);
         dataSet.setValueLinePart2Length(0.4f);
         dataSet.setSliceSpace(7f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        //dataSet.setValueFormatter(new PercentFormatter());
+        dataSet.setValueFormatter(new PercentFormatter());
         data.setValueTextColor(Color.WHITE);
-        //dataSet.setValueLinePart1OffsetPercentage(10.f);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.60f);
         dataSet.setValueLinePart2Length(.1f);
         dataSet.setValueTextColor(Color.BLACK);
@@ -141,9 +141,10 @@ public class Graph extends Fragment {
         chart.setTransparentCircleRadius(0);
         chart.getDescription().setText("");
         chart.getDescription().setTextColor(Color.BLACK);
-        chart.getDescription().setTextSize(12);
-        chart.setUsePercentValues(false);
-        chart.setEntryLabelColor(Color.WHITE);
+        chart.getDescription().setTextSize(8f);
+        chart.setUsePercentValues(true);
+        chart.setEntryLabelColor(Color.GRAY);
+        chart.setEntryLabelTextSize(7f);
         //legend display
         Legend legend = chart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);

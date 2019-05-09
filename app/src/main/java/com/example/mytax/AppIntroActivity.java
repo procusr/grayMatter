@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -62,7 +61,7 @@ public class AppIntroActivity extends AppCompatActivity{
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(getApplicationContext(),"Welcome", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Welcome to FinTax", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(AppIntroActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -118,23 +117,23 @@ public class AppIntroActivity extends AppCompatActivity{
         }*/
         PieDataSet dataSet = new PieDataSet(yvalues, "");
         PieData data = new PieData(dataSet);
-        data.setValueTextSize(25f);
-        dataSet.setValueLinePart1OffsetPercentage(80.f);
-        dataSet.setValueLinePart1Length(0.2f);
-        dataSet.setValueLinePart2Length(0.4f);
+        data.setValueTextSize(12f);
+        dataSet.setValueLinePart1OffsetPercentage(60.f);
+        dataSet.setValueLinePart1Length(0.1f);
+        dataSet.setValueLinePart2Length(0.2f);
         dataSet.setSliceSpace(7f);
         dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setValueFormatter(new PercentFormatter());
-        data.setValueTextColor(Color.WHITE);
-        //dataSet.setValueLinePart1OffsetPercentage(10.f);
+        data.setValueTextColor(Color.BLACK);
+        dataSet.setValueLinePart1OffsetPercentage(80.f);
         dataSet.setValueLinePart1Length(0.60f);
         dataSet.setValueLinePart2Length(.1f);
         dataSet.setValueTextColor(Color.BLACK);
         dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setSelectionShift(65);
+
         //Display the chart
         PieChart chart = findViewById(R.id.chart);
-        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         chart.setData(data);
         chart.animateY(2800);
@@ -143,19 +142,20 @@ public class AppIntroActivity extends AppCompatActivity{
         chart.setMaxAngle(360);
         chart.setDrawCenterText(true);
         chart.setCenterText("Tax paid");
-        chart.setHoleRadius(40);
+        chart.setHoleRadius(30);
         chart.setTransparentCircleRadius(0);
         chart.getDescription().setText("");
         chart.getDescription().setTextColor(Color.BLACK);
-        chart.getDescription().setTextSize(12);
+        chart.getDescription().setTextSize(8f);
         chart.setUsePercentValues(true);
-        chart.setEntryLabelColor(Color.WHITE);
+        chart.setEntryLabelColor(Color.GRAY);
+        chart.setEntryLabelTextSize(7f);
         //legend display
         Legend legend = chart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        legend.setTextSize(12f);
+        legend.setTextSize(8f);
         legend.setTextColor(Color.BLACK);
         legend.setDrawInside(false);
     }

@@ -37,7 +37,4 @@
         Listing Price: the price that was paid to the listing service On the top boxes, the profit to be declared in  the final declaration
             will be displayed in green and the total expenses will be displayed in red."</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>
